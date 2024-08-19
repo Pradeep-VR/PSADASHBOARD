@@ -1,0 +1,9 @@
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\Dashboard.exe
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\appsettings.Development.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\appsettings.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\Dashboard.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\Dashboard.deps.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\Dashboard.runtimeconfig.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\Dashboard.pdb
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\System.Data.SqlClient.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\win-x86\PubTmp\Out\sni.dll

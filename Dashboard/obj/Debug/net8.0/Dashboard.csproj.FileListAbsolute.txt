@@ -1,0 +1,190 @@
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\appsettings.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.staticwebassets.runtime.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.exe
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.deps.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.runtimeconfig.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\Dashboard.pdb
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\System.Data.SqlClient.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.csproj.AssemblyReference.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfoInputs.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfo.cs
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cs
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.Dashboard.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.build.Dashboard.props
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Dashboard.props
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Dashboard.props
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\scopedcss\bundle\Dashboard.styles.css
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\scopedcss\projectbundle\Dashboard.bundle.scp.css
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.csproj.Up2Date
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\refint\Dashboard.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.pdb
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\Dashboard.genruntimeconfig.cache
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Debug\net8.0\ref\Dashboard.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\appsettings.Development.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\appsettings.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.staticwebassets.runtime.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.exe
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.deps.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.runtimeconfig.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\Dashboard.pdb
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.AssemblyReference.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfoInputs.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfo.cs
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.CoreCompileInputs.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.MvcApplicationPartsAssemblyInfo.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cs
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.build.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.development.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.Dashboard.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.build.Dashboard.props
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Dashboard.props
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Dashboard.props
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\scopedcss\bundle\Dashboard.styles.css
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\scopedcss\projectbundle\Dashboard.bundle.scp.css
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.Up2Date
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\refint\Dashboard.dll
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.pdb
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\Dashboard.genruntimeconfig.cache
+D:\Git-Hub\PSA\Latest\PSA\Dashboard\obj\Debug\net8.0\ref\Dashboard.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.AssemblyReference.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfoInputs.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfo.cs
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.CoreCompileInputs.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.MvcApplicationPartsAssemblyInfo.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cs
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.pdb
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\appsettings.Development.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\appsettings.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.staticwebassets.runtime.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.exe
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.deps.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.runtimeconfig.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\Dashboard.pdb
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.build.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.development.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.Dashboard.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.build.Dashboard.props
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Dashboard.props
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Dashboard.props
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\scopedcss\bundle\Dashboard.styles.css
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\scopedcss\projectbundle\Dashboard.bundle.scp.css
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.Up2Date
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\refint\Dashboard.dll
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\Dashboard.genruntimeconfig.cache
+D:\Pradeep\Git-Hub\Latest_PSA\PSA\Dashboard\obj\Debug\net8.0\ref\Dashboard.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\appsettings.Development.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\appsettings.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.staticwebassets.runtime.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.exe
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.deps.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.runtimeconfig.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\Dashboard.pdb
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.AssemblyReference.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfoInputs.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfo.cs
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.CoreCompileInputs.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.MvcApplicationPartsAssemblyInfo.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cs
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.build.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.development.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.Dashboard.Microsoft.AspNetCore.StaticWebAssets.props
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.build.Dashboard.props
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Dashboard.props
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Dashboard.props
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.pack.json
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\scopedcss\bundle\Dashboard.styles.css
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\scopedcss\projectbundle\Dashboard.bundle.scp.css
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.Up2Date
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\refint\Dashboard.dll
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.pdb
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\Dashboard.genruntimeconfig.cache
+D:\PSA_WEB\PSA UPDATE\PSA_Aug13\PSA\Dashboard\obj\Debug\net8.0\ref\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\appsettings.Development.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\appsettings.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.staticwebassets.runtime.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.exe
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.deps.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.runtimeconfig.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\Dashboard.pdb
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.AssemblyReference.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfoInputs.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.AssemblyInfo.cs
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.CoreCompileInputs.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.MvcApplicationPartsAssemblyInfo.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.RazorAssemblyInfo.cs
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.build.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.development.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.Dashboard.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.build.Dashboard.props
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Dashboard.props
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Dashboard.props
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\scopedcss\bundle\Dashboard.styles.css
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\scopedcss\projectbundle\Dashboard.bundle.scp.css
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.csproj.Up2Date
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\refint\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.pdb
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\Dashboard.genruntimeconfig.cache
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Debug\net8.0\ref\Dashboard.dll

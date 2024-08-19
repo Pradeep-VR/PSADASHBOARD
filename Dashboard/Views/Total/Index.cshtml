@@ -1,0 +1,466 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "TotalIndex";
+    var mId = ViewBag.Id;
+    var Name = "TOTAL CONSUMPTION'S";
+}
+
+<style>
+    canvas {
+        border: 2px solid #858080;
+    }
+
+    .form__input {
+        border: 0;
+        outline: 0;
+        color: rgb(60, 66, 87);
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        padding: 4px 8px;
+        min-height: 28px;
+        vertical-align: middle;
+        transition: background-color .24s, box-shadow .24s;
+        transition-property: background-color, box-shadow;
+        transition-duration: 0.24s, 0.24s;
+        transition-timing-function: ease, ease;
+        transition-delay: 0s, 0s;
+    }
+
+        .form__input:focus {
+            box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
+            transition: all 0.1s ease 0s;
+        }
+
+    .form__btn {
+        display: inline-block;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        color: #fff;
+        font-weight: 500;
+        border-radius: 4px;
+        font-size: 14px;
+        height: 30px;
+        padding: 1px 15px;
+        text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
+        background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+        transition: all 0.5s ease 0s;
+    }
+
+        .form__btn:hover {
+            box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
+            transition: all 0.1s ease 0s;
+        }
+
+    .lblcss {
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 500;
+        letter-spacing: 0.045rem;
+        font-style: normal;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        background-color: #0030c2;
+        border-radius: .2rem;
+        -webkit-border-radius: .2rem;
+        -moz-border-radius: 0rem;
+        padding: 0.30rem 0.5rem;
+        border-style: none;
+        border-width: 0rem;
+        border-color: darkred;
+    }
+
+    .menu-icon {
+        position: absolute;
+        top: 10px;
+        right: 35px;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .controls-container {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .controls {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #dad9d9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .date-selector {
+        margin-bottom: 20px;
+    }
+
+    .labell {
+        display: block;
+        color: forestgreen;
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    .inputt {
+        margin-bottom: 10px;
+        display: block;
+        width: 365px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .side-buttons {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+        .side-buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            width: auto;
+        }
+
+            .side-buttons button:hover {
+                background-color: #45a049;
+            }
+
+
+
+    /*Next and Previous Arrow*/
+    .arrow {
+        cursor: pointer;
+        position: relative;
+        display: block;
+        width: 40px;
+        height: 40px;
+        border: solid 6px #999;
+        border-radius: 100%;
+        z-index: 1;
+        transition: all 0.2s linear;
+    }
+
+        .arrow:before,
+        .arrow:after {
+            content: "";
+            position: absolute;
+            width: 35%;
+            height: 10%;
+            top: 41%;
+            left: 55%;
+            background: #999;
+            z-index: 2;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: all 0.2s linear;
+        }
+
+        .arrow:after {
+            z-index: 3;
+            top: 59%;
+            left: 55%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .arrow:hover {
+            border: solid 8px #777;
+        }
+
+            .arrow:hover:before,
+            .arrow:hover:after {
+                background: #777;
+            }
+
+        .arrow:active {
+            border: solid 8px #111;
+        }
+
+            .arrow:active:before,
+            .arrow:active:after {
+                background: #111;
+            }
+
+    .containerr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+        .containerr .form__input {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .containerr .form__btn,
+        .containerr .lblcss {
+            margin-left: 10px;
+        }
+</style>
+<div style="display:flex; flex-direction:row; margin:10px">
+    <div style="margin:10px;width:250px;">
+        <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">GROUPS</label>
+        <select class="form-select" id="ddlGroups" onchange="ddlGroupChange()" style="margin:5px;">
+        </select>
+    </div>
+
+    <div style="margin: 10px; width: 250px; display:none;">
+        <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">METERS</label>
+        <select class="form-select" id="ddlMeters" @*onchange="OnSelectChanged()"*@ disabled="disabled" style="margin:5px;width:auto;">
+        </select>
+    </div>
+
+    <div style="margin:10px">
+        <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">From Date:</label>
+        <input class="inputt" type="datetime-local" id="Fdate" style="margin-top:7px;" name="fromdate">
+    </div>
+
+    <div style="margin:10px">
+        <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="ToDate">To Date:</label>
+        <input class="inputt" type="datetime-local" id="Tdate" style="margin-top:7px;" name="todate">
+    </div>
+
+    <div style="margin:10px;">
+        <button id="viewButton" style="width: 100px;height: 30px;background-color: forestgreen;color: white;border: 0;border-radius: 5px;margin-top: 35px;"
+                onclick="ViewBtn_Clicked()">
+            View
+        </button>
+    </div>
+</div>
+
+<canvas id="myLineChart" width="380" height="120" style="overflow:auto;" onclick="toggleControls1()"></canvas>
+
+@section Scripts {
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/echarts/echarts.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/linechart.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script>
+        var barChart;
+        const loadData = [10, 20, 30, 40];
+        const loadNameData = ["Load", "Load", "Load", "Load"];
+
+        $(document).ready(function () {
+            LoadGroups();
+            BarGraphOnload('All', '', '');
+        });
+
+        function ddlGroupChange() {
+            var ddlGroupData = document.getElementById('ddlGroups');
+            var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+            var ddlGroup = ddlGroupselected.value;
+            if (ddlGroup != 'All') {
+                document.getElementById('ddlMeters').removeAttribute("disabled");
+                LoadMeters(ddlGroup);
+
+                var ddlGroupData = document.getElementById('ddlGroups');
+                var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+                var ddlGroup = ddlGroupselected.value;
+
+                BarGraphOnload(ddlGroup, '', '');
+            } else {
+                document.getElementById('ddlMeters').setAttribute("disabled", "disabled");
+            }
+
+        }
+
+        function LoadGroups() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupsWithMeters", "Home")',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    var html = `<option value='All'>Select All</option>`;
+                    for (var i = 0; i < response.length; i++) {
+                        var group = response[i];
+                        html += `<option value='${group.groupId}'>${group.groupName}</option>`;
+                    }
+                    $('#ddlGroups').html(html);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+
+        function LoadMeters(strId) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetMetersName", "Home")',
+                contentType: "application/json; charset=utf-8",
+                data: { Groupid: strId },
+                success: function (getmetersname) {
+                    var html = `<option value='All'>Select All</option>`;
+                    for (var i = 0; i < getmetersname.mmaster.length; i++) {
+                        var meter = getmetersname.mmaster[i];
+                        html += `<option value='${meter.meterid}'>${meter.metername}</option>`;
+                        $('#ddlMeters').html(html);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function ViewBtn_Clicked() {
+            loadData.length = 0;
+            loadNameData.length = 0;
+            //var meternames = [];
+            //$("input:checkbox[name=Meteridentify]:checked").each(function () {
+            //    meternames.push($(this).val());
+            //});
+            var ddlGroupData = document.getElementById('ddlGroups');
+            var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+            var ddlGroup = ddlGroupselected.value;
+
+            var fDate = document.getElementById('Fdate').value;
+            var tDate = document.getElementById('Tdate').value;
+            if (fDate == "" && tDate == "") {
+                alert("Please select the Group's / Date's.....!");
+            } else {
+                //for (let i = 0; i < meternames.length; i++) {
+                //    GetBarGraphData(meternames[i], fDate, tDate);
+                //}
+                BarGraphOnload(ddlGroup, fDate, tDate);
+            }
+            //BarGraph(loadData, loadNameData);
+
+        }
+
+        function BarGraphOnload(id, startdate, enddate) {
+            loadData.length = 0;
+            loadNameData.length = 0;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupsData", "Total")',
+                // contentType: "application/json; charset=utf-8",
+                data: { strGroup: id, strStartD: startdate, strEndD: enddate },
+                success: function (response) {
+                    if (response) {
+                        var meterNames = response.groupname; //`${response.name}`;
+                        var meterConsumptions = response.groupcons; //`${response.data}`;
+                        if (Array.isArray(meterNames) && Array.isArray(meterConsumptions)) {
+                            meterNames.forEach(function (name, index) {
+                                loadNameData.push(name);
+                                loadData.push(meterConsumptions[index]);
+                                BarGraph(loadData, loadNameData);
+                            });
+                        }
+
+                    } else {
+                        alert('Response Empty...');
+                    }
+
+                },
+                error: function (err) {
+                    alert(`Error : ${err}`);
+                }
+            });
+        }
+
+        function GetBarGraphData(metId, SDate, EDate) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetMetersReadings", "Total")',                
+                data: { strId: metId, strFDate: SDate, strTDate: EDate },
+                success: function (response) {
+                    if (response) {
+                        var meetrname = response.name; //`${response.name}`;
+                        var meetrCons = response.data; //`${response.data}`;
+                        loadNameData.push(meetrname);
+                        loadData.push(meetrCons);
+                        BarGraph(loadData, loadNameData);
+                        //alert(loadNameData + '\n' + loadData);
+                    } else {
+                        alert('Response Empty...');
+                    }
+
+                },
+                error: function (err) {
+                    alert(`Error : ${err}`);
+                }
+            });
+            //BarGraph(loadData, loadNameData);
+        }
+
+        // Bar Chart Script Function
+        function BarGraph(arrData, arrNData) {
+            const data = {
+                labels: arrNData,
+                datasets: [{
+                    // Remove the label here
+                    data: arrData,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+                    borderColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+                    borderWidth: 1,
+                    barThickness: 20  // Set the bar thickness here
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false  // Hide the legend
+                        }
+                    }
+                }
+            };
+
+            if (barChart) {
+                barChart.destroy();
+            }
+
+            barChart = new Chart(
+                document.getElementById('myLineChart'),
+                config
+            );
+        }
+
+        // For Toggle Menu Icons Hide Only
+        function toggleControls1() {
+            const controls = document.querySelector('.controls');
+            controls.style.display = "none";
+        }
+
+        // For Toggle Menu Icons Both Open and Hide
+        function toggleControls() {
+            const controls = document.querySelector('.controls');
+            if (controls.style.display === "none" || controls.style.display === "") {
+                controls.style.display = "flex";
+            } else {
+                controls.style.display = "none";
+            }
+        }
+    </script>
+}

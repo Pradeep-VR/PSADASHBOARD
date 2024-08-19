@@ -1,0 +1,158 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <title>PSA - Login Page</title>
+
+    <!-- Add jQuery here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="logo-section">
+            <header>
+                <img class="companyname-section" style="width: 394px; height: 123px;" src="~/assets/images/Stellantis_logo_blue_background.jpg" />
+            </header>
+        </div>
+
+        <div class="signup-section">
+            <header>SIGN UP</header>
+            <form id="signupForm">
+                <input type="text" id="NewUserName" placeholder="Full Name" required>
+                <input type="text" id="NewUserid" placeholder="User ID" required>
+                <div class="password-container">
+                    <input type="password" id="Newpasswordid" placeholder="Password" required>
+                    <i class="bx bx-hide" id="toggleNewPassword" style="cursor: pointer;"></i>
+                </div>
+                <a href="@Url.Action("ForgotPassword", "Login")">Forgot Password?</a>
+                <button type="submit" id="Signbutton" class="btn">SIGN UP</button>
+            </form>
+        </div>
+        <div class="login-section">
+            <header>LOGIN</header>
+            <form id="loginForm">
+                <input type="text" id="Userid" placeholder="User ID" required value="TL0115">
+                <div class="password-container">
+                    <input type="password" id="passwordid" placeholder="Password" required value="0115">
+                    <i class="bx bx-hide" id="togglePassword" style="cursor: pointer;"></i>
+                </div>
+                <a href="@Url.Action("ForgotPassword", "Login")">Forgot Password?</a>
+                <button type="submit" id="loginbt" class="btn">LOGIN</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/metismenu/metismenu.min.js"></script>
+    <script src="~/lib/simplebar/simplebar.min.js"></script>
+    <script src="~/lib/node-waves/waves.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const container = document.querySelector('.container');
+            container.classList.add('active');
+            const signupContainer = document.querySelector('.signup-section header');
+            const loginContainer = document.querySelector('.login-section header');
+
+            loginContainer.addEventListener('click', () => {
+                container.classList.add('active');
+            });
+
+            signupContainer.addEventListener('click', () => {
+                container.classList.remove('active');
+            });
+
+            $("#signupForm").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                var NewUserName = $("#NewUserName").val();
+                var NewUserId = $("#NewUserid").val();
+                var Newpassword = $("#Newpasswordid").val();
+
+                if (NewUserName !== "" && NewUserId !== "" && Newpassword !== "") {
+                    SigninMethod(NewUserName, NewUserId, Newpassword);
+                } else {
+                    alert("Please enter Use Name and UserID and Password");
+                }
+            });
+
+            $('#toggleNewPassword').click(function () {
+                const type = $('#Newpasswordid').attr('type') === 'text' ? 'password' : 'text';
+                $('#Newpasswordid').attr('type', type);
+                $(this).toggleClass('bx-hide bx-show');
+            });
+
+            $("#loginForm").submit(function (event) {
+                event.preventDefault();
+
+                var UserId = $("#Userid").val();
+                var pass = $("#passwordid").val();
+
+                if (UserId !== "" && pass !== "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("UserLogin", "Login")',
+                        data: JSON.stringify({ userid: UserId, password: pass }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (resultData) {
+                            if (resultData.success) {
+                                window.location.href = 'Home/Index';
+                            } else {
+                                alert(resultData.message);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    alert("Please enter UserID and Password");
+                }
+            });
+
+            $('#togglePassword').click(function () {
+                const type = $('#passwordid').attr('type') === 'text' ? 'password' : 'text';
+                $('#passwordid').attr('type', type);
+                $(this).toggleClass('bx-hide bx-show');
+            });
+
+            function SigninMethod(NewUserName, NewUserId, Newpassword) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("UserSignin", "Login")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ NewUserName: NewUserName, Newuserid: NewUserId, Newpassword: Newpassword }),
+                    success: function (resultData) {
+                        if (resultData.success) {
+                            alert(resultData.message);
+                            window.location.href = '/Login/Index';
+                        } else {
+                            alert(resultData.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

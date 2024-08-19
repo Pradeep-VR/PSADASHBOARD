@@ -1,0 +1,742 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "METERS";
+    var groupId = ViewBag.GroupId;
+    var groupName = ViewBag.groupName;
+    var yesCon = ViewBag.YesCon;
+    var toCon = ViewBag.ToCon;
+}
+
+<style>
+    /* body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        width: 100%; /* Changed to full width 
+        overflow: hidden;
+    } */
+
+
+    .dashboard {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 10px;
+        /*width: 30%;*/
+        height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding: 10px;
+        position: relative; /*Added for positioning date selector */
+        justify-content: start;
+    }
+
+    /*dashboard {
+                        display: flex;
+                        gap: 10px;
+                        margin-top: 10px;
+                        width: 100%;
+                        height: calc(100vh - 100px);
+                        overflow-y: auto;
+                        padding: 10px;
+                        justify-content: start;
+                    }*/
+
+    .left-section {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        justify-content: space-between;
+        gap: 10px;
+        width: 25%;
+    }
+
+    .menu-icon {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .controls-container {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        z-index: 1000;
+        box-shadow: 10px 3.5px 5px lightslategray;
+    }
+
+    .controls {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #dad9d9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .date-selector {
+        margin-bottom: 20px;
+    }
+
+    .labell {
+        display: block;
+        color: forestgreen !important;
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    .inputt {
+        margin-bottom: 10px;
+        display: block;
+        width: 365px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .side-buttons button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px; /* Add some space between the buttons */
+        width: 100%; /* Make buttons take full width of their container */
+    }
+
+        .side-buttons button:hover {
+            background-color: #45a049;
+        }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .containerMeter {
+        background-color: #fff;
+        padding: 10px;
+        box-shadow: 10px 3.5px 5px lightslategray;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        /*width: calc(26% - 20px);*/
+        width: 100%;
+        max-width: 300px;
+        min-width: 200px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 2em;
+        color: #4CAF50;
+    }
+
+    .card {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card1 {
+        margin-bottom: 10px;
+        padding: 9px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .meterheading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 2px;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .meter {
+        height: 50px
+    }
+
+    .row1 {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .column {
+        width: 36%;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 0.9em;
+        color: #2196F3;
+    }
+
+    .card p {
+        margin: 5px 0;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    p span {
+        color: #FF5722;
+    }
+
+    .card:last-child {
+        text-align: center;
+        background-color: #E3F2FD;
+        border-color: #64B5F6;
+    }
+
+        .card:last-child h2 {
+            color: #1976D2;
+        }
+
+        .card:last-child p span {
+            color: #D32F2F;
+        }
+
+    .box-select {
+        background-color: #0563af;
+        color: white;
+        padding: 12px;
+        width: 250px;
+        border: none;
+        font-size: 20px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+    }
+
+    .right-section {
+        width: 75%;
+        height: 100%;
+        overflow-x: auto; /* Enable horizontal scrolling */
+    }
+
+    .chart-wrapper {
+        white-space: nowrap; /* Prevent wrapping of x-axis labels */
+        display: inline-block; /* Ensure inline-block for dynamic width adjustment */
+        overflow-x: auto; /* Enable horizontal scrolling */
+        min-width: auto; /* Adjust based on the number of labels */
+    }
+</style>
+<link href="~/css/loader.css" rel="stylesheet" />
+<div id="preloader">
+    <div class="waviy">
+        <span style="--i:1">L</span>
+        <span style="--i:2">O</span>
+        <span style="--i:3">A</span>
+        <span style="--i:4">D</span>
+        <span style="--i:5">I</span>
+        <span style="--i:6">N</span>
+        <span style="--i:7">G</span>
+        <span style="--i:8">.</span>
+        <span style="--i:9">.</span>
+        <span style="--i:10">.</span>
+    </div>
+</div>
+
+@* <div class="heading">@Html.Raw(groupName)</div> *@
+
+<div style="display:flex;flex-direction:row;justify-content:space-around;">
+    <span><a style="font-size:20px;color:black;">YESTERDAY CONSUMPTION : @Html.Raw(yesCon)</a></span>
+    <span><a style="font-size:20px;color:black;">TODAY CONSUMPTION : @Html.Raw(toCon)</a></span>
+</div>
+<div class="dashboard" id="groupContainers">
+
+    <div class="left-section" id="divMeters"></div>
+    <div class="right-section">
+        <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+            <select class="form-select" id="ddlDivision" onchange="OnSelectChanged()" style="margin:5px;">
+                <option value="'V','F'">OVERALL</option>
+                <option value="'F'">FIXED</option>
+                <option value="'V'">VARIABLE</option>
+            </select>
+            <select class="form-select" id="ddlTimes" onchange="OnSelectChanged()" style=" margin:5px;">
+                <option value="1">DAILY</option>
+                <option value="7">WEEKLY</option>
+                <option value="30">MONTHLY</option>
+            </select>
+            <div style="margin:5px">
+                <label style="vertical-align:central;" for="fname">Consumption :</label><br />
+                <input style="vertical-align: central;" type="text" id="txtConsumption" disabled="disabled" name="Consumption" />
+            </div>
+            <div style="margin:5px">
+                <label style="vertical-align:central;" for="fname">Set Target :</label><br />
+                <input style="vertical-align: central;" type="number" id="txtTarget" value="50" onchange="updateTargetLine()" onkeypress="this.onchange()" />
+            </div>
+        </div>
+        <div class="chart-wrapper">
+            <canvas id="myLineChart" width="2000" height="500"></canvas>
+        </div>
+    </div>
+</div>
+
+@* <div class="menu-icon" onclick="toggleControls()">☰</div>
+<div class="controls-container">
+    <div class="controls">
+        <div class="date-selector">
+            <div class="dropdown" style="display: flex;flex-direction: column;">
+                <button class="btn" style=" color: white !important; font-weight: bold; width: 20em; background-color: #4CAF50; margin-bottom: 15px;" onclick="TotCon_BtnClicked()">
+                    Total Consumption
+                </button>
+
+            </div>
+
+        </div>
+        <div class="side-buttons">
+        </div>
+    </div>
+</div> *@
+
+@section Scripts {
+    </script><script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/echarts/echarts.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/linechart.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script>
+        var preloader = document.getElementById('preloader');
+        $(document).ready(function () {
+            var groupId = '@Html.Raw(groupId)';
+            var divs = "'V','F'";
+            onLoadScreen(groupId, divs, '7');
+        });
+
+        function onLoadScreen(JstrGroupid, JMetrDiv, JMetrTimes) {
+            preloader.style.display = 'inline-flex';
+            LoadGroupData(JstrGroupid, JMetrDiv);
+            LoadGraphData(JstrGroupid, JMetrTimes, JMetrDiv);
+            //LoadMeterData(groupId);
+            Getmetersforddl(JstrGroupid);
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 3000);
+        }
+
+        function LoadGroupData(Id, jstrMeterDiv) {
+            $.ajax({
+                // url: '@Url.Action("GetEnergyData_ReWork", "Home")',
+                // type: 'POST',
+                // data: { groupId: groupId },
+
+                type: 'POST',
+                url: '@Url.Action("GetMeters", "Home")',
+                // contentType: "application/json; charset=utf-8",
+                data: { groupId: Id, strMeterDiv: jstrMeterDiv },
+                success: function (group) {
+                    console.log(group);
+                    debugger;
+                    //var container = $("#groupContainers");
+                    //container.empty();
+                    var meters = $('#divMeters');
+                    meters.empty();
+                    if (group && group.mmaster) {
+                        //var divMeter = $("#divMeters");
+
+                        group.mmaster.forEach((meter, index) => {
+                            //if (index % 4 === 0) {
+                            //row = $('<div class="row"></div>');
+                            //container.append(row);
+                            //}
+                            var meterHtml = `<div class="containerMeter">
+                                                                                                    <div class="meterheading" onclick="navigateGraph('${meter.meterid}','${meter.metername}')" >
+                                                                                                    <div class="meter">
+                                                                                                     <h1>${meter.metername}</h1>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    <div class="card1">
+                                                                                                        <p style="color:#30d1c1;">TODAY: <span id="today_${meter.meterid}"></span> kWh</p>
+                                                                                                        <p style="color:#3066d1;">YESTERDAY: <span id="yesterday_${meter.meterid}"></span> kWh</p>
+                                                                                                    </div>
+                                                                                                    <div class="card">
+                                                                                                        <div class="row1">
+                                                                                                            <div class="column">
+                                                                                                                <h2>Current (A)</h2>
+                                                                                                                <p>RY: <span id="currentA_${meter.meterid}"></span></p>
+                                                                                                                <p>YB: <span id="currentB_${meter.meterid}"></span></p>
+                                                                                                                <p>BR: <span id="currentC_${meter.meterid}"></span></p>
+                                                                                                            </div>
+                                                                                                            <div class="column">
+                                                                                                                <h2>Voltage (V)</h2>
+                                                                                                                <p>RY: <span id="voltageA_${meter.meterid}"></span></p>
+                                                                                                                <p>YB: <span id="voltageB_${meter.meterid}"></span></p>
+                                                                                                                <p>BR: <span id="voltageC_${meter.meterid}"></span></p>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <p>kWh: <span id="kwh_${meter.meterid}"></span></p>
+                                                                                                    </div>
+                                                                                                </div>`;
+                            //row.append(meterHtml);
+                            meters.append(meterHtml);
+                            LoadMeterData(meter.meterid);
+                        });
+                    } else {
+                        console.error("Expected a group with an MMASTER array but received: ", group);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function LoadMeterData(meterId) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetEnergyDataUsingMeterid", "Home")',
+                // contentType: "application/json; charset=utf-8",
+                data: { meterId: meterId },
+                success: function (resultData) {
+                    document.getElementById(`today_${meterId}`).innerText = resultData.todayConsume;
+                    document.getElementById(`yesterday_${meterId}`).innerText = resultData.yeasterdayConsume;
+                    document.getElementById(`currentA_${meterId}`).innerText = resultData.currenta;
+                    document.getElementById(`currentB_${meterId}`).innerText = resultData.currentb;
+                    document.getElementById(`currentC_${meterId}`).innerText = resultData.currentc;
+                    document.getElementById(`voltageA_${meterId}`).innerText = resultData.voltageab;
+                    document.getElementById(`voltageB_${meterId}`).innerText = resultData.voltagebc;
+                    document.getElementById(`voltageC_${meterId}`).innerText = resultData.voltageca;
+                    document.getElementById(`kwh_${meterId}`).innerText = resultData.activeenergydelivered;
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function Getmetersforddl(groupId) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetMetersName", "Home")',
+                // contentType: "application/json; charset=utf-8",
+                data: { Groupid: groupId },
+                success: function (getmetersname) {
+                    for (var i = 0; i < getmetersname.mmaster.length; i++) {
+                        var meter = getmetersname.mmaster[i];
+                        var html = '<label style="color:black; padding-left:10px;font-size: 15px;">'
+                            + '<input type="checkbox" name="Meteridentify" style="height:10px;"  value=' + meter.meterid + ' /> &nbsp;&nbsp;' + meter.metername + ''
+                            + '</label><br/>';
+                        $('#ddlmetersname').append(html);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+        }
+
+        function OnSelectChanged() {
+            debugger;
+            var data = document.getElementById('ddlDivision');
+            var selectedOption = data.options[data.selectedIndex];
+            var Divisionvalue = selectedOption.value;
+
+            var data1 = document.getElementById('ddlTimes');
+            var selectedOption1 = data1.options[data1.selectedIndex];
+            var Timingsvalue = selectedOption1.value;
+
+            var groupId = '@Html.Raw(groupId)';
+            onLoadScreen(groupId, Divisionvalue, Timingsvalue);
+            //alert("Selected Text: " + text + "\nSelected Value: " + value);
+        }
+
+        //  New 1
+        function navigateGraph(Id, Name) {
+            window.location.href = `@Url.Action("Index", "Graph")?strId=${Id}&strName=${Name}`;
+        }
+
+        function TotCon_BtnClicked() {
+            var ids = "@Html.Raw(groupId)";
+            window.location.href = `@Url.Action("TotalIndex", "Total")?id=${ids}`;
+        }
+
+
+        // View Graph Button Function
+        function btnGraph() {
+            var meternames = [];
+            $("input:checkbox[name=Meteridentify]:checked").each(function () {
+                meternames.push($(this).val());
+            });
+            var fDate = document.getElementById('Fdate').value;
+            var tDate = document.getElementById('Tdate').value;
+            if (fDate == "" && tDate == "" && meternames.length == 0) {
+                alert("Please select the Meters.....!");
+            } else {
+                //window.location.href = `@Url.Action("LstGraphIndex", "Graph")?strId=${[meternames]}&strName=${meternames[0]}&strFdate=${fDate}&strTdate=${tDate}`;
+
+                var meterParams = meternames.map(function (name) {
+                    return `${name}`;
+                });
+
+
+                var url = `@Url.Action("LstGraphIndex", "Graph")?strId=${meterParams}&strName=${meterParams[0]}&strFdate=${fDate}&strTdate=${tDate}`;
+
+                window.location.href = url;
+            }
+        };
+
+        //View Table Data Button Function
+        $("#viewDataBtn").click(function () {
+            var fDate = document.getElementById('Fdate').value;
+            var tDate = document.getElementById('Tdate').value;
+            var groupId = '@Html.Raw(groupId)';
+            var groupname = '@Html.Raw(groupName)';
+            if (fDate !== "" && tDate !== "" && groupId !== "" && groupname !== "") {
+                window.location.href = `@Url.Action("TableData", "Home")?strgroupId=${groupId}&strgroupName=${groupname}&strfromDate=${fDate}&strtoDate=${tDate}`;
+            } else {
+                alert('Please Check Date Selection.');
+            }
+        });
+
+        //Export Excel Button Function
+        $("#exportXLBtn").click(function () {
+            var fDate = document.getElementById('Fdate').value;
+            var tDate = document.getElementById('Tdate').value;
+            var groupId = '@Html.Raw(groupId)';
+            var groupname = '@Html.Raw(groupName)';
+            if (fDate !== "" && tDate !== "" && groupId !== "" && groupname !== "") {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetXLData", "Home")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ strGroupId: groupId, strFromDate: fDate, strToDate: tDate }),
+                    xhrFields: {
+                        responseType: 'blob' // Important for binary data download
+                    },
+                    success: function (data, status, xhr) {
+                        var blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                        var link = document.createElement('a');
+                        var d = '@DateTime.Now.ToString("dd/mm/yy hh:mm:ss")';
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = groupname + ' ENERGYDATA ' + d + '.xlsx';
+                        link.click();
+                    },
+                    error: function (err) {
+                        alert('Error : ' + err);
+                    }
+                });
+            } else {
+                alert('Please Check Date Selection.');
+            }
+        });
+
+
+
+        let maxDemandData = [];
+        let powerFactorData = [];
+        let activeEnergyData = [];
+
+        let ctx = document.getElementById('myLineChart').getContext('2d');
+        let targetLineValue = document.getElementById('txtTarget').value;
+
+        let myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Active Energy Delivered',
+                        data: [],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        fill: true,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'DAYS',
+                            font: {
+                                size: 20,
+                                weight: 'bold',
+                                family: 'Arial'
+                            },
+                            color: 'darkblue'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'UNITS',
+                            font: {
+                                size: 20,
+                                weight: 'bold',
+                                family: 'Arial'
+                            },
+                            color: 'darkblue'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15,
+                            font: {
+                                size: 14,
+                                family: 'Arial'
+                            },
+                            color: 'black'
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: targetLineValue,
+                                yMax: targetLineValue,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Target',
+                                    enabled: true,
+                                    position: 'end'
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'targetLine',
+                afterDraw: (chart) => {
+                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+                }
+            }]
+        });
+
+        function LoadGraphData(Id, Intval, divss) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupGraph", "Graph")',
+                data: { groupId: Id, Interval: Intval, Divs: divss },
+                success: function (response) {
+                    if (response) {
+                        let labels = response.days;
+                        if (Array.isArray(labels) && labels.length > 0) {
+                            let activeEnergyData = response.consumption.map(x => parseFloat(x));
+
+                            myLineChart.data.labels = labels;
+                            myLineChart.data.datasets[0].data = activeEnergyData;
+
+                            let sum = activeEnergyData.reduce((accumulator, currentValue) => {
+                                return accumulator + currentValue;
+                            }, 0);
+
+                            let inputField = document.getElementById('txtConsumption');
+                            inputField.value = sum.toFixed(2);
+
+                            myLineChart.update();
+                        } else {
+                            alert('No valid labels data found');
+                        }
+                    } else {
+                        alert('No data found');
+                    }
+                },
+                error: function (err) {
+                    alert('Error : ' + err);
+                }
+            });
+        }
+
+        // function LoadGraphData(Id, Intval, divss) {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '@Url.Action("GetGroupGraph", "Graph")',
+        //         data: { groupId: Id, Interval: Intval, Divs: divss },
+        //         success: function (response) {
+        //             try {
+        //                 if (response && response.days && response.consumption) {
+        //                     let labels = response.days;
+        //                     let activeEnergyData = response.consumption.map(x => parseFloat(x));
+
+        //                     myLineChart.data.labels = labels;
+        //                     myLineChart.data.datasets[0].data = activeEnergyData;
+
+        //                     let sum = activeEnergyData.reduce((accumulator, currentValue) => {
+        //                         return accumulator + currentValue;
+        //                     }, 0);
+
+        //                     let inputField = document.getElementById(Fn');
+        //                     inputField.value = sum.toFixed(2);
+
+        //                     myLineChart.update();
+        //                 } else {
+        //                     alert('Unexpected response format or missing data');
+        //                 }
+        //             } catch (error) {
+        //                 console.error('Error processing the response:', error);
+        //                 alert('Error processing the response data. Please check the console for details.');
+        //             }
+        //         },
+        //         error: function (err) {
+        //             console.error('AJAX error:', err);
+        //             alert('Error in AJAX request: ' + err.statusText);
+        //         }
+        //     });
+        // }
+
+        function updateTargetLine() {
+            targetLineValue = document.getElementById('txtTarget').value;
+            myLineChart.update();
+        }
+
+        function drawHorizontalLine(chartInstance, value, color) {
+            const yScale = chartInstance.scales.y;
+            const yPos = yScale.getPixelForValue(value);
+
+            chartInstance.ctx.save();
+            chartInstance.ctx.beginPath();
+            chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
+            chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
+            chartInstance.ctx.strokeStyle = color;
+            chartInstance.ctx.lineWidth = 1;
+            chartInstance.ctx.shadowColor = color;
+            chartInstance.ctx.shadowBlur = 10;
+            chartInstance.ctx.stroke();
+            chartInstance.ctx.restore();
+        }
+
+
+    </script>
+}

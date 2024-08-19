@@ -1,0 +1,13 @@
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.exe
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.deps.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.runtimeconfig.json
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.pdb
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\System.Data.SqlClient.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\sni.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\prade\OneDrive\Desktop\PSAPROJECTS\TEST\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

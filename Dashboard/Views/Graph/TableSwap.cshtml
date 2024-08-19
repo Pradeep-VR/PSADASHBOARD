@@ -1,0 +1,125 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "TableSwap";
+    var Meterid = ViewBag.id;
+    var Fdate = ViewBag.fd;
+    var Tdate = ViewBag.td;
+    var MeterName = ViewBag.MeterName;
+}
+<link href="~/css/datatables.datatables.css" rel="stylesheet" />
+<main class="table" id="customers_table">
+    <section class="table__body">
+        <table id="dataTable" style="background-color:lightgray" class="display">
+            <thead>
+                <tr>
+                    <th>METER</th>
+                    <th>DATEANDTIME</th>
+                    <th>ACTIVE_ENERGY</th>
+                    <th>CONSUMPTION</th>
+                    <th>RY_CURRENT</th>
+                    <th>YB_CURRENT</th>
+                    <th>BR_CURRENT</th>
+                    <th>RY_VOLTAGE</th>
+                    <th>YB_VOLTAGE</th>
+                    <th>BR_VOLTAGE</th>
+                    <th>MAX_DEMAND</th>
+                    <th>POWER_FACTOR</th>
+                    <th><label for="export-file" id="toCSV"><img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Binding From Function DownSide. *@
+            </tbody>
+        </table>
+    </section>
+</main>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/js/xlsx.full.min.js"></script>
+    <script src="~/js/filesaver.min.js"></script>
+    <script src="~/js/datatables.js"></script>
+    <script>
+        window.onload = function () {
+            debugger;
+            var id = '@Html.Raw(Meterid)';
+            var fdt = '@Html.Raw(Fdate)';
+            var tdt = '@Html.Raw(Tdate)';
+            LoadTableData(id, fdt, tdt);
+        }
+
+        function LoadTableData(strMId, strFDate, strTDate) {
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetTableData", "Graph")',
+                data: { strId: strMId, strFD: strFDate, strTD: strTDate },
+                success: function (response) {
+                    if (response) {
+                        const tableBody = document.querySelector('#dataTable tbody');
+                        tableBody.innerHTML = '';
+                        debugger;
+                        for (let i = 0; i < response.consumption.length; i++) {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `<tr>
+                                                     <td>${response.meterName[i]}</td>
+                                                                <td>${response.dateAndTime[i]}</td>
+                                                                <td>${response.activeEnergy[i]}</td>
+                                                                <td>${response.consumption[i]}</td>
+                                                                <td>${response.current_A[i]}</td>
+                                                                <td>${response.current_B[i]}</td>
+                                                                <td>${response.current_C[i]}</td>
+                                                                <td>${response.voltage_A[i]}</td>
+                                                                <td>${response.voltage_B[i]}</td>
+                                                                <td>${response.voltage_C[i]}</td>
+                                                                <td>${response.maxDemand[i]}</td>
+                                                                <td>${response.powerFactor[i]}</td>
+                                                            </tr>`;
+                            tableBody.appendChild(row);
+                        }
+                    }
+                    else {
+                        alert('No Data Found.' + response);
+                    }
+                },
+                error: function (err) {
+                    alert('Error : ' + err);
+                }
+            });
+        }
+        // new DataTable('#dataTable');
+
+        /* DEFAULT SCRIPTS FUNCTIONS */
+        const search = document.querySelector('.input-group input'),
+            table_rows = document.querySelectorAll('tbody tr'),
+            table_headings = document.querySelectorAll('thead th');
+
+        const csv_btn = document.querySelector('#toCSV');
+        const toCSV = function (table) {
+            const t_heads = table.querySelectorAll('th'),
+                tbody_rows = table.querySelectorAll('tbody tr');
+            // Capture and format headings
+            const headings = [...t_heads].map(head => head.textContent.trim().toUpperCase());
+            // Capture and format table data
+            const table_data = [...tbody_rows].map(row => {
+                const cells = row.querySelectorAll('td');
+                const cells_data = [...cells].map(cell => cell.textContent.trim());
+                return cells_data;
+            });
+            return [headings, ...table_data];
+        }
+        const downloadXLSX = (data, fileName) => {
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, '@Html.Raw(MeterName)');
+            XLSX.writeFile(wb, `${fileName}.xlsx`);
+        }
+        csv_btn.onclick = () => {
+            const table = document.getElementById('dataTable');
+            const data = toCSV(table);
+            downloadXLSX(data, '@Html.Raw(MeterName)');
+        }
+    </script>
+}

@@ -1,0 +1,13 @@
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.exe
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\appsettings.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.deps.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.runtimeconfig.json
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\Dashboard.pdb
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\System.Data.SqlClient.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\sni.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
