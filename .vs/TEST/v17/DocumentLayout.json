@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\views\\total\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\total\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|c:\\users\\prade\\onedrive\\desktop\\psaprojects\\test\\dashboard\\controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 222,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OverAllIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Home\\OverAllIndex.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\OverAllIndex.cshtml",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Home\\OverAllIndex.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\OverAllIndex.cshtml",
+              "ViewState": "AQIAALkAAAAAAAAAAAAAAM4AAAByAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-04T21:24:19.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShopwiseIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "ViewState": "AQIAACwBAAAAAAAAAAAAAEMBAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-04T21:23:52.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Graph\\Index.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Graph\\Index.cshtml",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Graph\\Index.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Graph\\Index.cshtml",
+              "ViewState": "AQIAAAUBAAAAAAAAAAAAACYBAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-04T21:21:46.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\appsettings.json",
+              "RelativeDocumentMoniker": "Dashboard\\appsettings.json",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\appsettings.json",
+              "RelativeToolTip": "Dashboard\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-04T21:06:40.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Total\\Index.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Total\\Index.cshtml",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Views\\Total\\Index.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Total\\Index.cshtml",
+              "ViewState": "AQIAAPUAAAAAAAAAAAAAAAABAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-08-04T21:04:11.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TotalController.cs",
+              "DocumentMoniker": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Controllers\\TotalController.cs",
+              "RelativeDocumentMoniker": "Dashboard\\Controllers\\TotalController.cs",
+              "ToolTip": "C:\\Users\\prade\\OneDrive\\Desktop\\PSAPROJECTS\\TEST\\Dashboard\\Controllers\\TotalController.cs",
+              "RelativeToolTip": "Dashboard\\Controllers\\TotalController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAwwBoAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-04T21:01:14.748Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
