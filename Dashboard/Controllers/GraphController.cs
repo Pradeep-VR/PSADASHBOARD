@@ -77,11 +77,11 @@ namespace Dashboard.Controllers
                     //strTD = dt2.ToString("dd-MM-yyyy HH:mm:ss");
 
 
-                    //startDate = DateTime.Parse(strFD);//.ToString("yyyy-MM-dd hh:mm:ss");
-                    //endDate = DateTime.Parse(strTD);//.ToString("yyyy-MM-dd hh:mm:ss");    
+                    startDate = DateTime.Parse(strFD);//.ToString("yyyy-MM-dd hh:mm:ss");
+                    endDate = DateTime.Parse(strTD);//.ToString("yyyy-MM-dd hh:mm:ss");    
 
-                    startDate = DateTime.ParseExact(strFD, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-                    endDate = DateTime.ParseExact(strTD, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    //startDate = DateTime.ParseExact(strFD, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                    //endDate = DateTime.ParseExact(strTD, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                 }
                 else
                 {
@@ -95,13 +95,15 @@ namespace Dashboard.Controllers
                 string formattedStartDate = startDate.ToString("dd-MM-yyyy HH:mm:ss");
                 string formattedEndDate = endDate.ToString("dd-MM-yyyy HH:mm:ss");
 
-                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
-                      "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + formattedStartDate + "',103) AND CONVERT(DATETIME,'" + formattedEndDate + "',103) " +
-                      "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME UNION ALL SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME) FROM TIMEINTERVALS " +
-                      "WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 103)) " +
-                      "SELECT T.INTERVALTIME AS DATETIMES, E.CURRENTA, E.CURRENTB, E.CURRENTC, E.VOLTAGEAB, E.VOLTAGEBC, E.VOLTAGECA, E.MAXDEMAND, E.POWERFACTOR, E.ACTIVEENERGYDELIVERED AS KWH " +
-                      "FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
-                      "WHERE E.METERID = '" + groupId + "' ORDER BY T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
+                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
+                //      "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + formattedStartDate + "',103) AND CONVERT(DATETIME,'" + formattedEndDate + "',103) " +
+                //      "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME UNION ALL SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME) FROM TIMEINTERVALS " +
+                //      "WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 103)) " +
+                //      "SELECT T.INTERVALTIME AS DATETIMES, E.CURRENTA, E.CURRENTB, E.CURRENTC, E.VOLTAGEAB, E.VOLTAGEBC, E.VOLTAGECA, E.MAXDEMAND, E.POWERFACTOR, E.ACTIVEENERGYDELIVERED AS KWH " +
+                //      "FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
+                //      "WHERE E.METERID = '" + groupId + "' ORDER BY T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
+
+                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + formattedStartDate + "',103) AS INTERVALTIME    UNION ALL SELECT  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) FROM  TIMEINTERVALS WHERE  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "',103))SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR, E.ACTIVEENERGYDELIVERED AS KWH FROM  TIMEINTERVALS T LEFT JOIN  TBL_ENERGYMETER E ON E.SYNCDATETIME >= T.INTERVALTIME  AND E.SYNCDATETIME < DATEADD(MINUTE, " + Interval + ", T.INTERVALTIME) WHERE  E.METERID = '" + groupId + "' ORDER BY  T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
 
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
