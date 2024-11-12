@@ -150,3 +150,4 @@ D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\refint\Dashboa
 D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\Dashboard.pdb
 D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\Dashboard.genruntimeconfig.cache
 D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\ref\Dashboard.dll
+D:\Pradeep\PLC_FX5U\WEB\Augest16\PSA\Dashboard\obj\Release\net8.0\Dashboard.sourcelink.json

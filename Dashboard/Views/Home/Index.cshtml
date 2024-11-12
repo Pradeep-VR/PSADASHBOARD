@@ -327,7 +327,7 @@
                                                                         <div class="col-md-4 col-sm-6 col-12 p-1">
                                                                                                 <div class="card custom-bg" style="background-color: ${color};" >
                                                                                                     <div class="card-body" id="Group_${group.groupId}">
-                                                                                                        <div style="display: flex;justify-content: center;" ondblclick="navigateToNextPage('${group.groupId}', '${group.groupName}')">
+                                                                                                                <div style="display: flex;justify-content: center;" ondblclick="tws_clicked()')">
                                                                                                         <h3 style="color:#FFD700;font-size: 2.5em;">${group.groupName}</h3>
                                                                                                         </div>
                                                                                                         <div class="consume-labels" style="visibility:hidden;"  >
@@ -349,7 +349,6 @@
                                                                                                                 <label style="font-size:1.5em;" >TODAY: <span id="tstoday_${group.groupId}"></span></label>
                                                                                                             </div>
                                                                                                         </div>
-
                                                                                                         <div style="display:none">
                                                                                                         <h1 class="meterheading">Meters</h1>
                                                                                                         </div>
@@ -436,6 +435,10 @@
             }
         });
 
+        function tws_clicked(){
+            alert('Your Clicked Group TransformerWise. Please Click Other Groups.');
+        }
+
         function viewDataBtn_Clicked() {
             var fDate = document.getElementById('Fdate').value;
             var tDate = document.getElementById('Tdate').value;
@@ -497,7 +500,6 @@
                 success: function (resultData) {
                     var dropdown = $("#groupDropdown");
                     dropdown.empty();
-
 
                     var defaultOption = new Option("Select Group Name", "default");
                     defaultOption.selected = true;
