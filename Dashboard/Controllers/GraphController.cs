@@ -2,7 +2,9 @@
 using Dashboard.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Dashboard.Controllers
 {
@@ -22,10 +24,11 @@ namespace Dashboard.Controllers
         }
         #endregion
 
-        public IActionResult Index(string strId, string strName)
+        public IActionResult Index(string strId, string strName, string strGName)
         {
             ViewBag.Id = strId;
             ViewBag.Name = strName;
+            ViewBag.GName = strGName;
             return View();
         }
 
@@ -315,6 +318,79 @@ namespace Dashboard.Controllers
 
 
         [HttpPost]
+        public ActionResult GetShopWise_Group_GraphAll(string groupId, string strMeterId, string strFD, string strTD, int Interval, string Divison)
+        {
+
+            string Qry = string.Empty;
+
+            try
+            {
+                if (groupId != "")
+                {
+                    string formattedStartDate = DateTime.Now.ToString("yyyy-MM-ddT00:00:00");
+                    string formattedEndDate = DateTime.Now.ToString("yyyy-MM-ddT23:59:59");
+                    if (!(string.IsNullOrEmpty(strFD) && string.IsNullOrEmpty(strTD)))
+                    {
+                        // Correctly parse the strings in the ISO 8601 format
+                        DateTime startDateTime = DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm:ss", null);
+                        DateTime endDateTime = DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm:ss", null);
+
+                        // Now format to the desired format for SQL query
+                        formattedStartDate = startDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                        formattedEndDate = endDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+
+                    }
+
+
+                    Qry = "WITH TIMEINTERVALS AS ( SELECT CONVERT(DATETIME, ( SELECT TOP 1 SYNCDATETIME  FROM TBL_ENERGYMETER E   WHERE CONVERT(DATETIME, E.SYNCDATETIME, 126) BETWEEN CONVERT(DATETIME, '" + formattedStartDate + "', 126) " +
+                            "AND CONVERT(DATETIME, '" + formattedEndDate + "', 126) ORDER BY SYNCDATETIME ASC), 126) AS INTERVALTIME UNION ALL    SELECT DATEADD(MINUTE, 15, INTERVALTIME) " +
+                            "FROM TIMEINTERVALS   WHERE   DATEADD(MINUTE, 15, INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 126)),CALCULATED_CONSUMPTION AS (SELECT  T.INTERVALTIME AS DATETIMES," +
+                            " E.CURRENTA AS CURRENTA, E.CURRENTB AS CURRENTB, E.CURRENTC AS CURRENTC, E.VOLTAGEAB AS VOLTAGEAB,  E.VOLTAGEBC AS VOLTAGEBC,E.VOLTAGECA AS VOLTAGECA, E.MAXDEMAND AS MAXDEMAND, E.POWERFACTOR AS POWERFACTOR," +
+                            "CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) AS KWH,M.ID,E.METERID, CASE  WHEN LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) IS NULL THEN 0 " +
+                            "ELSE CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) - LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) END AS TIME_BASED_KWH_CONSUMPTION  FROM  TIMEINTERVALS T  LEFT JOIN " +
+                            "TBL_ENERGYMETER E  ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 126) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  LEFT JOIN  METERMASTER M ON E.METERID = M.METERID    WHERE E.GROUPID = '" + groupId + "' AND M.METERDIVISION IN (" + Divison + ")) SELECT   DATETIMES," +
+                            " ROUND(SUM(TIME_BASED_KWH_CONSUMPTION), 2) AS TOTAL_KWH_CONSUMPTION FROM  CALCULATED_CONSUMPTION GROUP BY   DATETIMES ORDER BY DATETIMES ASC";
+
+                    var dt = _serve.GetDataTable(Qry);
+                    if (dt.Rows.Count > 0)
+                    {
+                        List<string> syncdatetime = new List<string>();
+                        List<string> activeenergy = new List<string>();
+
+                        int j = 0;
+
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            j = i + 1;
+                            if (j < dt.Rows.Count)
+                            {
+                                syncdatetime.Add(dt.Rows[i]["DATETIMES"].ToString());
+                                activeenergy.Add(dt.Rows[i]["TOTAL_KWH_CONSUMPTION"].ToString());
+                            }
+
+                        }
+                        return Json(new { SYNCDATETIME = syncdatetime.ToArray(), Consumptions = activeenergy.ToArray() });
+                    }
+                    else//No Data Found
+                    {
+                        return Json(new { data = "No Data Found." });
+                    }
+
+                }
+                else//Group Id Null
+                {
+                    return Json(new { data = "Group Id was Null/Empty," });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Json(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+
+        [HttpPost]
         public ActionResult GetOverAllIndex_Graph_All(string groupId, string strMeterId, string strFD, string strTD, int Interval)
         {
             string MQ = string.Empty;
@@ -348,37 +424,89 @@ namespace Dashboard.Controllers
                             if (string.IsNullOrEmpty(strFD) && string.IsNullOrEmpty(strTD))
                             {
 
-                                strFD = DateTime.Now.ToString("dd-MM-yyyy");
-                                strTD = DateTime.Now.ToString("dd-MM-yyyy");
 
-                                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
-                                "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + strFD + "',103) AND CONVERT(DATETIME,'" + strTD + "',103) " +
-                                "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
-                                " WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + strTD + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
-                                "E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
-                                "TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
-                                " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
+                                DateTime startDateTime = DateTime.Now.Date;
+                                DateTime endDateTime = DateTime.Now;
+
+
+                                string formattedStartDate = startDateTime.ToString("yyyy-MM-ddT00:00:00");
+                                string formattedEndDate = endDateTime.ToString("yyyy-MM-ddT23:59:59");
+
+                                Qry = "WITH TIMEINTERVALS AS ( SELECT CONVERT(DATETIME, ( SELECT TOP 1 SYNCDATETIME  FROM TBL_ENERGYMETER E   WHERE CONVERT(DATETIME, E.SYNCDATETIME, 126) BETWEEN CONVERT(DATETIME, '" + formattedStartDate + "', 126) " +
+                                    "AND CONVERT(DATETIME, '" + formattedEndDate + "', 126) ORDER BY SYNCDATETIME ASC), 126) AS INTERVALTIME UNION ALL    SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME) " +
+                                    "FROM TIMEINTERVALS   WHERE   DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 126)),CALCULATED_CONSUMPTION AS (SELECT  T.INTERVALTIME AS DATETIMES," +
+                                    " E.CURRENTA AS CURRENTA, E.CURRENTB AS CURRENTB, E.CURRENTC AS CURRENTC, E.VOLTAGEAB AS VOLTAGEAB,  E.VOLTAGEBC AS VOLTAGEBC,E.VOLTAGECA AS VOLTAGECA, E.MAXDEMAND AS MAXDEMAND, E.POWERFACTOR AS POWERFACTOR," +
+                                    "CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) AS KWH,M.ID,E.METERID, CASE  WHEN LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) IS NULL THEN 0 " +
+                                    "ELSE CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) - LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) END AS TIME_BASED_KWH_CONSUMPTION  FROM  TIMEINTERVALS T  LEFT JOIN " +
+                                    "TBL_ENERGYMETER E  ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 126) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  LEFT JOIN  METERMASTER M ON E.METERID = M.METERID    WHERE " + MQ + ") SELECT   DATETIMES," +
+                                    " ROUND(SUM(TIME_BASED_KWH_CONSUMPTION), 2) AS TOTAL_KWH_CONSUMPTION FROM  CALCULATED_CONSUMPTION GROUP BY   DATETIMES ORDER BY DATETIMES ASC";
+
+                                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME  FROM TBL_ENERGYMETER E  WHERE" +
+                                //    "CONVERT(DATETIME, E.SYNCDATETIME, 103)  BETWEEN CONVERT(DATETIME,'" + strFD + "',103) AND CONVERT(DATETIME,'" + strTD + "',103) " +
+                                //    "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS    WHERE" +
+                                //    "DATEADD(MINUTE," + Interval + ", INTERVALTIME) <= CONVERT(DATETIME,  '" + strTD + "', 103)),CALCULATED_CONSUMPTION AS ( SELECT  T.INTERVALTIME AS DATETIMES," +
+                                //    "E.CURRENTA AS CURRENTA , E.CURRENTB AS CURRENTB, E.CURRENTC  AS CURRENTC, E.VOLTAGEAB  AS VOLTAGEAB, E.VOLTAGEBC AS VOLTAGEBC, E.VOLTAGECA AS VOLTAGECA," +
+                                //    "E.MAXDEMAND AS MAXDEMAND ,E.POWERFACTOR AS POWERFACTOR,CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) AS KWH," +
+                                //  " M.ID, E.METERID,  " +
+                                //  " CASE  WHEN LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) IS NULL THEN 0" +
+                                //  " ELSE CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) - LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY" +
+                                //  " T.INTERVALTIME ASC) END AS TIME_BASED_KWH_CONSUMPTION FROM TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E   ON CAST(CONVERT(DATETIME," +
+                                //  " E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  LEFT JOIN METERMASTER M   ON E.METERID = M.METERID" +
+                                //  " WHERE " + MQ + " SELECT  DATETIMES, ROUND( SUM(TIME_BASED_KWH_CONSUMPTION),2) AS TOTAL_KWH_CONSUMPTION FROM CALCULATED_CONSUMPTION GROUP BY DATETIMES ORDER BY DATETIMES ASC";
+
+
+
+
+                                // SUNIL COMENTED BELOW  QUERY ON 23-10-2024
+
+                                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
+                                //"CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + strFD + "',103) AND CONVERT(DATETIME,'" + strTD + "',103) " +
+                                //"ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
+                                //" WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + strTD + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
+                                //"E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
+                                //"TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
+                                //" WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
+
                             }
                             else
                             {
-                                DateTime startOfToday = DateTime.Today;
-                                DateTime endOfToday = DateTime.Today.AddDays(1).AddTicks(-1);
-                                //    startDate = startOfToday;
-                                //    endDate = endOfToday;
+                                // Correctly parse the strings in the ISO 8601 format
+                                DateTime startDateTime = DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm", null);
+                                DateTime endDateTime = DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm", null);
 
-                                string formattedStartDate = startOfToday.ToString("dd-MM-yyyy hh:mm:ss tt");
-                                string formattedEndDate = endOfToday.ToString("dd-MM-yyyy hh:mm:ss tt");
+                                // Now format to the desired format for SQL query
+                                string formattedStartDate = startDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                                string formattedEndDate = endDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+
+
+
+
 
                                 //startDate = DateTime.ParseExact(formattedStartDate, "dd-MM-yyyy hh:mm:ss tt", null);
                                 //endDate = DateTime.ParseExact(formattedEndDate, "dd-MM-yyyy hh:mm:ss tt", null);
 
-                                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
-                                    "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + formattedStartDate + "',103) AND CONVERT(DATETIME,'" + formattedEndDate + "',103) " +
-                                    "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
-                                    " WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
-                                    "E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
-                                    "TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
-                                    " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
+
+                                Qry = "WITH TIMEINTERVALS AS ( SELECT CONVERT(DATETIME, ( SELECT TOP 1 SYNCDATETIME  FROM TBL_ENERGYMETER E   WHERE CONVERT(DATETIME, E.SYNCDATETIME, 126) BETWEEN CONVERT(DATETIME, '" + formattedStartDate + "', 126) " +
+                                    "AND CONVERT(DATETIME, '" + formattedEndDate + "', 126) ORDER BY SYNCDATETIME ASC), 126) AS INTERVALTIME UNION ALL    SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME) " +
+                                    "FROM TIMEINTERVALS   WHERE   DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 126)),CALCULATED_CONSUMPTION AS (SELECT  T.INTERVALTIME AS DATETIMES," +
+                                    " E.CURRENTA AS CURRENTA, E.CURRENTB AS CURRENTB, E.CURRENTC AS CURRENTC, E.VOLTAGEAB AS VOLTAGEAB,  E.VOLTAGEBC AS VOLTAGEBC,E.VOLTAGECA AS VOLTAGECA, E.MAXDEMAND AS MAXDEMAND, E.POWERFACTOR AS POWERFACTOR," +
+                                    "CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) AS KWH,M.ID,E.METERID, CASE  WHEN LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) IS NULL THEN 0 " +
+                                    "ELSE CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) - LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) END AS TIME_BASED_KWH_CONSUMPTION  FROM  TIMEINTERVALS T  LEFT JOIN " +
+                                    "TBL_ENERGYMETER E  ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 126) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  LEFT JOIN  METERMASTER M ON E.METERID = M.METERID    WHERE " + MQ + ") SELECT   DATETIMES," +
+                                    " ROUND(SUM(TIME_BASED_KWH_CONSUMPTION), 2) AS TOTAL_KWH_CONSUMPTION FROM  CALCULATED_CONSUMPTION GROUP BY   DATETIMES ORDER BY DATETIMES ASC";
+
+
+
+
+
+                                //Sunil Commented
+                                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
+                                //    "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + formattedStartDate + "',103) AND CONVERT(DATETIME,'" + formattedEndDate + "',103) " +
+                                //    "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
+                                //    " WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
+                                //    "E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
+                                //    "TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
+                                //    " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
                             }
 
                             //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
@@ -402,9 +530,10 @@ namespace Dashboard.Controllers
                                     j = i + 1;
                                     if (j < dt.Rows.Count)
                                     {
-                                        decimal val3 = Convert.ToDecimal(dt.Rows[j]["KWH"].ToString()) - Convert.ToDecimal(dt.Rows[i]["KWH"].ToString());
+                                        //decimal val3 = Convert.ToDecimal(dt.Rows[j]["KWH"].ToString()) - Convert.ToDecimal(dt.Rows[i]["KWH"].ToString());
                                         syncdatetime.Add(dt.Rows[i]["DATETIMES"].ToString());
-                                        activeenergy.Add(val3.ToString(".00").Replace('-', ' '));
+                                        //activeenergy.Add(val3.ToString(".00").Replace('-', ' '));
+                                        activeenergy.Add(dt.Rows[i]["TOTAL_KWH_CONSUMPTION"].ToString());
                                     }
 
                                 }
@@ -531,11 +660,12 @@ namespace Dashboard.Controllers
         }
         /*----------------------------------TABLE-------------------------------------------*/
 
-        public IActionResult TableSwap(string id, string fd, string td)
+        public IActionResult TableSwap(string id, string fd, string td, string strGName)
         {
             ViewBag.id = id;
             ViewBag.fd = fd;
             ViewBag.td = td;
+            ViewBag.GName = strGName;
             string qry = "  SELECT METERNAME FROM METERMASTER WHERE METERID ='" + id + "'";
             DataTable dt = _serve.GetDataTable(qry);
             if (dt.Rows.Count > 0)
@@ -549,84 +679,248 @@ namespace Dashboard.Controllers
             return View();
         }
 
+
         [HttpPost]
         public JsonResult GetTableData_Overall(string strGroup, string strFD, string strTD)
         {
             string BQ = string.Empty;
+            string Qry = string.Empty;
             decimal Ov_Cons = 0;
             try
             {
-                if (!string.IsNullOrEmpty(strFD) && !string.IsNullOrEmpty(strTD))
+
+                if (strGroup == "ALLGROUPS")
                 {
-                    DateTime fDate = DateTime.Parse(strFD);
-                    DateTime tDate = DateTime.Parse(strTD);
-                    BQ = "  AND CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + fDate + "',103) AND CONVERT(DATETIME,'" + tDate + "',103) ";
+                    if (!string.IsNullOrEmpty(strFD) && !string.IsNullOrEmpty(strTD))
+                    {
+                        DateTime startDateTime = DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm", null);
+                        DateTime endDateTime = DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm", null);
+
+                        // Now format to the desired format for SQL query
+                        string formattedStartDate = startDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                        string formattedEndDate = endDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+
+                        Qry = "SELECT GM.GROUPNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,SUM(MC.Consumption) AS TOTAL_KWH_CONSUMPTION" +
+                            " FROM (SELECT GROUPID, METERID,Round((MAX(CAST(ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS Consumption" +
+                            " FROM TBL_ENERGYMETER WHERE SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY GROUPID, METERID) AS MC" +
+                            " JOIN GROUPMASTER GM ON GM.GROUPID = MC.GROUPID GROUP BY GM.GROUPNAME";
+
+                    }
+                    else
+                    {
+                        DateTime startDateTime1 = DateTime.Now.Date;
+                        DateTime endDateTime1 = DateTime.Now;
+
+
+                        string formattedStartDate = startDateTime1.ToString("yyyy-MM-ddT00:00:00");
+                        string formattedEndDate = endDateTime1.ToString("yyyy-MM-ddT23:59:59");
+
+                        Qry = "SELECT GM.GROUPNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,SUM(MC.Consumption) AS TOTAL_KWH_CONSUMPTION" +
+                            " FROM (SELECT GROUPID, METERID,Round((MAX(CAST(ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS Consumption" +
+                            " FROM TBL_ENERGYMETER WHERE SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY GROUPID, METERID) AS MC" +
+                            " JOIN GROUPMASTER GM ON GM.GROUPID = MC.GROUPID GROUP BY GM.GROUPNAME";
+
+                    }
                 }
                 else
                 {
-                    var datetime = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
-                    //BQ = "  AND CONVERT(DATE,SYNCDATETIME) = CONVERT(DATE,'08-07-2024')  ";
-                    BQ = "  AND CONVERT(DATE,SYNCDATETIME,103) = CONVERT(DATE,'" + datetime + "',103)  ";
-                    strFD = datetime.ToString();
+
+
+                    if (!string.IsNullOrEmpty(strFD) && !string.IsNullOrEmpty(strTD))
+                    {
+                        DateTime startDateTime = DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm", null);
+                        DateTime endDateTime = DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm", null);
+
+                        // Now format to the desired format for SQL query
+                        string formattedStartDate = startDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                        string formattedEndDate = endDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                        Qry = "SELECT MM.METERNAME AS METERNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,Round((MAX(CAST(EM.ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(EM.ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS CONSUMPTION FROM TBL_ENERGYMETER EM" +
+                            " JOIN METERMASTER MM ON MM.METERID = EM.METERID WHERE EM.GROUPID='" + strGroup + "' AND EM.SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY MM.METERNAME, EM.METERID";
+
+                        //Qry = "SELECT GM.GROUPNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,SUM(MC.Consumption) AS TOTAL_KWH_CONSUMPTION" +
+                        //    " FROM (SELECT GROUPID, METERID,Round((MAX(CAST(ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS Consumption" +
+                        //    " FROM TBL_ENERGYMETER WHERE  GROUPID='"+ strGroup + "' AND SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY GROUPID, METERID) AS MC" +
+                        //    " JOIN GROUPMASTER GM ON GM.GROUPID = MC.GROUPID GROUP BY GM.GROUPNAME";
+
+                    }
+                    else
+                    {
+                        DateTime startDateTime1 = DateTime.Now.Date;
+                        DateTime endDateTime1 = DateTime.Now;
+
+
+                        string formattedStartDate = startDateTime1.ToString("yyyy-MM-ddT00:00:00");
+                        string formattedEndDate = endDateTime1.ToString("yyyy-MM-ddT23:59:59");
+
+                        Qry = "SELECT MM.METERNAME AS METERNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,Round((MAX(CAST(EM.ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(EM.ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS CONSUMPTION FROM TBL_ENERGYMETER EM" +
+                            " JOIN METERMASTER MM ON MM.METERID = EM.METERID WHERE EM.GROUPID='" + strGroup + "' AND EM.SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY MM.METERNAME, EM.METERID";
+
+
+                        //Qry = "SELECT GM.GROUPNAME,CONCAT('" + formattedStartDate + "', ' to ', '" + formattedEndDate + "') AS Date_Details,SUM(MC.Consumption) AS TOTAL_KWH_CONSUMPTION" +
+                        //    " FROM (SELECT GROUPID, METERID,Round((MAX(CAST(ACTIVEENERGYDELIVERED AS FLOAT)) - MIN(CAST(ACTIVEENERGYDELIVERED AS FLOAT))), 2) AS Consumption" +
+                        //    " FROM TBL_ENERGYMETER WHERE GROUPID='"+ strGroup + "' AND SYNCDATETIME BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "' GROUP BY GROUPID, METERID) AS MC" +
+                        //    " JOIN GROUPMASTER GM ON GM.GROUPID = MC.GROUPID GROUP BY GM.GROUPNAME";
+
+                    }
+
                 }
-                string GroupName = string.Empty;
-                string Qry = "SELECT MM.METERNAME,SYNCDATETIME, CURRENTA ,CURRENTB,CURRENTC,VOLTAGEAB,VOLTAGEBC,VOLTAGECA,MAXDEMAND,POWERFACTOR,ACTIVEENERGYDELIVERED ,SYNCDATETIME" +
-                    " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.GROUPID='" + strGroup + "' " + BQ + "";
+
+
+
+                // Execute the query and get the DataTable
                 DataTable dt = _serve.GetDataTable(Qry);
+
+                // Check if there are rows in the DataTable
                 if (dt.Rows.Count > 0)
                 {
-                    string qrty = "SELECT GROUPNAME FROM GROUPMASTER WHERE GROUPID='" + strGroup + "' AND FLAG=1";
-                    var gn = _serve.GetDataTable(qrty);
-                    if (gn.Rows.Count > 0)
+                    // Create lists to hold the return data
+                    List<string> GroupNameList = new List<string>();
+                    List<string> DateTimeList = new List<string>();
+                    List<decimal> ConsumptionList = new List<decimal>();
+
+                    if (strGroup == "ALLGROUPS")
                     {
-                        GroupName = gn.Rows[0][0].ToString();
-                    }
-
-
-                    List<string> consumption = new List<string>();
-                    int j = 0;
-
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        j = i + 1;
-                        if (j < dt.Rows.Count)
+                        foreach (DataRow row in dt.Rows)
                         {
-                            decimal Con = Convert.ToDecimal(dt.Rows[i]["ACTIVEENERGYDELIVERED"].ToString()) - Convert.ToDecimal(dt.Rows[j]["ACTIVEENERGYDELIVERED"].ToString());
-                            consumption.Add(Con.ToString(".00"));
+                            GroupNameList.Add(row["GROUPNAME"].ToString());
+                            DateTimeList.Add(row["Date_Details"].ToString());
+                            ConsumptionList.Add(Convert.ToDecimal(row["TOTAL_KWH_CONSUMPTION"]));
                         }
-
                     }
-
-
-                    if (consumption.Count > 0)
+                    else
                     {
-                        foreach (var item in consumption)
+                        foreach (DataRow row in dt.Rows)
                         {
-                            Ov_Cons = Ov_Cons + Convert.ToDecimal(item);
+                            GroupNameList.Add(row["METERNAME"].ToString());
+                            DateTimeList.Add(row["Date_Details"].ToString());
+                            ConsumptionList.Add(Convert.ToDecimal(row["CONSUMPTION"]));
                         }
                     }
 
+
+                    // Loop through the DataTable rows and populate the lists
+                    //foreach (DataRow row in dt.Rows)
+                    //{
+                    //    GroupNameList.Add(row["GROUPNAME"].ToString());
+                    //    DateTimeList.Add(row["Date_Details"].ToString());
+                    //    ConsumptionList.Add(Convert.ToDecimal(row["TOTAL_KWH_CONSUMPTION"]));
+                    //}
+
+                    // Build the response object
                     var retRes = new
                     {
-                        group = GroupName,
-                        datetime = strFD + " - " + strTD,
-                        consumption = Ov_Cons
+                        group = GroupNameList,
+                        datetime = DateTimeList,
+                        consumption = ConsumptionList
                     };
+
                     return Json(retRes);
                 }
                 else
                 {
                     return Json(null);
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 return Json(ex);
             }
         }
+
+
+        //[HttpPost]
+        //public JsonResult GetTableData_Overall(string strGroup, string strFD, string strTD)
+        //{
+        //    string BQ = string.Empty;
+        //    string Qry=string.Empty;
+        //    decimal Ov_Cons = 0;
+        //    try
+        //    {
+        //        if (!string.IsNullOrEmpty(strFD) && !string.IsNullOrEmpty(strTD))
+        //        {
+        //            DateTime startDateTime = DateTime.Now.Date;
+        //            DateTime endDateTime = DateTime.Now;
+
+
+        //            string formattedStartDate = startDateTime.ToString("yyyy-MM-ddT00:00:00");
+        //            string formattedEndDate = endDateTime.ToString("yyyy-MM-ddT23:59:59");
+
+        //            Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E  WHERE CONVERT(DATETIME, E.SYNCDATETIME, 126) BETWEEN CONVERT(DATETIME, '" + formattedEndDate + "', 126) AND CONVERT(DATETIME, '"+ formattedEndDate + "', 126) ORDER BY SYNCDATETIME ASC), 126) AS INTERVALTIME UNION ALL  SELECT DATEADD(MINUTE, 60, INTERVALTIME) FROM TIMEINTERVALS   WHERE DATEADD(MINUTE, 60, INTERVALTIME) <= CONVERT(DATETIME, '"+ formattedEndDate + "', 126)),CALCULATED_CONSUMPTION AS (SELECT T.INTERVALTIME AS DATETIMES, E.CURRENTA AS CURRENTA, " +
+        //                " E.CURRENTB AS CURRENTB, E.CURRENTC AS CURRENTC, E.VOLTAGEAB AS VOLTAGEAB, E.VOLTAGEBC AS VOLTAGEBC,E.VOLTAGECA AS VOLTAGECA, E.MAXDEMAND AS MAXDEMAND, E.POWERFACTOR AS POWERFACTOR," +
+        //                "CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) AS KWH,M.ID,E.METERID,E.GROUPID,CASE  WHEN LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC) IS NULL  THEN 0 " +
+        //                " ELSE CAST(E.ACTIVEENERGYDELIVERED AS FLOAT) - LAG(CAST(E.ACTIVEENERGYDELIVERED AS FLOAT)) OVER (PARTITION BY E.METERID ORDER BY T.INTERVALTIME ASC)  END AS TIME_BASED_KWH_CONSUMPTION FROM  TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E  ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 126) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) LEFT JOIN METERMASTER M ON E.METERID = M.METERID   )SELECT " +
+        //                " MIN(DATETIMES) AS FROM_DATE, MAX(DATETIMES) AS TO_DATE, G.GROUPNAME,  ROUND(SUM(TIME_BASED_KWH_CONSUMPTION), 2) AS TOTAL_KWH_CONSUMPTION  FROM CALCULATED_CONSUMPTION C LEFT JOIN GROUPMASTER G ON C.GROUPID = G.GROUPID  GROUP BY    G.GROUPNAME ORDER BY   FROM_DATE ASC";
+
+        //           // BQ = "  AND CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + fDate + "',103) AND CONVERT(DATETIME,'" + tDate + "',103) ";
+        //        }
+        //        else
+        //        {
+        //            //var datetime = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
+        //            ////BQ = "  AND CONVERT(DATE,SYNCDATETIME) = CONVERT(DATE,'08-07-2024')  ";
+        //            //BQ = "  AND CONVERT(DATE,SYNCDATETIME,103) = CONVERT(DATE,'" + datetime + "',103)  ";
+        //            //strFD = datetime.ToString();
+        //        }
+        //        string GroupName = string.Empty;
+        //         //Qry = "SELECT MM.METERNAME,SYNCDATETIME, CURRENTA ,CURRENTB,CURRENTC,VOLTAGEAB,VOLTAGEBC,VOLTAGECA,MAXDEMAND,POWERFACTOR,ACTIVEENERGYDELIVERED ,SYNCDATETIME" +
+        //         //   " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.GROUPID='" + strGroup + "' " + BQ + "";
+        //        DataTable dt = _serve.GetDataTable(Qry);
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            List<string>  GroupNamelist = new List<string>();
+        //            List<string> Date_Time = new List<string>();
+        //            List<string> ConsumptionList= new List<string>();
+        //            //string qrty = "SELECT GROUPNAME FROM GROUPMASTER WHERE GROUPID='" + strGroup + "' AND FLAG=1";
+        //            //var gn = _serve.GetDataTable(qrty);
+        //            //if (gn.Rows.Count > 0)
+        //            //{
+        //            //    GroupName = gn.Rows[0][0].ToString();
+        //            //}
+
+
+        //            //List<string> consumption = new List<string>();
+        //            //int j = 0;
+
+        //            //for (int i = 0; i < dt.Rows.Count; i++)
+        //            //{
+        //            //    j = i + 1;
+        //            //    if (j < dt.Rows.Count)
+        //            //    {
+        //            //        decimal Con = Convert.ToDecimal(dt.Rows[i]["ACTIVEENERGYDELIVERED"].ToString()) - Convert.ToDecimal(dt.Rows[j]["ACTIVEENERGYDELIVERED"].ToString());
+        //            //        consumption.Add(Con.ToString(".00"));
+        //            //    }
+
+        //            //}
+
+
+        //            //if (consumption.Count > 0)
+        //            //{
+        //            //    foreach (var item in consumption)
+        //            //    {
+        //            //        Ov_Cons = Ov_Cons + Convert.ToDecimal(item);
+        //            //    }
+        //            //}
+
+        //            var retRes = new
+        //            {
+        //                group = GroupName,
+        //                datetime = strFD + " - " + strTD,
+        //                consumption = Ov_Cons
+        //            };
+        //            return Json(retRes);
+        //        }
+        //        else
+        //        {
+        //            return Json(null);
+        //        }
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(ex);
+        //    }
+        //}
 
 
         [HttpPost]

@@ -2,207 +2,142 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Heading = "OVERALL DATA";
 }
 
-<style>
-    /* .heading {
-                border: 1px solid;
-                background-color: #E3F2FD;
-                color: dodgerblue;
-                border-radius: 10px;
-                font-size: 50px;
-                font-family: Arial;
-                font-weight: bold;
-                text-align: center;
-                width: 100%;
-                padding: 0px 0;
-                margin: 0;
-            } */
-
-    /* select {
-            appearance: none;
-            outline: 0;
-            box-shadow: none;
-            border: 0 !important;
-            background: #0d205f;
-            background-image: none;
-            flex: 1;
-            padding: 0 1em;
-            color: #fff;
-            cursor: pointer;
-            font-size: 1em;
-            font-family: 'Open Sans', sans-serif;
-        } */
-
-    select::-ms-expand {
-        display: none;
-    }
-
-    .ddlist {
-        margin-bottom: 25px;
-        margin-left: 25px;
-        position: relative;
-        display: flex;
-        width: 20em;
-        height: 3em;
-        line-height: 3;
-        background: #5c6664;
-        overflow: hidden;
-        border-radius: .25em;
-    }
-
-        .ddlist::after {
-            content: '\25BC';
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 0 1em;
-            background: #2b2e2e;
-            cursor: pointer;
-            pointer-events: none;
-            transition: .25s all ease;
-        }
-
-        .ddlist:hover::after {
-            color: #fff;
-        }
-
-    .inputt {
-        margin-bottom: 10px;
-        display: block;
-        width: 20em;
-        height: 40px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        border-width: 2px;
-        border-color: black;
-    }
-
-    .buttonn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-        .buttonn:hover {
-            background-color: #45a049;
-        }
-
-    .chart-container {
-        width: 100%;
-        height: 100%;
-        overflow-x: auto; /* Enable horizontal scrolling */
-    }
-
-    .chart-wrapper {
-        white-space: nowrap; /* Prevent wrapping of x-axis labels */
-        display: inline-block; /* Ensure inline-block for dynamic width adjustment */
-        overflow-x: auto; /* Enable horizontal scrolling */
-        min-width: auto; /* Adjust based on the number of labels */
-    }
-</style>
+<link href="~/css/homeoverallindex.css" rel="stylesheet" />
 <link href="~/css/datatables.datatables.css" rel="stylesheet" />
 <link href="~/css/tabel.css" rel="stylesheet" />
+
 <div class="jumbotron center">
-    @* <div class="heading">OVER ALL</div> *@
-    <div style="display:flex; flex-direction:column;">
-        <div style="display:flex; flex-direction:row;">
-            <div style="margin-left: 25px; border-width:5px; border-color:black;">
-                <label for="groupSelect">Group</label>
-                <select name="format" id="groupSelect" onchange="LoadMeterData()" style="height:40px;width:300px;"></select>
+    <div class="container-fluid">
+        <!-- Single Row -->
+        <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+            <div class="col">
+                <div style="margin-right: 10px;">
+                    <label for="groupSelect">Group</label>
+                    <select name="format" id="groupSelect" onchange="LoadMeterData()" class="inputt" style="height:40px;"></select>
+                </div>
             </div>
-            <div style="margin-left: 25px; border-width:5px; border-color:black;">
-                <label for="meterSelect">Meter</label>
-                <select name="format" id="meterSelect" style="height:40px;width:300px;"></select>
+            <div class="col">
+                <div style="margin-right: 10px;">
+                    <label for="meterSelect">Meter</label>
+                    <select name="format" id="meterSelect" class="inputt" style="height:40px;"></select>
+                </div>
             </div>
-            <div style="margin-left: 25px; border-width:5px; border-color:black;">
-                <label for="fromDate">From Date</label>
-                <input class="inputt" type="datetime-local" id="fromDate" />
+            <div class="col">
+                <div style="margin-right: 10px;">
+                    <label for="fromDate">From Date</label>
+                    <input class="inputt" type="datetime-local" id="fromDate" />
+                </div>
             </div>
-            <div style="margin-left: 25px; border-width:5px; border-color:black;">
-                <label for="toDate">To Date</label>
-                <input class="inputt" type="datetime-local" id="toDate" />
+            <div class="col">
+                <div style="margin-right: 10px;">
+                    <label for="toDate">To Date</label>
+                    <input class="inputt" type="datetime-local" id="toDate" />
+                </div>
             </div>
-
+            <div class="col">
+                <div style="margin-right: 10px;">
+                    <label for="txtInterval">Interval (mins)</label>
+                    <input class="inputt" type="text" id="txtInterval" value="60" />
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <button class="buttonn" id="btnGraph" style="margin-right: 5px;">GRAPH</button>
+                    <button class="buttonn" id="btnTable">TABLE</button>
+                </div>
+            </div>
         </div>
-        <div style="display:flex; flex-direction:row;">
-            <div style="margin-left: 25px; border-width:5px; border-color:black;">
-                <label for="txtInterval">Interval (mins)</label>
-                <input class="inputt" type="text" id="txtInterval" value="60" />
-            </div>
-            <div style="margin-left: 25px;margin-right: 22px; border-width:5px; border-color:black; display:flex; align-items:flex-end;">
-                <button class="buttonn" id="btnGraph" style="margin-right:20px;">GRAPH</button>
-                <button class="buttonn" id="btnTable" style="margin-right:20px;">TABLE</button>
-            </div>
-        </div>
-        @*         <div style="display:flex; flex-direction:row;">
-        </div> *@
-        <!--For Graph-->
-        <div class="chart-container" id="graph_container">
-            <div class="chart-wrapper" style="border-width:2px;border-color:black;border:groove; margin:20px">
-                <canvas id="myLineChart" width="6000" height="500"></canvas>
-            </div>
-        </div>
-        <!--For Table-->
-        <div style="display: none;" id="customers_table">
-            <main class="table" style="margin:10px;">
-                <br />
-                <br />
-                <section class="table__body">
-
-                    <table id="dataTable" style="background-color: lightgray; display: none;" class="display">
-                        <!--For Specific-->
-                        <thead>
-                            <tr>
-                                <th>METER</th>
-                                <th>DATE&TIME</th>
-                                <th>ACTIVEENERGY</th>
-                                <th>CONSUMPTION</th>
-                                <th>RY CURRENT</th>
-                                <th>YB CURRENT</th>
-                                <th>BR CURRENT</th>
-                                <th>RY VOLTAGE</th>
-                                <th>YB VOLTAGE</th>
-                                <th>BR VOLTAGE</th>
-                                <th>MAX DEMAND</th>
-                                <th>POWER FACTOR</th>
-                                <th><label for="export-file" id="toCSV" onclick="csvExport()"><img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @* Binding From Function DownSide. *@
-                        </tbody>
-                    </table>
-
-                    <table id="dataTable1" style="background-color:lightgray" class="display">
-                        <!--For OverAll-->
-                        <thead id="th_overall">
-                            <tr>
-                                <th>GROUPNAME</th>
-                                <th>DATE&TIME</th>
-                                <th>CONSUMPTION</th>
-                                <th><label for="export-file" id="toCSV1" onclick="csvExport1()"><img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* Binding From Function DownSide. *@
-                        </tbody>
-                    </table>
-                </section>
-            </main>
-        </div>
-
-
     </div>
 </div>
+
+
+<!-- Chart Container (if needed) -->
+<div class="row">
+    <div class="col-12">
+        <div class="chart-container" id="graph_container">
+            <div class="chart-wrapper">
+                <canvas id="myLineChart" style="border: 3px solid black;margin-top: 10px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- For Table -->
+<div style="display: none;" id="customers_table">
+    <main class="table" style="margin:10px;">
+        <br /><br />
+        <section class="table__body">
+            <table id="dataTable" style="background-color: lightgray; display: none;" class="display">
+                <!-- For Specific -->
+                <thead>
+                    <tr>
+                        <th>METER</th>
+                        <th>DATE&TIME</th>
+                        <th>ACTIVE ENERGY</th>
+                        <th>CONSUMPTION</th>
+                        <th>RY CURRENT</th>
+                        <th>YB CURRENT</th>
+                        <th>BR CURRENT</th>
+                        <th>RY VOLTAGE</th>
+                        <th>YB VOLTAGE</th>
+                        <th>BR VOLTAGE</th>
+                        <th>MAX DEMAND</th>
+                        <th>POWER FACTOR</th>
+                        <th><label for="export-file" id="toCSV" onclick="csvExport()"><img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Binding From Function -->
+                </tbody>
+            </table>
+
+
+            <h1>Your Title Here</h1>
+
+            <div class="table-container">
+                <table id="dataTable1" class="animated-table display">
+                    <thead id="th_overall">
+                        <tr>
+                            <th>GROUP NAME</th>
+                            <th>DATE & TIME</th>
+                            <th>CONSUMPTION</th>
+                            <th>
+                                <label for="export-file" id="toCSV1" onclick="csvExport1()">
+                                    <img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File">
+                                </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Binding From Function -->
+                    </tbody>
+                </table>
+
+                <table id="dataTable2" class="animated-table display">
+                    <thead id="th_overall">
+                        <tr>
+                            <th>METER NAME</th>
+                            <th>DATE & TIME</th>
+                            <th>CONSUMPTION</th>
+                            <th>
+                                <label for="export-file" id="toCSV2" onclick="csvExport2()">
+                                    <img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File">
+                                </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Binding From Function -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
 
 @section Scripts {
     <script src="~/Scripts/jquery-3.4.1.js"></script>
@@ -357,12 +292,12 @@
                                         borderColor: 'rgba(255, 206, 86, 1)',
                                         fill: false
                                     },
-                                    {
-                                        label: 'TRANSFORMER_WISE (KWH)',
-                                        data: response.transformeR_WISE_ActiveEnergy,
-                                        borderColor: 'rgba(75, 192, 192, 1)',
-                                        fill: false
-                                    },
+                                    // {
+                                    //     label: 'TRANSFORMER_WISE (KWH)',
+                                    //     data: response.transformeR_WISE_ActiveEnergy,
+                                    //     borderColor: 'rgba(75, 192, 192, 1)',
+                                    //     fill: false
+                                    // },
                                     {
                                         label: 'UTILITIES (KWH)',
                                         data: response.utilitieS_ActiveEnergy,
@@ -584,19 +519,19 @@
                         for (let i = 0; i < response.consumption.length; i++) {
                             // Create a new row
                             var row = `<tr>
-                                                            <td>${response.meterName[i]}</td>
-                                                            <td>${response.dateAndTime[i]}</td>
-                                                            <td>${response.activeEnergy[i]}</td>
-                                                            <td>${response.consumption[i]}</td>
-                                                            <td>${response.current_A[i]}</td>
-                                                            <td>${response.current_B[i]}</td>
-                                                            <td>${response.current_C[i]}</td>
-                                                            <td>${response.voltage_A[i]}</td>
-                                                            <td>${response.voltage_B[i]}</td>
-                                                            <td>${response.voltage_C[i]}</td>
-                                                            <td>${response.maxDemand[i]}</td>
-                                                            <td>${response.powerFactor[i]}</td>
-                                                       </tr>`;
+                                                                            <td>${response.meterName[i]}</td>
+                                                                            <td>${response.dateAndTime[i]}</td>
+                                                                            <td>${response.activeEnergy[i]}</td>
+                                                                            <td>${response.consumption[i]}</td>
+                                                                            <td>${response.current_A[i]}</td>
+                                                                            <td>${response.current_B[i]}</td>
+                                                                            <td>${response.current_C[i]}</td>
+                                                                            <td>${response.voltage_A[i]}</td>
+                                                                            <td>${response.voltage_B[i]}</td>
+                                                                            <td>${response.voltage_C[i]}</td>
+                                                                            <td>${response.maxDemand[i]}</td>
+                                                                            <td>${response.powerFactor[i]}</td>
+                                                                       </tr>`;
                             // Append the row to the table body
                             tbody1.append(row);
                         }
@@ -623,10 +558,10 @@
                     const row = document.createElement('tr');
                     if (response) {
                         row.innerHTML = `<tr>
-                                                    <td>${response.group}</td>
-                                                    <td>${response.datetime}</td>
-                                                    <td>${response.consumption}</td>
-                                                </tr>`;
+                                                                    <td>${response.group}</td>
+                                                                    <td>${response.datetime}</td>
+                                                                    <td>${response.consumption}</td>
+                                                                </tr>`;
                         tbody2.append(row);
                     }
                 },
@@ -656,7 +591,7 @@
                 document.getElementById('dataTable1').style = 'display:none;';
                 LoadTableData_Specific(selectedMeter, StartDate, EndDate);
 
-            } else if (selectedGroup = "ALLGROUPS") {
+            } else if (selectedGroup != "ALLGROUPS") {
                 //GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval).then((labels) => {
                 //    if (labels != null) {
                 //        generateChart_All(labels);
@@ -666,20 +601,41 @@
                 //document.getElementById('th_overall').style = 'display:none;';
 
 
+                // var x = document.getElementById('groupSelect');
+                // var txt = '';
+                // var i;
+                // $('#dataTable1 tbody').empty();
+                // // for (i = 0; i < x.length; i++) {
+                txt = selectedGroup;
+                // if (txt == "ALLGROUPS") {
+                LoadTableData_Overall(txt, StartDate, EndDate);
+                // }
+
+                // }
+
+            }
+            else if (selectedGroup == "ALLGROUPS") {
+
                 var x = document.getElementById('groupSelect');
                 var txt = '';
                 var i;
                 $('#dataTable1 tbody').empty();
                 for (i = 0; i < x.length; i++) {
                     txt = x.options[i].value;
-                    if (txt !== "ALLGROUPS") {
+                    if (txt == "ALLGROUPS") {
                         LoadTableData_Overall(txt, StartDate, EndDate);
                     }
 
                 }
-
             }
         };
+
+        function csvExport2() {
+            const table = document.getElementById('dataTable2');
+            const data = toCSV(table);
+            var selectedGroup = document.getElementById('groupSelect').innerHTML;
+            downloadXLSX(data, selectedGroup + ' OverAllMeter_Export');
+        }
 
         function csvExport1() {
             const table = document.getElementById('dataTable1');

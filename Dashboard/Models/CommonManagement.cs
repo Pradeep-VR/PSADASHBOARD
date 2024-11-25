@@ -100,7 +100,65 @@ namespace Dashboard.Models
             }
             return ret;
         }
+
         public string GetConsumptions(string Id, string fd, string td, string lol)
+        {
+            string ret = string.Empty;
+            List<string> consumptions = new List<string>();
+            string lols = string.Empty;
+            if (lol == "G")
+            {
+                lols = "GROUPID = '" + Id + "'";
+            }
+            else if (lol == "M")
+            {
+                lols = "METERID = '" + Id + "'";
+            }
+
+            //CONVERT(DATETIME, '" + td + "', 121)
+
+            string qry2 = "SELECT ACTIVEENERGYDELIVERED AS kwh FROM TBL_ENERGYMETER WHERE " + lols + " AND CONVERT(DATETIME, SYNCDATETIME,103) " +
+                "BETWEEN CONVERT(DATETIME, '" + fd + "',103) AND  CONVERT(DATETIME, '" + td + "',103)";
+
+            //string qry2 = "SELECT ACTIVEENERGYDELIVERED AS kwh FROM TBL_ENERGYMETER WHERE METERID = 'M10'"+
+            //          "AND CONVERT(DATETIME, SYNCDATETIME,103) BETWEEN CONVERT(DATETIME, '2024-07-10 13:06:04.000',121) "+
+            //                            "AND CONVERT(DATETIME, '2024-07-10 13:06:04.000',121)";
+            var dt = _serv.GetDataTable(qry2);
+            if (dt.Rows.Count > 0)
+            {
+                int j = dt.Rows.Count - 1;
+                int i = 0;
+                decimal val3 = Convert.ToDecimal(dt.Rows[j]["kwh"].ToString()) - Convert.ToDecimal(dt.Rows[i]["kwh"].ToString());
+                consumptions.Add(val3.ToString(".00"));
+
+
+                //int j = 0;
+                //// Adding data
+                //for (int i = 0; i < dt.Rows.Count; i++)
+                //{
+                //    j = i + 1;
+                //    if (j < dt.Rows.Count)
+                //    {
+                //        decimal val3 = Convert.ToDecimal(dt.Rows[i]["kwh"].ToString()) - Convert.ToDecimal(dt.Rows[j]["kwh"].ToString());
+                //        consumptions.Add(val3.ToString(".00"));
+                //    }
+                //}
+            }
+            if (consumptions.Count > 0)
+            {
+                decimal count = 0;
+                foreach (var item in consumptions)
+                {
+                    count = count + Convert.ToDecimal(item);
+                }
+                ret = count.ToString(".00").Replace('-', ' ').Trim();
+            }
+            return ret;
+        }
+
+
+        // -- Commented By Pradeep On Oct-24
+        public string GetConsumptionss(string Id, string fd, string td, string lol)
         {
             string ret = string.Empty;
             List<string> consumptions = new List<string>();
@@ -148,5 +206,6 @@ namespace Dashboard.Models
             }
             return ret;
         }
+        /* */
     }
 }

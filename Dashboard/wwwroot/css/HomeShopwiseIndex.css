@@ -1,0 +1,249 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 0px;
+    /*width: 30%;*/
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding: 10px;
+    position: relative; /*Added for positioning date selector */
+    justify-content: start;
+}
+
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    justify-content: space-between;
+    gap: 10px;
+    width: 25%;
+}
+
+.menu-icon {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.controls-container {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 10px 3.5px 5px lightslategray;
+}
+
+.controls {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #dad9d9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.date-selector {
+    margin-bottom: 20px;
+}
+
+.labell {
+    display: block;
+    color: forestgreen !important;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.inputt {
+    margin-bottom: 10px;
+    display: block;
+    width: 365px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.side-buttons button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Add some space between the buttons */
+    width: 100%; /* Make buttons take full width of their container */
+}
+
+    .side-buttons button:hover {
+        background-color: #45a049;
+    }
+
+.row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.containerMeter {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 10px 3.5px 5px lightslategray;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    /*width: calc(26% - 20px);*/
+    width: 100%;
+    max-width: 300px;
+    min-width: 200px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
+    /* color: #4CAF50; */
+    color: #0B2F9F;
+}
+
+.card {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card1 {
+    margin-bottom: 10px;
+    padding: 9px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+    .card1 p span {
+        color: #D32F2F;
+    }
+
+.meterheading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.meter {
+    height: 50px
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.column {
+    width: 36%;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 0.9em;
+    color: #2196F3;
+}
+
+.card p {
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+p span {
+    color: #FF5722;
+}
+
+.card:last-child {
+    text-align: center;
+    background-color: #E3F2FD;
+    border-color: #64B5F6;
+}
+
+    .card:last-child h2 {
+        color: #2196F3;
+        font-weight: 700;
+    }
+
+    .card:last-child p span {
+        color: #D32F2F;
+    }
+
+.box-select {
+    background-color: #0563af;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+
+.right-section {
+    width: 75%;
+    height: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.chart-container {
+    width: 100%;
+    height: auto; /* Adjust height automatically */
+    overflow: hidden; /* No scrolling */
+}
+
+.chart-wrapper {
+    display: block; /* Block display for full-width adjustment */
+    white-space: normal; /* Allow wrapping */
+    overflow: hidden; /* Prevent scrolling */
+    min-width: 100%; /* Ensure chart spans entire container width */
+}
+
+.text {
+    font-size: 1.5vw;
+    font-family: "Roboto Mono";
+    /* font-family: "Bungee"; */
+    -webkit-text-fill-color: #7338037a;
+    background: linear-gradient( 45deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0) 65% ) -100% / 50% no-repeat currentColor;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shark-txt 2s infinite;
+}
+
+@keyframes shark-txt {
+    from {
+        background-position: -100%;
+    }
+
+    to {
+        background-position: 200%;
+    }
+}

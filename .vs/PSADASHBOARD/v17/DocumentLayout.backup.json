@@ -1,46 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\",
+  "WorkspaceRootPath": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\total\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\total\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\augest16\\psa\\dashboard\\views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,129 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Program.cs",
-              "RelativeDocumentMoniker": "Dashboard\\Program.cs",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Program.cs",
-              "RelativeToolTip": "Dashboard\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T18:57:40.146Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Graph\\Index.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Graph\\Index.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Graph\\Index.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Graph\\Index.cshtml",
-              "ViewState": "AgIAAGEBAAAAAAAAAAAWwG4BAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-28T17:36:43.513Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ShopwiseIndex.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
-              "ViewState": "AgIAABIBAAAAAAAAAAAAACQBAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-28T17:35:31.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TotalController.cs",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Controllers\\TotalController.cs",
-              "RelativeDocumentMoniker": "Dashboard\\Controllers\\TotalController.cs",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Controllers\\TotalController.cs",
-              "RelativeToolTip": "Dashboard\\Controllers\\TotalController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-19T13:05:16.85Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Total\\Index.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Total\\Index.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Total\\Index.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Total\\Index.cshtml",
-              "ViewState": "AgIAAAUBAAAAAAAAAAAAABIBAAAAAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACgAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-19T13:08:51.811Z",
+              "WhenOpened": "2024-11-23T05:55:26.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAADwCAAAAAAAAAAAAADwCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-21T07:54:46.076Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\appsettings.json",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\appsettings.json",
               "RelativeDocumentMoniker": "Dashboard\\appsettings.json",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\appsettings.json",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\appsettings.json",
               "RelativeToolTip": "Dashboard\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-19T07:02:46.943Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GraphController.cs",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Controllers\\GraphController.cs",
-              "RelativeDocumentMoniker": "Dashboard\\Controllers\\GraphController.cs",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Controllers\\GraphController.cs",
-              "RelativeToolTip": "Dashboard\\Controllers\\GraphController.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAWwFcAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-18T15:26:52.916Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OverAllIndex.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\OverAllIndex.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\OverAllIndex.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\OverAllIndex.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Home\\OverAllIndex.cshtml",
-              "ViewState": "AgIAAKgCAAAAAAAAAAAqwL4CAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T17:42:09.121Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Login\\Index.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Login\\Index.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Login\\Index.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Login\\Index.cshtml",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T15:44:46.205Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\Augest16\\PSA\\Dashboard\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Dashboard\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAAAAIBAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-18T15:14:07.97Z",
+              "WhenOpened": "2024-11-14T09:00:01.708Z",
               "EditorCaption": ""
             }
           ]
