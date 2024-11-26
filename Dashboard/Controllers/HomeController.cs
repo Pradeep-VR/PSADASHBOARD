@@ -42,11 +42,24 @@ namespace Dashboard.Controllers
 
             return View();
         }
+        public IActionResult TransFormer(string groupId, string groupName)
+        {
+            var vals = groupId.Split(',');
+            ViewBag.groupId = vals[0];
+            ViewBag.groupName = groupName;
+            //ViewBag.yesCon = vals[1];
+            //ViewBag.toCon = vals[2];
+
+            return View();
+        }
+
 
         public IActionResult OverAllIndex()
         {
             return View();
         }
+
+
 
         [HttpPost]
         public JsonResult GetGroupsWithMeters()
@@ -79,7 +92,16 @@ namespace Dashboard.Controllers
         public JsonResult GetMetersName(string Groupid)
         {
             var group = new GROUPS();
-            string mtrnameqry = "SELECT METERID,METERNAME FROM METERMASTER WHERE GROUPID='" + Groupid + "' AND FLAG=1";
+            string mtrnameqry = "";
+            if (Groupid == "GTW")
+            {
+                mtrnameqry = "SELECT METERID,METERNAME FROM METERMASTER WHERE FLAG=1";
+            }
+            else
+            {
+                mtrnameqry = "SELECT METERID,METERNAME FROM METERMASTER WHERE GROUPID='" + Groupid + "' AND FLAG=1";
+            }
+
             DataTable dt = _serv.GetDataTable(mtrnameqry);
             if (dt.Rows.Count > 0)
             {
@@ -426,11 +448,21 @@ namespace Dashboard.Controllers
         [HttpPost]
         public JsonResult GetMeters(string groupId, string strMeterDiv)
         {
+            string query = String.Empty;
             var group = new GROUPS();
+            if (groupId == "GTW")
+            {
+                query = "SELECT GM.GROUPID,GM.GROUPNAME,MM.METERID,MM.METERNAME,MM.METERDIVISION FROM GROUPMASTER GM LEFT JOIN  METERMASTER MM ON GM.GROUPID = MM.GROUPID " +
+              "WHERE GM.FLAG = '1' AND MM.FLAG='1'  ORDER BY MM.TRANSFORMER DESC ";
+            }
+            else
+            {
+                query = "SELECT GM.GROUPID,GM.GROUPNAME,MM.METERID,MM.METERNAME,MM.METERDIVISION FROM GROUPMASTER GM LEFT JOIN  METERMASTER MM ON GM.GROUPID = MM.GROUPID " +
+               "WHERE GM.FLAG = '1' AND MM.FLAG='1' AND GM.GROUPID = '" + groupId + "' AND MM.METERDIVISION IN (" + strMeterDiv + ")";
+            }
 
             //string query = "SELECT gm.GroupId,gm.GroupName,mm.MeterId,mm.MeterName FROM GroupMaster gm LEFT JOIN  MeterMaster mm ON gm.GroupId = mm.GroupId WHERE gm.FLAG = '1' AND mm.FLAG='1' AND gm.GroupId = '" + groupId + "';";
-            string query = "SELECT GM.GROUPID,GM.GROUPNAME,MM.METERID,MM.METERNAME,MM.METERDIVISION FROM GROUPMASTER GM LEFT JOIN  METERMASTER MM ON GM.GROUPID = MM.GROUPID " +
-                "WHERE GM.FLAG = '1' AND MM.FLAG='1' AND GM.GROUPID = '" + groupId + "' AND MM.METERDIVISION IN (" + strMeterDiv + ")";
+
             DataTable dt = _serv.GetDataTable(query);
             if (dt.Rows.Count > 0)
             {

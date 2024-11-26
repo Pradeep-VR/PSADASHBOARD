@@ -66,13 +66,14 @@ namespace Dashboard.Controllers
             }
             else
             {
+                decimal SpeCons;
                 string Qry = "SELECT GROUPID, GROUPNAME FROM GROUPMASTER WHERE FLAG=1;";
                 var dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
-                    decimal SpeCons = 0;
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
+                        SpeCons = 0;
                         string group = dt.Rows[i]["GROUPID"].ToString();
                         string Qry1 = "SELECT METERID, METERNAME FROM METERMASTER WHERE GROUPID='" + group + "' AND FLAG = 1;";
                         var meters = _serve.GetDataTable(Qry1);
@@ -171,4 +172,3 @@ namespace Dashboard.Controllers
 
     }
 }
- 

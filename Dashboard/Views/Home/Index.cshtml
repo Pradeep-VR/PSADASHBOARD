@@ -2,239 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    .badge {
-        font-size: 100% !important;
-    }
 
-    .e-charts {
-        height: 160px !important;
-    }
-
-    .card {
-        margin-bottom: 0 !important;
-    }
-
-    .profile-container {
-        display: flex;
-        align-items: center;
-        margin-top: 20px;
-        justify-content: space-between;
-    }
-
-        .profile-container img {
-            width: 30px;
-            height: auto;
-            margin-right: 20px;
-        }
-
-        .profile-container button {
-            align-items: end;
-        }
-
-    .profile-info {
-        display: flex;
-        flex-direction: column;
-    }
-
-        .profile-info label {
-            margin-bottom: 0px;
-            margin-left: 0px;
-            font-size: 15px;
-        }
-
-    .user-id-container {
-        display: flex;
-        align-items: center;
-        margin-top: 44px;
-        margin-left: -51px;
-    }
-
-        .user-id-container label {
-            margin-right: 423px;
-        }
-
-    .profile-container button:hover {
-        background-color: darkblue;
-        color: black;
-        border: none;
-    }
-
-    .card.custom-bg {
-        color: white;
-    }
-
-        .card.custom-bg .card-title {
-            color: white !important;
-        }
-
-    .consume-labels {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 25px;
-    }
-
-        .consume-labels label {
-            font-size: 14px;
-            color: #FFD700;
-        }
-
-    .card.custom-bg .card-title {
-        color: #FFD700 !important;
-        font-weight: bold !important;
-        font-size: 2em !important;
-    }
-
-    .custom-container {
-        max-width: 1500px;
-        margin: 0 auto;
-        padding: 15px;
-    }
-
-    .scrollable-grid {
-        max-height: 130px;
-        overflow-y: auto;
-        margin-top: 15px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-        .scrollable-grid::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollable-grid .grid-item {
-            background-color: #f1f1f178;
-            margin-bottom: 5px;
-            color: #212529;
-            font-weight: bold;
-            padding: 2px;
-            border-radius: 5px;
-            color: black;
-            font-size: 0.9em;
-        }
-
-    @@media (max-width: 767px) {
-        .consume-labels {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-            .consume-labels label {
-                margin-bottom: 5px;
-            }
-    }
-
-    .jumbotron h3 {
-        color: #1E90FF;
-        font-weight: bold;
-        font-family: none;
-        font-size: 36px;
-    }
-
-    .kwh {
-        font-size: 30px;
-        /*padding-bottom: 10px;*/
-        color: #FFD700;
-    }
-
-    .meterheading {
-        color: #e2d707;
-        font-size: 20px;
-    }
-
-    .heading {
-        border: 1px solid;
-        background-color: #E3F2FD;
-        color: dodgerblue;
-        border-radius: 10px;
-        font-size: 50px;
-        font-family: Arial;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-        padding: 0px 0;
-        margin: 0;
-    }
-
-    .dashboard {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-        width: 100%;
-        height: calc(100vh - 100px);
-        overflow: hidden;
-        padding: 10px;
-        position: relative; /* Added for positioning date selector */
-    }
-
-    .menu-icon {
-        color: white;
-        position: absolute;
-        top: 5px;
-        right: 35px;
-        font-size: 30px;
-        cursor: pointer;
-        z-index: 1001;
-    }
-
-    .controls-container {
-        position: fixed;
-        top: 70px;
-        right: 20px;
-        z-index: 1000;
-        box-shadow: 10px 3.5px 5px lightslategray;
-    }
-
-    .controls {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        background-color: #dad9d9;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .date-selector {
-        margin-bottom: 20px;
-    }
-
-    .labell {
-        display: block;
-        color: forestgreen !important;
-        font-weight: bold;
-        font-size: 17px;
-    }
-
-    .inputt {
-        margin-bottom: 10px;
-        display: block;
-        width: 365px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .side-buttons button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 10px; /* Add some space between the buttons */
-        width: 100%; /* Make buttons take full width of their container */
-    }
-
-        .side-buttons button:hover {
-            background-color: #45a049;
-        }
-</style>
 <link href="~/css/loader.css" rel="stylesheet" />
+<link href="~/css/homeindex.css" rel="stylesheet" />
+
 <div id="preloader">
     <div class="waviy">
         <span style="--i:1">L</span>
@@ -324,73 +95,132 @@
                             var groupName = `${group.groupName}`;
                             if (groupName === "TRANSFORMER WISE") {
                                 groupHtml = `
-                                                                        <div class="col-md-4 col-sm-6 col-12 p-1">
-                                                                                                <div class="card custom-bg" style="background-color: ${color};" >
-                                                                                                    <div class="card-body" id="Group_${group.groupId}">
-                                                                                                                <div style="display: flex;justify-content: center;" ondblclick="tws_clicked()')">
-                                                                                                        <h3 style="color:#FFD700;font-size: 2.5em;">${group.groupName}</h3>
-                                                                                                        </div>
-                                                                                                        <div class="consume-labels" style="visibility:hidden;"  >
-                                                                                                            <label style="font-size:1.5em;">YESTERDAY: <span id="yesterday_${group.groupId}"></span></label>
-                                                                                                            <label style="font-size:1.5em;">TODAY: <span id="today_${group.groupId}"></span></label>
-                                                                                                        </div>
-                                                                                                        <div >
-                                                                                                        <select id="ddlTranswise" style="align-content: center;font-size:1.5em;" class="form-select" onchange="OnTSWSelectChanged()">
-                                                                                                        <option >-SELECT-</option>
-                                                                                                        <option value="PCC-1">PCC-1</option>
-                                                                                                        <option value="PCC-2">PCC-2</option>
-                                                                                                        <option value="PCC-3">PCC-3</option>
-                                                                                                        <option value="EMG Panel">EMG Panel</option>
-                                                                                                        </select>
-                                                                                                        </div>
-                                                                                                        <div style="padding:3px;">
-                                                                                                            <div class="consume-labels" >
-                                                                                                                <label style="font-size:1.5em;">YESTERDAY: <span id="tsyesterday_${group.groupId}"></span></label>
-                                                                                                                <label style="font-size:1.5em;" >TODAY: <span id="tstoday_${group.groupId}"></span></label>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div style="display:none">
-                                                                                                        <h1 class="meterheading">Meters</h1>
-                                                                                                        </div>
-                                                                                                        <div style="display:none" class="scrollable-grid" id="meterGrid_${group.groupId}"></div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        `;
+                                                                                                <div class="col-md-4 col-sm-6 col-12 p-1">
+                                                                                                                                <div class="card custom-bg" style="background-color: ${color};" ondblclick="tws_clicked('${group.groupId}', '${group.groupName}')" >
+                                                                                                                                    <div class="card-body" id="Group_${group.groupId}" style="height:305px;box-shadow: 12px 12px 32px rgba(0, 0, 0, 0.25), -12px -12px 32px rgb(0 0 0 / 0%), 12px -12px 32px rgb(0 0 0 / 0%), -12px 12px 32px rgba(0, 0, 0, 0.25);">
+                                                                                                                                        <div style="display: flex;justify-content: center;" ondblclick="tws_clicked()')">
+                                                                                                                                <h3 style="color:#FFD700;text-shadow: 3px 3px 2px #000000, 11px 10px 4px rgb(15 142 41 / 9%);
+                                                                                                                                    } font-size: 2.5em;">${group.groupName}</h3>
+                                                                                                                                </div>
+                                                                                                                                <div class="consume-labels" style="visibility:hidden;"  >
+                                                                                                                                    <label style="font-size:1.5em;">YESTERDAY: <span id="yesterday_${group.groupId}"></span></label>
+                                                                                                                                    <label style="font-size:1.5em;">TODAY: <span id="today_${group.groupId}"></span></label>
+                                                                                                                                </div>
+                                                                                                                                <div >
+                                                                                                                                <select id="ddlTranswise" style="align-content: center;font-size:1.5em;" class="form-select" onchange="OnTSWSelectChanged()">
+                                                                                                                                <option >-SELECT-</option>
+                                                                                                                                <option value="PCC-1">PCC-1</option>
+                                                                                                                                <option value="PCC-2">PCC-2</option>
+                                                                                                                                <option value="PCC-3">PCC-3</option>
+                                                                                                                                <option value="EMG Panel">EMG Panel</option>
+                                                                                                                                </select>
+                                                                                                                                </div>
+                                                                                                                                <div style="padding:3px;">
+                                                                                                                                    <div class="consume-labels" >
+                                                                                                                                        <label style="font-size:1.5em;">YESTERDAY: <span id="tsyesterday_${group.groupId}"></span></label>
+                                                                                                                                        <label style="font-size:1.5em;" >TODAY: <span id="tstoday_${group.groupId}"></span></label>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div style="display:none">
+                                                                                                                                <h1 class="meterheading">Meters</h1>
+                                                                                                                                </div>
+                                                                                                                                <div style="display:none" class="scrollable-grid" id="meterGrid_${group.groupId}"></div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                `;
                             }
                             else {
                                 if (groupName != "NA") {
                                     groupHtml = `
-                                                                                            <div class="col-md-4 col-sm-6 col-12 p-1">
-                                                                                                <div class="card custom-bg" style="background-color: ${color};" ondblclick="navigateToNextPage('${group.groupId}', '${group.groupName}')">
-                                                                                                    <div class="card-body" id="Group_${group.groupId}">
-                                                                                                        <div style="display: flex;justify-content: center;">
-                                                                                                        <h3 style="color:#FFD700;font-size: 2.5em;">${group.groupName}</h3>
-                                                                                                        </div>
-                                                                                                        <div class="consume-labels">
-                                                                                                            <label style="font-size:1.5em;">YESTERDAY: <span id="yesterday_${group.groupId}"></span></label>
-                                                                                                            <label style="font-size:1.5em;">TODAY: <span id="today_${group.groupId}"></span></label>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                        </div>
-                                                                                                        <div style="display: flex;justify-content: space-evenly;">
-                                                                                                        <div>
-                                                                                                        <h3 style="color:#DEF9C4;font-size: 2em;">VARIABLE</h3>
-                                                                                                        <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="var_today_con${group.groupId}"> 00</span></h1>
-                                                                                                        <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="var_yesday_con${group.groupId}"> 00</span></h1>
-                                                                                                        </div>
-                                                                                                        <div>
-                                                                                                        <h3 style="color:#DEF9C4;font-size: 2em;">FIXED</h3>
-                                                                                                        <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="fix_today_con${group.groupId}"> 00</span></h1>
-                                                                                                        <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="fix_yesday_con${group.groupId}"> 00</span></h1>
-                                                                                                        </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        `;
+                                <div class="col-md-4 col-sm-6 col-12 p-1">
+                                    <div class="card custom-bg"
+                                         style="background-color: ${color};
+                                         box-shadow: 12px 12px 32px rgba(0, 0, 0, 0.25), -12px -12px 32px rgb(0 0 0 / 0%),
+                                         12px -12px 32px rgb(0 0 0 / 0%), -12px 12px 32px rgba(0, 0, 0, 0.25);"
+                                         ondblclick="navigateToNextPage('${group.groupId}', '${group.groupName}')">
+                                        <div class="card-body" id="Group_${group.groupId}" style="height:305px;">
+                                            <div style="display: flex; justify-content: center;">
+                                                <h3 style="color:#FFD700;font-size: 2.5em;
+                                                            text-shadow: 3px 3px 2px #000000, 11px 10px 4px rgb(15 142 41 / 9%);">
+                                                    ${group.groupName}
+                                                </h3>
+                                            </div>
+
+                                            <!-- Swiper Container -->
+                                            <div class="swiper-container">
+
+                                                <!-- Overall Card Container -->
+                                                <div class="swiper-card-container">
+                                                    <div class="swiper-card overall-card"
+                                                         style="display:block; box-shadow: inset 0 5px 5px #333,
+                                                         inset 0 -5px 5px #333, inset 5px 0 5px #333, inset -5px 0 5px #333;">
+                                                        <h3 style="color:#DEF9C4;font-size: 2em;">OVERALL</h3>
+
+                                                        <label>
+                                                            <span class="today-label" style="font-size: 1.0em; margin-left:-100px;">TODAY: </span><br/>
+                                                            <span class="group-id" id="today_${group.groupId}" style="font-size: 2.0em;">00</span>
+                                                        </label><br/>
+
+                                                        <label>
+                                                            <span class="yesterday-label" style="font-size: 1.0em; margin-left:-100px;">YESTERDAY: </span><br/>
+                                                            <span class="group-id" id="yesterday_${group.groupId}" style="font-size: 2.0em;">00</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Variable Card Container -->
+                                                <div class="swiper-card-container">
+                                                    <div class="swiper-card variable-card"
+                                                         style="display:none; box-shadow: inset 0 5px 5px #333,
+                                                         inset 0 -5px 5px #333, inset 5px 0 5px #333, inset -5px 0 5px #333;">
+                                                        <h3 style="color:#DEF9C4;font-size: 2em;">VARIABLE</h3>
+
+                                                        <label>
+                                                            <span class="today-label" style="font-size: 1.0em; margin-left:-100px;">TODAY: </span><br/>
+                                                            <span class="group-id" id="var_today_con${group.groupId}" style="font-size: 2.0em; color: #FFFFFF;">00</span>
+                                                        </label><br/>
+
+                                                        <label>
+                                                            <span class="yesterday-label" style="font-size: 1.0em; margin-left:-100px;">YESTERDAY: </span><br/>
+                                                            <span class="group-id" id="var_yesday_con${group.groupId}" style="font-size: 2.0em; color: #FFFFFF;">00</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Fixed Card Container -->
+                                                <div class="swiper-card-container">
+                                                    <div class="swiper-card fixed-card"
+                                                         style="display:none; box-shadow: inset 0 5px 5px #333,
+                                                         inset 0 -5px 5px #333, inset 5px 0 5px #333, inset -5px 0 5px #333;">
+                                                        <h3 style="color:#DEF9C4;font-size: 2em;">FIXED</h3>
+
+                                                        <label>
+                                                            <span class="today-label" style="font-size: 1.0em; margin-left:-100px;">TODAY: </span><br/>
+                                                            <span class="group-id" id="fix_today_con${group.groupId}" style="font-size: 2.0em; color: #FFFFFF;">00</span>
+                                                        </label><br/>
+
+                                                        <label>
+                                                            <span class="yesterday-label" style="font-size: 1.0em; margin-left:-100px;">YESTERDAY: </span><br/>
+                                                            <span class="group-id" id="fix_yesday_con${group.groupId}" style="font-size: 2.0em; color: #FFFFFF;">00</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+
+                                    // Initialize card swiper after the card is rendered
+                                    setTimeout(function () {
+                                        initializeCardSwiper(group.groupId);
+                                    }, 0);
                                 }
                             }
+
+
+
 
                             row.append(groupHtml);
                             LoadMeterData(group.groupId);
@@ -435,9 +265,61 @@
             }
         });
 
-        function tws_clicked(){
+        function tws_clicked() {
             alert('Your Clicked Group TransformerWise. Please Click Other Groups.');
         }
+
+        function toggleSections(groupId) {
+            const selectedOption = document.getElementById(`ddl_${groupId}`).value;
+
+            // Hide both sections initially
+            document.getElementById(`variable_section_${groupId}`).style.display = 'none';
+            document.getElementById(`fixed_section_${groupId}`).style.display = 'none';
+
+            // Set the default YESTERDAY and TODAY values
+            document.getElementById(`yesterday_${groupId}`).textContent = '00';
+            document.getElementById(`today_${groupId}`).textContent = '00';
+
+            // Show the relevant section and fetch the values for YESTERDAY and TODAY based on dropdown selection
+            if (selectedOption === 'VARIABLE') {
+                document.getElementById(`variable_section_${groupId}`).style.display = 'block';
+                document.getElementById(`yesterday_${groupId}`).textContent = document.getElementById(`var_yesday_con${groupId}`).textContent;
+                document.getElementById(`today_${groupId}`).textContent = document.getElementById(`var_today_con${groupId}`).textContent;
+            } else if (selectedOption === 'FIXED') {
+                document.getElementById(`fixed_section_${groupId}`).style.display = 'block';
+                document.getElementById(`yesterday_${groupId}`).textContent = document.getElementById(`fix_yesday_con${groupId}`).textContent;
+                document.getElementById(`today_${groupId}`).textContent = document.getElementById(`fix_today_con${groupId}`).textContent;
+            }
+        }
+        function initializeCardSwiper(groupId) {
+            const overallCard = document.querySelector(`#Group_${groupId} .overall-card`);
+            const variableCard = document.querySelector(`#Group_${groupId} .variable-card`);
+            const fixedCard = document.querySelector(`#Group_${groupId} .fixed-card`);
+
+            // Array to hold the cards
+            const cards = [overallCard, variableCard, fixedCard];
+            let currentIndex = 0;
+
+            // Ensure Overall is visible initially
+            overallCard.style.display = 'block';
+
+            // Swiper logic: Rotate between cards every 10 seconds
+            setInterval(() => {
+                // Hide all cards
+                cards.forEach(card => card.style.display = 'none');
+
+                // Show the next card in the list
+                cards[currentIndex].style.display = 'block';
+
+                // Move to the next card, and loop back to the first after the last
+                currentIndex = (currentIndex + 1) % cards.length;
+            }, 5000); // Change card every 10 seconds
+        }
+
+
+
+
+
 
         function viewDataBtn_Clicked() {
             var fDate = document.getElementById('Fdate').value;
@@ -590,6 +472,14 @@
             window.location.href = `@Url.Action("ShopWiseIndex", "Home")?groupId=${vals}&groupName=${groupName}`;
         }
 
+        function tws_clicked(groupId, groupName) {
+            debugger;
+            var yesdays = document.getElementById(`tsyesterday_${groupId}`).innerText;
+            var todays = document.getElementById(`tstoday_${groupId}`).innerText;
+            var vals = `${groupId},${yesdays},${todays}`;
+            window.location.href = `@Url.Action("TransFormer", "Home")?groupId=${vals}&groupName=${groupName}`;
+        }
+
         //  For Toggle Menu Icons Hide Only
         function toggleControls1() {
             const controls = document.querySelector('.controls');
@@ -658,26 +548,26 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const heading = document.querySelector('.heading');
-            heading.style.display = 'block';
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //     const heading = document.querySelector('.heading');
+        //     heading.style.display = 'block';
 
-            function updateTime() {
-                const now = new Date();
-                const formattedTime = now.toLocaleString('en-GB', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit'
-                });
-                document.getElementById('time').textContent = formattedTime;
-            }
+        //     function updateTime() {
+        //         const now = new Date();
+        //         const formattedTime = now.toLocaleString('en-GB', {
+        //             day: '2-digit',
+        //             month: '2-digit',
+        //             year: 'numeric',
+        //             hour: '2-digit',
+        //             minute: '2-digit',
+        //             second: '2-digit'
+        //         });
+        //         document.getElementById('time').textContent = formattedTime;
+        //     }
 
-            updateTime(); // Initial call to set the time immediately
-            setInterval(updateTime, 1000); // Update time every second
-        });
+        //     updateTime(); Initial call to set the time immediately
+        //     setInterval(updateTime, 1000); Update time every second
+        // });
 
     </script>
 }

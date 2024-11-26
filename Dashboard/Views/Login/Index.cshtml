@@ -11,12 +11,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/css/boxicons.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="~/assets/images/Stell-fav-icon.ico" />
     <title>PSA - Login Page</title>
 
     <!-- Add jQuery here -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -111,7 +112,8 @@
                         dataType: "json",
                         success: function (resultData) {
                             if (resultData.success) {
-                                window.location.href = '/Home/Index';
+                                // window.location.href = '/Home/Index';
+                                window.location.href = '@Url.Action("Index", "Home")';
                             } else {
                                 alert(resultData.message);
                             }
@@ -140,7 +142,8 @@
                     success: function (resultData) {
                         if (resultData.success) {
                             alert(resultData.message);
-                            window.location.href = '/Login/Index';
+                            //window.location.href = '/Login/Index';
+                            window.location.href = '@Url.Action("Index", "Login")';
                         } else {
                             alert(resultData.message);
                         }

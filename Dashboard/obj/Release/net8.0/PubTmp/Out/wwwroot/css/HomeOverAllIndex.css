@@ -1,0 +1,44 @@
+﻿/* Style adjustments for the layout */
+.container-fluid {
+    margin-top: 20px; /* Optional margin for top spacing */
+}
+
+.row {
+    margin-bottom: 20px; /* Space between rows */
+}
+
+.col-12 {
+    flex: 0 0 100%; /* Full width for single column */
+
+    padding: 20px; /* Padding inside the column */
+    border-radius: 5px; /* Optional rounded corners */
+}
+
+.inputt {
+    display: block;
+    width: 100%; /* Full width of the parent column */
+    height: 40px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: black;
+    margin-bottom: 10px; /* Space below each input */
+}
+
+.buttonn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px; /* Space between buttons */
+}
+
+    .buttonn:hover {
+        background-color: #45a049;
+    }
+
