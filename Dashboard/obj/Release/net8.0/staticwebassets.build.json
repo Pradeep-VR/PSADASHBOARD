@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6tAdKhxm2QUE3Ni0mjXl/A9oKY22cTo6TWGA7asD7+w=",
+  "Hash": "Z2XW3kCSoa1W0hKYLUyPuSnNoeuVm40UVf+uAHjZRhk=",
   "Source": "Dashboard",
   "BasePath": "_content/Dashboard",
   "Mode": "Default",
@@ -535,8 +535,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "v5jb88fg3y",
-      "Integrity": "w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU=",
+      "Fingerprint": "dfs8qw93t8",
+      "Integrity": "F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\GraphIndex.css"
@@ -4466,11 +4466,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU=\""
+          "Value": "\"F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 29 Oct 2024 07:11:08 GMT"
+          "Value": "Tue, 26 Nov 2024 06:23:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4480,12 +4480,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU="
+          "Value": "sha256-F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM="
         }
       ]
     },
     {
-      "Route": "css/GraphIndex.v5jb88fg3y.css",
+      "Route": "css/GraphIndex.dfs8qw93t8.css",
       "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\css\\GraphIndex.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4503,11 +4503,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU=\""
+          "Value": "\"F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 29 Oct 2024 07:11:08 GMT"
+          "Value": "Tue, 26 Nov 2024 06:23:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4517,7 +4517,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "v5jb88fg3y"
+          "Value": "dfs8qw93t8"
         },
         {
           "Name": "label",
@@ -4525,7 +4525,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU="
+          "Value": "sha256-F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM="
         }
       ]
     },

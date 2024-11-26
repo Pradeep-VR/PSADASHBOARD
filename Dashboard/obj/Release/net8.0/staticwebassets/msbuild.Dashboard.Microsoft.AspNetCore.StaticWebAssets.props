@@ -408,8 +408,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>v5jb88fg3y</Fingerprint>
-      <Integrity>w03bnYHUyhEL+9nAmLJQUfZfFlp2ENGI69acI8E0dUU=</Integrity>
+      <Fingerprint>dfs8qw93t8</Fingerprint>
+      <Integrity>F5T72rILZYuq/0v/JLttW6PZPCk2f3yhhOKrutQdYnM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\GraphIndex.css'))</OriginalItemSpec>

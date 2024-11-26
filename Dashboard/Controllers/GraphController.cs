@@ -950,7 +950,7 @@ namespace Dashboard.Controllers
                 }
 
                 string Qry = "SELECT MM.METERNAME,SYNCDATETIME, CURRENTA ,CURRENTB,CURRENTC,VOLTAGEAB,VOLTAGEBC,VOLTAGECA,MAXDEMAND,POWERFACTOR,ACTIVEENERGYDELIVERED ,SYNCDATETIME" +
-                    " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.METERID='" + strId + "' " + BQ + "";
+                    " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.METERID='" + strId + "' " + BQ + " ORDER BY EM.SYNCDATETIME ASC ";
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
@@ -1064,7 +1064,7 @@ namespace Dashboard.Controllers
                 }
 
                 string Qry = "SELECT MM.METERNAME,SYNCDATETIME, CURRENTA ,CURRENTB,CURRENTC,VOLTAGEAB,VOLTAGEBC,VOLTAGECA,MAXDEMAND,POWERFACTOR,ACTIVEENERGYDELIVERED " +
-                    " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.GroupId='" + strId + "'" + BQ + " ";
+                    " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.GroupId='" + strId + "'" + BQ + " ORDER BY EM.SYNCDATETIME ASC ";
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
