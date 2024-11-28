@@ -933,14 +933,15 @@ namespace Dashboard.Controllers
                 if (!string.IsNullOrEmpty(strFD) && !string.IsNullOrEmpty(strTD))
                 {
                     DateTime dt1 = Convert.ToDateTime(strFD);
-                    strFD = dt1.ToString("dd-MM-yyyy");
+                    strFD = dt1.ToString("yyyy-MM-ddTHH:mm:ss");
                     DateTime dt2 = Convert.ToDateTime(strTD);
-                    strTD = dt2.ToString("dd-MM-yyyy");
+                    strTD = dt2.ToString("yyyy-MM-ddTHH:mm:ss");
 
 
                     //DateTime fDate = DateTime.Parse(strFD);
                     //DateTime tDate = DateTime.Parse(strTD);
-                    BQ = "  AND CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + strFD + "',103) AND CONVERT(DATETIME,'" + strTD + "',103) ";
+                    //BQ = "  AND CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + strFD + "',103) AND CONVERT(DATETIME,'" + strTD + "',103) ";
+                    BQ = "  AND CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN '" + strFD + "' AND '" + strTD + "' ";
                 }
                 else
                 {

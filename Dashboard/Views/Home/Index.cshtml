@@ -64,7 +64,7 @@
             preloader.style.display = 'inline-flex';
             // head.style.display = 'none';
             LoadGroupData();
-            LoadGroupNames();
+            //LoadGroupNames();
             setTimeout(function () {
                 preloader.style.display = 'none';
             }, 2000);
@@ -374,31 +374,31 @@
             });
         }
 
-        function LoadGroupNames() {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("GetEnergyData", "Home")',
-                data: { groupId: 0 },
-                success: function (resultData) {
-                    var dropdown = $("#groupDropdown");
-                    dropdown.empty();
+        // function LoadGroupNames() {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '@Url.Action("GetEnergyData", "Home")',
+        //         data: { groupId: 0 },
+        //         success: function (resultData) {
+        //             var dropdown = $("#groupDropdown");
+        //             dropdown.empty();
 
-                    var defaultOption = new Option("Select Group Name", "default");
-                    defaultOption.selected = true;
-                    dropdown.append(defaultOption);
+        //             var defaultOption = new Option("Select Group Name", "default");
+        //             defaultOption.selected = true;
+        //             dropdown.append(defaultOption);
 
-                    if (resultData.GroupNames && Array.isArray(resultData.GroupNames)) {
-                        resultData.GroupNames.forEach(groupName => {
-                            var option = new Option(groupName, groupName);
-                            dropdown.append(option);
-                        });
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        }
+        //             if (resultData.GroupNames && Array.isArray(resultData.GroupNames)) {
+        //                 resultData.GroupNames.forEach(groupName => {
+        //                     var option = new Option(groupName, groupName);
+        //                     dropdown.append(option);
+        //                 });
+        //             }
+        //         },
+        //         error: function (err) {
+        //             console.log(err);
+        //         }
+        //     });
+        // }
 
         function LoadMeterData(groupId) {
             $.ajax({
