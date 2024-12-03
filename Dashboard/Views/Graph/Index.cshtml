@@ -16,9 +16,9 @@
         <div>
             <div class="dateF">
                 <div class="date-selector">
-                    <label for="FromDate">From Date:</label>
+                    <label for="FromDate" style="color:black;">From Date:</label>
                     <input type="datetime-local" id="Fdate" name="fromdate">
-                    <label for="ToDate">To Date:</label>
+                    <label for="ToDate" style="color:black;">To Date:</label>
                     <input type="datetime-local" id="Tdate" name="todate">
                 </div>
                 <div class="side-buttons">
@@ -31,11 +31,11 @@
             <span class="arrow" style="transform: rotate(180deg); display:none;" id="btnPrev"></span>
 
 
-            <label class="lblcss" style="margin: 8px 0;">Interval</label>
+            <label class="lblcss" style="margin: 8px 0;">Interval (mins)</label>
             <input type="number" style="    margin-top: -15px" class="form__input" id="interval" value="15" />
 
-            <label class="lblcss" style="margin: 8px 0;">KWH</label>
-            <input type="text" id="txtConsumption" style="    margin-top: -15px" class="form__input" value="0" readonly="readonly" style="margin-left:5px; border-color:cornflowerblue !important; border-width:1px !important;" />
+            <label class="lblcss" style="margin: 8px 0;">Consumption </label>
+            <input type="text" id="txtConsumption"  class="form__input" value="0" readonly="readonly" style="margin-left:5px; border-color:cornflowerblue !important; border-width:1px !important;" />
 
             <label class="lblcss" style="margin-bottom: -10px;  ">Target Value</label>
             <input type="number" style="width:45%" class="form__input" id="targetValue" value="60" />

@@ -34,37 +34,41 @@
 
     <div class="left-section" id="divMeters"></div>
     <div class="right-section">
+        <div style="display: flex; flex-direction: row; border: 3px solid black;  padding: 10px; ">
+            <div style="margin:5px;">
+                <label style="vertical-align:central;color:#222831;font-weight: 600;" for="fname">Division :</label><br />
+                <select class="form-select" id="ddlDivision" onchange="OnSelectChanged()" style="width:150px;height:35px;">
+                    <option value="'V','F'">OVERALL</option>
+                    <option value="'F'">FIXED</option>
+                    <option value="'V'">VARIABLE</option>
+                </select>
+            </div>
+            <div style="margin:5px;">
+                <label style="vertical-align:central;color:#222831;font-weight: 600;" for="fname">TimeLine :</label>
+                <select class="form-select" id="ddlTimes" onchange="OnSelectChanged()" style="width:150px;height:35px">
+                    <option value="LIVE">LIVE</option>
+                    <option value="7">WEEKLY</option>
+                    <option value="30">MONTHLY</option>
+                </select>
+            </div>
 
-        <div style="display: flex; flex-direction: row; border: 3px solid black;
-    padding: 15px; ">
-
-
-            <select class="form-select" id="ddlDivision" onchange="OnSelectChanged()" style="margin:5px;width:150px">
-                <option value="'V','F'">OVERALL</option>
-                <option value="'F'">FIXED</option>
-                <option value="'V'">VARIABLE</option>
-            </select>
-            <select class="form-select" id="ddlTimes" onchange="OnSelectChanged()" style=" margin:5px;width:150px">
-                <option value="LIVE">LIVE</option>
-                <option value="7">WEEKLY</option>
-                <option value="30">MONTHLY</option>
-            </select>
             <div style="margin:5px">
-                <label style="vertical-align:central;color:#4CAF50;font-weight: 600;" for="fname">Consumption :</label><br />
-                <input style="vertical-align: central;" type="text" id="txtConsumption" disabled="disabled" name="Consumption" />
+                <label style="vertical-align:central;color:#222831;font-weight: 600;" for="fname">Consumption :</label><br />
+                <input style="vertical-align: central;height:35px;" type="text" id="txtConsumption" disabled="disabled" name="Consumption" />
             </div>
 
 
             <div style="margin:5px">
-                <label style="vertical-align:central;color:#4CAF50;font-weight: 600;" for="fname">Set Target :</label><br />
-                <input style="vertical-align: central;" type="number" id="txtTarget" value="50" onchange="updateTargetLine()" onkeypress="this.onchange()" />
+                <label style="vertical-align:central;color:#222831;font-weight: 600;" for="fname">Set Target :</label><br />
+                <input style="vertical-align: central;height:35px;" type="number" id="txtTarget" value="50" onchange="updateTargetLine()" onkeypress="this.onchange()" />
             </div>
+
             <div style="display: flex; flex-direction: column; justify-content: space-around;">
                 <a style="font-size:20px;color:#3066d1;font-weight: 600;padding-left: 40px;">
-                    YESTERDAY CONSUMPTION: <span style="color:red;">@Html.Raw(yesCon)</span> kwh
+                    YESTERDAY CONSUMPTION: <span style="color:red;">@Html.Raw(yesCon)</span> kWh
                 </a>
-                <a style="font-size:20px;color:#30d1c1;font-weight: 600;padding-left: 40px;">
-                    TODAY CONSUMPTION: <span style="color:red;">@Html.Raw(toCon)</span> kwh
+                <a style="font-size:20px;color:#016A70;font-weight: 600;padding-left: 40px;">
+                    TODAY CONSUMPTION: <span style="color:red;">@Html.Raw(toCon)</span> kWh
                 </a>
             </div>
 
@@ -469,7 +473,7 @@
 
         }
 
-        
+
 
         function updateTargetLine() {
             targetLineValue = document.getElementById('txtTarget').value;
