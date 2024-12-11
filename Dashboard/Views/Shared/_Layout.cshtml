@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Dashboard.styles.css" asp-append-version="true" />
     @* <link href="~/css/loader.css" rel="stylesheet" /> *@
+    @* Loader *@
+    <link href="~/css/loader.css" rel="stylesheet" />
 </head>
 @{
     ViewBag.Title = "METERS";
@@ -17,21 +19,35 @@
 }
 <body>
     <header>
-        
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color:darkblue !important;">
-            <div class="container-fluid" >
+            <div class="container-fluid">
                 @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span style="color:white;font-size:20px;">S T E L L A N T I S</span></a> *@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span><img style="height:35px" src="~/assets/images/stellantis_logo_white.png" /></span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a style="margin-right: 600px;color: white;font-size: large;font-weight: 700;letter-spacing: 1px;">@Html.Raw(Heading)</a>                
+                <a style="margin-right: 600px;color: white;font-size: large;font-weight: 700;letter-spacing: 1px;">@Html.Raw(Heading)</a>
             </div>
         </nav>
     </header>
     <div class="container-flex" style="margin:20px">
         <main role="main" class="pb-3">
+            <div id="preloader">
+                <div class="waviy">
+                    <span style="--i:1">L</span>
+                    <span style="--i:2">O</span>
+                    <span style="--i:3">A</span>
+                    <span style="--i:4">D</span>
+                    <span style="--i:5">I</span>
+                    <span style="--i:6">N</span>
+                    <span style="--i:7">G</span>
+                    <span style="--i:8">.</span>
+                    <span style="--i:9">.</span>
+                    <span style="--i:10">.</span>
+                </div>
+            </div>
             @RenderBody()
         </main>
     </div>
@@ -43,9 +59,25 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>    
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/chart.js"></script>
     <script src="~/js/jquery.min.js"></script>
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/echarts/echarts.min.js"></script>
+
+    @* <script src="~/Scripts/jquery-3.4.1.js"></script> *@
+    <script src="~/js/xlsx.full.min.js"></script>
+    <script src="~/js/filesaver.min.js"></script>
+    <script src="~/js/datatables.js"></script>
+
+    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/linechart.js"></script>
+
+    @*Screen Shot Link*@
+    <script src="~/js/html2canvas.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

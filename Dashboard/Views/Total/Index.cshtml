@@ -46,20 +46,20 @@
 <canvas id="myLineChart" width="380" height="120" style="overflow:auto;" onclick="toggleControls1()"></canvas>
 
 @section Scripts {
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/echarts/echarts.min.js"></script>
-    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
-    <script src="~/js/linechart.js"></script>
-    <script src="~/js/chart.js"></script>
+    
     <script>
         var barChart;
         const loadData = [10, 20, 30, 40];
-        const loadNameData = ["Load", "Load", "Load", "Load"];
+        const loadNameData = ["Load", "Load", "Load", "Load","Load","Load","Load"];
+        var preloader = document.getElementById('preloader');
 
         $(document).ready(function () {
+            preloader.style.display = 'inline-flex';
             LoadGroups();
             BarGraphOnload('All', '', '');
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 5000);
         });
 
         function ddlGroupChange() {
@@ -199,8 +199,8 @@
                 datasets: [{
                     // Remove the label here
                     data: arrData,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
-                    borderColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50'],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50','#441752','#355F2E','#FF8000'],
+                    borderColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50','#441752','#355F2E','#FF8000'],
                     borderWidth: 1,
                     barThickness: 20  // Set the bar thickness here
                 }]

@@ -171,12 +171,14 @@ namespace Dashboard.Controllers
             var YesDayCon = _mgnt.GetTransformerConsumptions("GTW", formYesDay, toYesDay, "G", strTransformer);
             var ToDayCon = _mgnt.GetTransformerConsumptions("GTW", fromToday, toToday, "G", strTransformer);
 
-            if (YesDayCon != null && YesDayCon != "")
+            //if (YesDayCon != null && YesDayCon != "")
+            if (!string.IsNullOrEmpty(YesDayCon))
             {
                 strYesCon = Convert.ToDecimal(strYesCon) + Convert.ToDecimal(YesDayCon);
             }
 
-            if (ToDayCon != null && ToDayCon != "")
+            //if (ToDayCon != null && ToDayCon != "")
+            if (!string.IsNullOrEmpty(ToDayCon))
             {
                 strToCon = Convert.ToDecimal(strToCon) + Convert.ToDecimal(ToDayCon);
             }
