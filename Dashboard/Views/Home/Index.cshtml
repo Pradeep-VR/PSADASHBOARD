@@ -3,23 +3,8 @@
 }
 
 
-<link href="~/css/loader.css" rel="stylesheet" />
 <link href="~/css/homeindex.css" rel="stylesheet" />
 
-<div id="preloader">
-    <div class="waviy">
-        <span style="--i:1">L</span>
-        <span style="--i:2">O</span>
-        <span style="--i:3">A</span>
-        <span style="--i:4">D</span>
-        <span style="--i:5">I</span>
-        <span style="--i:6">N</span>
-        <span style="--i:7">G</span>
-        <span style="--i:8">.</span>
-        <span style="--i:9">.</span>
-        <span style="--i:10">.</span>
-    </div>
-</div>
 
 <div class="jumbotron center" style="text-align: center;">
     @* <div class="heading">Operation Wise Status <span>@DateTime.Now.ToString("dd/MM/yyyy hh:mm")</span></div> *@
@@ -54,9 +39,9 @@
 </div>
 
 @section Scripts {
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/echarts/echarts.min.js"></script>
+    @* <script src="~/lib/jquery/jquery.min.js"></script> *@
+    @* <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script> *@
+    @* <script src="~/lib/echarts/echarts.min.js"></script> *@
     <script>
         var preloader = document.getElementById('preloader');
         // var head = document.getElementById('div-heading');
@@ -421,6 +406,7 @@
                         document.getElementById(`today_${groupId}`).style.color = '#fff';
                     }
                     else {
+
                         document.getElementById(`yesterday_${groupId}`).innerText = resultData.yeasterdayConsume;
                         document.getElementById(`yesterday_${groupId}`).style.color = '#fff';
 

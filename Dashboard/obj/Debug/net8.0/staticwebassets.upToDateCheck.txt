@@ -10,6 +10,7 @@ wwwroot\assets\images\LinkLogos\logo-light.svg
 wwwroot\assets\images\LinkLogos\maintenance.svg
 wwwroot\assets\images\logo.png
 wwwroot\assets\images\pdf.png
+wwwroot\assets\images\SaveGraph.png
 wwwroot\assets\images\search.png
 wwwroot\assets\images\Stellantis_logo_blue_background.jpg
 wwwroot\assets\images\stellantis_logo_white.png
@@ -36,6 +37,7 @@ wwwroot\js\Chart.js
 wwwroot\js\Chart294.js
 wwwroot\js\dataTables.js
 wwwroot\js\FileSaver.min.js
+wwwroot\js\html2canvas.min.js
 wwwroot\js\jquery.min.js
 wwwroot\js\jquery-3.6.0.min.js
 wwwroot\js\jquery-3.7.1.min.js

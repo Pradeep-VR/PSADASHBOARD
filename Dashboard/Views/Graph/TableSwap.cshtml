@@ -26,16 +26,16 @@
                     <tr>
                         <th>METER</th>
                         <th>DATE AND TIME</th>
-                        <th>ACTIVE_ENERGY<br />(KWh)</th>
+                        <th>ACTIVE_ENERGY (KWh)</th>
                         <th>CONSUMPTION</th>
-                        <th>RY_CURRENT<br />(A)</th>
-                        <th>YB_CURRENT<br />(A)</th>
-                        <th>BR_CURRENT<br />(A)</th>
-                        <th>RY_VOLTAGE<br />(V)</th>
-                        <th>YB_VOLTAGE<br />(V)</th>
-                        <th>BR_VOLTAGE<br />(V)</th>
-                        <th>MAX_DEMAND<br />(KVA)</th>
-                        <th>POWER_FACTOR<br />(PF)</th>
+                        <th>RY_CURRENT (A)</th>
+                        <th>YB_CURRENT (A)</th>
+                        <th>BR_CURRENT (A)</th>
+                        <th>RY_VOLTAGE (V)</th>
+                        <th>YB_VOLTAGE (V)</th>
+                        <th>BR_VOLTAGE (V)</th>
+                        <th>MAX_DEMAND (KVA)</th>
+                        <th>POWER_FACTOR (PF)</th>
                         @*  <th>
                         <label for="export-file" id="toCSV">
                         <img src="~/assets/images/excel.png" alt="" style="height:30px;" title="Export File">
@@ -53,18 +53,21 @@
 </main>
 
 
-@section Scripts {
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/js/xlsx.full.min.js"></script>
-    <script src="~/js/filesaver.min.js"></script>
-    <script src="~/js/datatables.js"></script>
+@section Scripts {    
+    @* <script src="~/js/xlsx.full.min.js"></script> *@
+    @* <script src="~/js/filesaver.min.js"></script> *@
+    @* <script src="~/js/datatables.js"></script> *@
     <script>
+        var preloader = document.getElementById('preloader');
         window.onload = function () {
-            debugger;
+            preloader.style.display = 'inline-flex';
             var id = '@Html.Raw(Meterid)';
             var fdt = '@Html.Raw(Fdate)';
             var tdt = '@Html.Raw(Tdate)';
             LoadTableData(id, fdt, tdt);
+                    setTimeout(function () {
+            preloader.style.display = 'none';
+        }, 2000);
         }
 
         function LoadTableData(strMId, strFDate, strTDate) {

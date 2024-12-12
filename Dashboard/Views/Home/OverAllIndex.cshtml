@@ -7,33 +7,33 @@
 
 <style>
     /* .heading {
-                    border: 1px solid;
-                    background-color: #E3F2FD;
-                    color: dodgerblue;
-                    border-radius: 10px;
-                    font-size: 50px;
-                    font-family: Arial;
-                    font-weight: bold;
-                    text-align: center;
-                    width: 100%;
-                    padding: 0px 0;
-                    margin: 0;
-                } */
+                                    border: 1px solid;
+                                    background-color: #E3F2FD;
+                                    color: dodgerblue;
+                                    border-radius: 10px;
+                                    font-size: 50px;
+                                    font-family: Arial;
+                                    font-weight: bold;
+                                    text-align: center;
+                                    width: 100%;
+                                    padding: 0px 0;
+                                    margin: 0;
+                                } */
 
     /* select {
-                appearance: none;
-                outline: 0;
-                box-shadow: none;
-                border: 0 !important;
-                background: #0d205f;
-                background-image: none;
-                flex: 1;
-                padding: 0 1em;
-                color: #fff;
-                cursor: pointer;
-                font-size: 1em;
-                font-family: 'Open Sans', sans-serif;
-            } */
+                                appearance: none;
+                                outline: 0;
+                                box-shadow: none;
+                                border: 0 !important;
+                                background: #0d205f;
+                                background-image: none;
+                                flex: 1;
+                                padding: 0 1em;
+                                color: #fff;
+                                cursor: pointer;
+                                font-size: 1em;
+                                font-family: 'Open Sans', sans-serif;
+                            } */
 
     select::-ms-expand {
         display: none;
@@ -150,7 +150,7 @@
                         <label for="groupSelect">Group</label>
                         <select name="format" id="groupSelect" onchange="LoadMeterData()" style="height: 40px; width: 100%;"></select>
                     </div>
-                    <div style="flex: 1; min-width: 150px; margin-right: 10px;">
+                    <div style="flex: 1; min-width: 150px; margin-right: 10px; display:none;">
                         <label for="meterSelect">Meter</label>
                         <select name="format" id="meterSelect" style="height: 40px; width: 100%;"></select>
                     </div>
@@ -169,6 +169,7 @@
                     <div style="display: flex; align-items: center; gap: 10px; margin-bottom:-30px;">
                         <button class="buttonn" id="btnGraph" style="width: 100px;">GRAPH</button>
                         <button class="buttonn" id="btnTable" style="width: 100px;">TABLE</button>
+                        <img src="~/assets/images/SaveGraph.png" alt="Export as Image" id="screenshotButton" class="export-btn" />
                     </div>
                 </div>
             </div>
@@ -176,8 +177,10 @@
             <!-- Column 2 (col-9) -->
             <div class="col-12" style="margin-left:-12px;">
                 <div class="chart-container" id="graph_container">
-                    <div class="chart-wrapper">
-                        <canvas id="myLineChart" width="1631" height="500"></canvas>
+                    <div class="col">
+                        <div class="chart-wrapper">
+                            <canvas id="myLineChart" width="1631" height="500"></canvas>
+                        </div>
                     </div>
                 </div>
                 <!-- For Table -->
@@ -229,534 +232,15 @@
             </div>
         </div>
     </div>
+</div>
+@section Scripts {
 
-    @section Scripts {
-        <script src="~/Scripts/jquery-3.4.1.js"></script>
-        <script src="~/js/xlsx.full.min.js"></script>
-        <script src="~/js/filesaver.min.js"></script>
-        <script src="~/js/datatables.js"></script>
-        <script src="~/js/chart.js"></script>
-        @* <script>
-            var loadCnt = 0;
-            var myLineChart; // Declare a global variable for the chart instance
-
-            window.onload = function () {
-                LoadGroupData();
-                if (loadCnt === 0) {
-                    LoadMeters('', false);
-                }
-                var intTime = document.getElementById('txtInterval').value;
-                GetDataForGenerateGraph_All("ALLMETERS", "ALLGROUPS", '', '', intTime).then((labels) => {
-                    if (labels != null) {
-                        generateChart_All(labels);
-                    }
-                });
-            }
-
-            function LoadMeterData() {
-                var data = document.getElementById("groupSelect");
-                var selectedOption = data.options[data.selectedIndex];
-                var selectedvalue = selectedOption.value;
-
-                if (selectedvalue == 'ALLGROUPS') {
-                    LoadMeters(selectedvalue, false);
-                } else {
-                    LoadMeters(selectedvalue, true);
-                }
-                loadCnt = "1";
-            }
-
-            function LoadMeters(strGroupId, strCon) {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetMetersDtls", "Home")',
-                    // contentType: "application/json; charset=utf-8",
-                    data: { strGroupId: strGroupId, strCon: strCon },
-                    success: function (response) {
-                        var ddlMeter = document.getElementById('meterSelect');
-                        ddlMeter.innerHTML = "";
-                        if (response) {
-                            var MetersList = response.mmaster;
-                            var selectAllOption = document.createElement('option');
-                            selectAllOption.value = "ALLMETERS";
-                            selectAllOption.text = "SELECT ALL";
-                            ddlMeter.appendChild(selectAllOption);
-
-                            for (let i = 0; i < MetersList.length; i++) {
-                                var option = document.createElement('option');
-                                option.value = MetersList[i].meterid;
-                                option.text = MetersList[i].metername;
-                                ddlMeter.appendChild(option);
-                            }
-                        }
-                    }
-                });
-            }
-
-            function LoadGroupData() {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetGroupsWithMeters", "Home")',
-                    // contentType: "application/json; charset=utf-8",
-                    success: function (groups) {
-                        var ddlGroup = document.getElementById('groupSelect');
-                        ddlGroup.innerHTML = "";
-
-                        var selectAllOption = document.createElement('option');
-                        selectAllOption.value = "ALLGROUPS";
-                        selectAllOption.text = "SELECT ALL";
-                        ddlGroup.appendChild(selectAllOption);
-
-                        for (let i = 0; i < groups.length; i++) {
-                            var option = document.createElement('option');
-                            option.value = groups[i].groupId;
-                            option.text = groups[i].groupName;
-                            ddlGroup.appendChild(option);
-                        }
-                    }
-                });
-            }
-
-
-
-
-            document.getElementById('btnGraph').onclick = function () {
-
-                document.getElementById('customers_table').style = 'display:none;';
-                document.getElementById('graph_container').style = '';
-
-                var selectedGroup = document.getElementById('groupSelect').value;
-                var selectedMeter = document.getElementById('meterSelect').value;
-                var StartDate = document.getElementById('fromDate').value;
-                var EndDate = document.getElementById('toDate').value;
-                var TimeInterval = document.getElementById('txtInterval').value;
-
-                if (selectedMeter !== "ALLMETERS" && selectedGroup !== "ALLGROUPS") {
-                    GetDataForGenerateGraph(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval).then((labels) => {
-                        if (labels != null) {
-                            var sel = document.getElementById('meterSelect');
-                            generateChart(labels, sel.options[sel.selectedIndex].text);
-                        }
-                    });
-                } else if (selectedGroup = "ALLGROUPS") {
-                    GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval).then((labels) => {
-                        if (labels != null) {
-                            generateChart_All(labels);
-                        }
-                    });
-                }
-            };
-
-            function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
-                return new Promise((resolve, reject) => {
-                    $.ajax({
-                        type: 'POST',
-                        url: '@Url.Action("GetOverAllIndex_Graph_All", "Graph")',
-                        // contentType: "application/json; charset=utf-8",
-                        data: { groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval },
-                        success: function (response) {
-                            if (response != null) {
-                                var labels = {
-                                    label: response.syncdatetime,
-                                    datasets: [
-                                        {
-                                            label: 'BODY_SHOP (KWH)',
-                                            data: response.bodY_SHOP_ActiveEnergy,
-                                            borderColor: 'rgba(75, 192, 192, 1)',
-                                            fill: false
-                                        },
-                                        {
-                                            label: 'GENERAL_ASSEMBLY (KWH)',
-                                            data: response.generaL_ASSEMBLY_ActiveEnergy,
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            fill: false
-                                        },
-                                        {
-                                            label: 'HOSTED_SERVICES (KWH)',
-                                            data: response.hosteD_SERVICES_ActiveEnergy,
-                                            borderColor: 'rgba(54, 162, 235, 1)',
-                                            fill: false
-                                        },
-                                        {
-                                            label: 'PAINT_SHOP (KWH)',
-                                            data: response.painT_SHOP_ActiveEnergy,
-                                            borderColor: 'rgba(255, 206, 86, 1)',
-                                            fill: false
-                                        },
-                                        // {
-                                        //     label: 'TRANSFORMER_WISE (KWH)',
-                                        //     data: response.transformeR_WISE_ActiveEnergy,
-                                        //     borderColor: 'rgba(75, 192, 192, 1)',
-                                        //     fill: false
-                                        // },
-                                        {
-                                            label: 'UTILITIES (KWH)',
-                                            data: response.utilitieS_ActiveEnergy,
-                                            borderColor: 'rgba(153, 102, 255, 1)',
-                                            fill: false
-                                        }
-                                    ]
-                                };
-                                resolve(labels);
-                            } else {
-                                resolve(null);
-                            }
-                        },
-                        error: function (error) {
-                            reject(error);
-                        }
-                    });
-                });
-            }
-
-            let targetLineValue = 60;//document.getElementById('targetValue').value;
-
-            function drawHorizontalLine(chartInstance, value, color) {
-                const yScale = chartInstance.scales.y;
-                const yPos = yScale.getPixelForValue(value);
-
-                chartInstance.ctx.save();
-                chartInstance.ctx.beginPath();
-                chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
-                chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
-                chartInstance.ctx.strokeStyle = color;
-                chartInstance.ctx.lineWidth = 1;
-                chartInstance.ctx.shadowColor = color;
-                chartInstance.ctx.shadowBlur = 10;
-                chartInstance.ctx.stroke();
-                chartInstance.ctx.restore();
-            }
-
-            function generateChart_All(labels) {
-                var ctx = document.getElementById('myLineChart').getContext('2d');
-
-                if (myLineChart) {
-                    myLineChart.destroy(); // Destroy the existing chart instance
-                }
-                myLineChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels.label,
-                        datasets: labels.datasets
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'TIMING',
-                                    font: {
-                                        size: 20,
-                                        weight: 'bold',
-                                        family: 'Arial'
-                                    },
-                                    color: 'darkblue'
-                                }
-                            },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: 'UNITS',
-                                    font: {
-                                        size: 20,
-                                        weight: 'bold',
-                                        family: 'Arial'
-                                    },
-                                    color: 'darkblue'
-                                },
-                                beginAtZero: true
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'top',
-                                labels: {
-                                    boxWidth: 20,
-                                    padding: 15,
-                                    font: {
-                                        size: 14,
-                                        family: 'Arial'
-                                    },
-                                    color: 'black'
-                                }
-                            },
-                            annotation: {
-                                annotations: {
-                                    line1: {
-                                        type: 'line',
-                                        yMin: targetLineValue,
-                                        yMax: targetLineValue,
-                                        borderColor: 'red',
-                                        borderWidth: 2,
-                                        label: {
-                                            content: 'Target',
-                                            enabled: true,
-                                            position: 'end'
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    plugins: [{
-                        id: 'targetLine',
-                        afterDraw: (chart) => {
-                            drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
-                        }
-                    }]
-                });
-
-            }
-
-
-            function GetDataForGenerateGraph(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
-                return new Promise((resolve, reject) => {
-                    $.ajax({
-                        type: 'POST',
-                        url: '@Url.Action("GetOverAllIndex_Graph", "Graph")',
-                        // contentType: "application/json; charset=utf-8",
-                        data: { groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval },
-                        success: function (response) {
-                            var data = response.activeenergy;
-                            if (data != null) {
-                                var label = response.syncdatetime; // Example label, you can change this as needed.
-                                var labels = {
-                                    label: label,
-                                    data: data
-                                };
-                                resolve(labels);
-                            } else {
-                                resolve(null);
-                            }
-                        },
-                        error: function (error) {
-                            reject(error);
-                        }
-                    });
-                });
-            }
-
-            function generateChart(labels, name) {
-                var ctx = document.getElementById('myLineChart').getContext('2d');
-
-                if (myLineChart) {
-                    myLineChart.destroy(); // Destroy the existing chart instance
-                }
-
-                myLineChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels.label,
-                        datasets: [{
-                            label: name,
-                            data: labels.data,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 2,
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: {
-                                display: true,
-                                title: {
-                                    display: true,
-                                    text: 'TIMING',
-                                    font: {
-                                        size: 20,
-                                        weight: 'bold',
-                                        family: 'Arial'
-                                    },
-                                    color: 'darkblue'
-                                }
-                            },
-                            y: {
-                                display: true,
-                                title: {
-                                    display: true,
-                                    text: 'UNITS',
-                                    font: {
-                                        size: 20,
-                                        weight: 'bold',
-                                        family: 'Arial'
-                                    },
-                                    color: 'darkblue'
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            let dt = $('#dataTable tbody');
-            let dt1 = $('#dataTable1 tbody');
-
-            ///Table View Scripts
-            function LoadTableData_Specific(strMId, strFDate, strTDate) {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetTableData", "Graph")',
-                    data: { strId: strMId, strFD: strFDate, strTD: strTDate },
-                    success: function (response) {
-                        if (response) {
-                            var tbody1 = $('#dataTable tbody');
-
-                            // Clear existing rows
-                            tbody1.empty();
-
-                            for (let i = 0; i < response.consumption.length; i++) {
-                                // Create a new row
-                                var row = `<tr>
-                                                                <td>${response.meterName[i]}</td>
-                                                                <td>${response.dateAndTime[i]}</td>
-                                                                <td>${response.activeEnergy[i]}</td>
-                                                                <td>${response.consumption[i]}</td>
-                                                                <td>${response.current_A[i]}</td>
-                                                                <td>${response.current_B[i]}</td>
-                                                                <td>${response.current_C[i]}</td>
-                                                                <td>${response.voltage_A[i]}</td>
-                                                                <td>${response.voltage_B[i]}</td>
-                                                                <td>${response.voltage_C[i]}</td>
-                                                                <td>${response.maxDemand[i]}</td>
-                                                                <td>${response.powerFactor[i]}</td>
-                                                           </tr>`;
-                                // Append the row to the table body
-                                tbody1.append(row);
-                            }
-                        } else {
-                            alert('No Data Found.');
-                        }
-                    },
-                    error: function (err) {
-                        alert('Error : ' + err);
-                    }
-                });
-            }
-
-
-            function LoadTableData_Overall(strGId, strFDate, strTDate) {
-                debugger;
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetTableData_Overall", "Graph")',
-                    data: { strGroup: strGId, strFD: strFDate, strTD: strTDate },
-                    success: function (response) {
-                        // const tableBody = dt1.tbody;//document.getElementById('#dataTable1 tbody');
-                        var tbody2 = $('#dataTable1 tbody');
-                        const row = document.createElement('tr');
-                        if (response) {
-                            row.innerHTML = `<tr>
-                                                        <td>${response.group}</td>
-                                                        <td>${response.datetime}</td>
-                                                        <td>${response.consumption}</td>
-                                                    </tr>`;
-                            tbody2.append(row);
-                        }
-                    },
-                    Error: function (err) {
-                        alert(err);
-                    }
-                });
-            }
-
-            document.getElementById('btnTable').onclick = function () {
-                document.getElementById('customers_table').style = '';
-                document.getElementById('graph_container').style = 'display:none;';
-
-                var selectedGroup = document.getElementById('groupSelect').value;
-                var selectedMeter = document.getElementById('meterSelect').value;
-                var StartDate = document.getElementById('fromDate').value;
-                var EndDate = document.getElementById('toDate').value;
-                var TimeInterval = document.getElementById('txtInterval').value;
-
-                if (selectedMeter != "ALLMETERS" && selectedGroup != "ALLGROUPS") {
-                    //GetDataForGenerateGraph(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval).then((labels) => {
-                    //    if (labels != null) {
-                    //        generateChart(labels);
-                    //    }
-                    //});
-                    document.getElementById('dataTable').style = '';
-                    document.getElementById('dataTable1').style = 'display:none;';
-                    LoadTableData_Specific(selectedMeter, StartDate, EndDate);
-
-                } else if (selectedGroup = "ALLGROUPS") {
-                    //GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval).then((labels) => {
-                    //    if (labels != null) {
-                    //        generateChart_All(labels);
-                    //    }
-                    //});
-                    //document.getElementById('th_specific').style = '';
-                    //document.getElementById('th_overall').style = 'display:none;';
-
-
-                    var x = document.getElementById('groupSelect');
-                    var txt = '';
-                    var i;
-                    $('#dataTable1 tbody').empty();
-                    for (i = 0; i < x.length; i++) {
-                        txt = x.options[i].value;
-                        if (txt !== "ALLGROUPS") {
-                            LoadTableData_Overall(txt, StartDate, EndDate);
-                        }
-
-                    }
-
-                }
-            };
-
-            function csvExport1() {
-                const table = document.getElementById('dataTable1');
-                const data = toCSV(table);
-                downloadXLSX(data, 'OverAll_Export');
-            }
-
-            function csvExport() {
-                const table = document.getElementById('dataTable');
-                const data = toCSV(table);
-                downloadXLSX(data, 'Specific_Export');
-            }
-
-            const csv_btn = document.querySelector('#toCSV');
-            const toCSV = function (table) {
-                const t_heads = table.querySelectorAll('th'),
-                    tbody_rows = table.querySelectorAll('tbody tr');
-                // Capture and format headings
-                const headings = [...t_heads].map(head => head.textContent.trim().toUpperCase());
-                // Capture and format table data
-                const table_data = [...tbody_rows].map(row => {
-                    const cells = row.querySelectorAll('td');
-                    const cells_data = [...cells].map(cell => cell.textContent.trim());
-                    return cells_data;
-                });
-                return [headings, ...table_data];
-            }
-            const downloadXLSX = (data, fileName) => {
-                const ws = XLSX.utils.aoa_to_sheet(data);
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, 'OverAll_Export');
-                XLSX.writeFile(wb, `${fileName}.xlsx`);
-            }
-            //csv_btn.onclick = () => {
-            //    const table = document.getElementById('dataTable');
-            //    const data = toCSV(table);
-            //    downloadXLSX(data, 'OverAll_Export');
-            //}
-        </script> *@
-
-        
-    @* <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/js/xlsx.full.min.js"></script>
-    <script src="~/js/filesaver.min.js"></script>
-    <script src="~/js/datatables.js"></script>
-    <script src="~/js/chart.js"></script> *@
     <script>
         var loadCnt = 0;
         var myLineChart; // Declare a global variable for the chart instance
 
         window.onload = function () {
+            preloader.style.display = 'inline-flex';
             LoadGroupData();
             if (loadCnt === 0) {
                 LoadMeters('', false);
@@ -767,6 +251,10 @@
                     generateChart_All(labels);
                 }
             });
+
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 5000);
         }
 
         function LoadMeterData() {
@@ -876,37 +364,38 @@
                                 label: response.syncdatetime,
                                 datasets: [
                                     {
-                                        label: 'BODY_SHOP (KWH)',
+                                        label: 'BODYSHOP (kWh)',
                                         data: response.bodY_SHOP_ActiveEnergy,
                                         borderColor: 'rgba(75, 192, 192, 1)',
                                         fill: false
                                     },
                                     {
-                                        label: 'GENERAL_ASSEMBLY (KWH)',
+                                            label: 'GENERALASSEMBLY (kWh)',
                                         data: response.generaL_ASSEMBLY_ActiveEnergy,
-                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        // borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderColor: 'rgba(255, 155, 152, 200)',
                                         fill: false
                                     },
                                     {
-                                        label: 'HOSTED_SERVICES (KWH)',
+                                            label: 'HOSTEDSERVICES (kWh)',
                                         data: response.hosteD_SERVICES_ActiveEnergy,
                                         borderColor: 'rgba(54, 162, 235, 1)',
                                         fill: false
                                     },
                                     {
-                                        label: 'PAINT_SHOP (KWH)',
+                                            label: 'PAINTSHOP (kWh)',
                                         data: response.painT_SHOP_ActiveEnergy,
                                         borderColor: 'rgba(255, 206, 86, 1)',
                                         fill: false
                                     },
                                     // {
-                                    //     label: 'TRANSFORMER_WISE (KWH)',
+                                    //     label: 'TRANSFORMERWISE (kWh)',
                                     //     data: response.transformeR_WISE_ActiveEnergy,
                                     //     borderColor: 'rgba(75, 192, 192, 1)',
                                     //     fill: false
                                     // },
                                     {
-                                        label: 'UTILITIES (KWH)',
+                                        label: 'UTILITIES (kWh)',
                                         data: response.utilitieS_ActiveEnergy,
                                         borderColor: 'rgba(153, 102, 255, 1)',
                                         fill: false
@@ -1019,7 +508,7 @@
                 plugins: [{
                     id: 'targetLine',
                     afterDraw: (chart) => {
-                        drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+                        drawHorizontalLine(chart, targetLineValue, '#FFFFFF');
                     }
                 }]
             });
@@ -1224,7 +713,7 @@
             //                         tbody2.append(row); // Append the new row for each entry
             //                     }
             //                 }
-            //                 else 
+            //                 else
             //                 {
             //                     for (let i = 0; i < response.group.length; i++) {
             //                         const row = `<tr>
@@ -1232,11 +721,11 @@
             //                                                             <td>${response.datetime[i]}</td>
             //                                                             <td>${response.consumption[i]}</td>
             //                                                         </tr>`;
-                                   
+
             //                         tbody3.append(row); // Append the new row for each entry
             //                     }
             //                 }
-                            
+
             //             }
             //         },
             //         error: function (err) {
@@ -1373,6 +862,35 @@
         //    const data = toCSV(table);
         //    downloadXLSX(data, 'OverAll_Export');
         //}
+
+        document.getElementById('screenshotButton').addEventListener('click', function () {
+                   var dt = new Date();
+                   var time =
+                       ' ' +
+                       dt.getDate() +
+                       '/' +
+                       (dt.getMonth() + 1) + // Adjusted to display correct month (0-indexed)
+                       '/' +
+                       dt.getFullYear() +
+                       ' ' +
+                       dt.getHours() +
+                       ':' +
+                       dt.getMinutes() +
+                       ':' +
+                       dt.getSeconds();
+
+                   // Select only the specific div
+                    var targetDiv = document.querySelector('.col');
+
+                    // Pass the target element to html2canvas
+                    html2canvas(targetDiv).then(function (canvas) {
+                        const link = document.createElement('a');
+                        link.download = 'OverAll_Graph_' + time + '.png';
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    });
+               });
+
     </script>
 
-    }
+}
