@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\LinkLogos\\maintenance.svg"
     },
     {
+      "Id": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\SaveGraph.png",
+      "PackagePath": "staticwebassets\\assets\\images\\SaveGraph.png"
+    },
+    {
       "Id": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\Stell-fav-icon.ico",
       "PackagePath": "staticwebassets\\assets\\images\\Stell-fav-icon.ico"
     },
@@ -155,6 +159,10 @@
     {
       "Id": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\dataTables.js",
       "PackagePath": "staticwebassets\\js\\dataTables.js"
+    },
+    {
+      "Id": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\html2canvas.min.js",
+      "PackagePath": "staticwebassets\\js\\html2canvas.min.js"
     },
     {
       "Id": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\jquery-3.6.0.min.js",

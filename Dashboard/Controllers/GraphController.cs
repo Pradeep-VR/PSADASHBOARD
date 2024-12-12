@@ -106,7 +106,10 @@ namespace Dashboard.Controllers
                 //      "FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
                 //      "WHERE E.METERID = '" + groupId + "' ORDER BY T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
 
-                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + formattedStartDate + "',103) AS INTERVALTIME    UNION ALL SELECT  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) FROM  TIMEINTERVALS WHERE  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "',103))SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR, E.ACTIVEENERGYDELIVERED AS KWH FROM  TIMEINTERVALS T LEFT JOIN  TBL_ENERGYMETER E ON E.SYNCDATETIME >= T.INTERVALTIME  AND E.SYNCDATETIME < DATEADD(MINUTE, " + Interval + ", T.INTERVALTIME) WHERE  E.METERID = '" + groupId + "' ORDER BY  T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
+                //on Dec - 03 - 2024 By Pradeep
+                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + formattedStartDate + "',103) AS INTERVALTIME    UNION ALL SELECT  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) FROM  TIMEINTERVALS WHERE  DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "',103))SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR, E.ACTIVEENERGYDELIVERED AS KWH FROM  TIMEINTERVALS T LEFT JOIN  TBL_ENERGYMETER E ON E.SYNCDATETIME >= T.INTERVALTIME  AND E.SYNCDATETIME < DATEADD(MINUTE, " + Interval + ", T.INTERVALTIME) WHERE  E.METERID = '" + groupId + "' ORDER BY  T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
+
+                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + formattedStartDate + "', 103) AS INTERVALTIME UNION ALL SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)  FROM TIMEINTERVALS WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + formattedEndDate + "', 103) )SELECT DISTINCT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH FROM TIMEINTERVALS T LEFT JOIN (SELECT *,ROW_NUMBER() OVER (PARTITION BY METERID, DATEADD(MINUTE, DATEDIFF(MINUTE, 0, SYNCDATETIME) / " + Interval + " * " + Interval + ", 0) ORDER BY SYNCDATETIME) AS RN FROM TBL_ENERGYMETER ) E ON E.SYNCDATETIME >= T.INTERVALTIME AND E.SYNCDATETIME < DATEADD(MINUTE, " + Interval + ", T.INTERVALTIME) AND E.RN = 1 WHERE  E.METERID = '" + groupId + "' ORDER BY  T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
 
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
@@ -332,8 +335,8 @@ namespace Dashboard.Controllers
                     if (!(string.IsNullOrEmpty(strFD) && string.IsNullOrEmpty(strTD)))
                     {
                         // Correctly parse the strings in the ISO 8601 format
-                        DateTime startDateTime = DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm:ss", null);
-                        DateTime endDateTime = DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm:ss", null);
+                        DateTime startDateTime = Convert.ToDateTime(strFD); //DateTime.ParseExact(strFD, "yyyy-MM-ddTHH:mm:ss", null);
+                        DateTime endDateTime = Convert.ToDateTime(strTD);  //DateTime.ParseExact(strTD, "yyyy-MM-ddTHH:mm:ss", null);
 
                         // Now format to the desired format for SQL query
                         formattedStartDate = startDateTime.ToString("yyyy-MM-ddTHH:mm:ss");
@@ -351,24 +354,21 @@ namespace Dashboard.Controllers
                             "TBL_ENERGYMETER E  ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 126) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  LEFT JOIN  METERMASTER M ON E.METERID = M.METERID    WHERE E.GROUPID = '" + groupId + "' AND M.METERDIVISION IN (" + Divison + ")) SELECT   DATETIMES," +
                             " ROUND(SUM(TIME_BASED_KWH_CONSUMPTION), 2) AS TOTAL_KWH_CONSUMPTION FROM  CALCULATED_CONSUMPTION GROUP BY   DATETIMES ORDER BY DATETIMES ASC";
 
+
                     var dt = _serve.GetDataTable(Qry);
                     if (dt.Rows.Count > 0)
                     {
                         List<string> syncdatetime = new List<string>();
                         List<string> activeenergy = new List<string>();
 
-                        int j = 0;
-
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            j = i + 1;
-                            if (j < dt.Rows.Count)
-                            {
-                                syncdatetime.Add(dt.Rows[i]["DATETIMES"].ToString());
-                                activeenergy.Add(dt.Rows[i]["TOTAL_KWH_CONSUMPTION"].ToString());
-                            }
+                            syncdatetime.Add(dt.Rows[i]["DATETIMES"].ToString());
+                            activeenergy.Add(dt.Rows[i]["TOTAL_KWH_CONSUMPTION"].ToString());
 
                         }
+
+
                         return Json(new { SYNCDATETIME = syncdatetime.ToArray(), Consumptions = activeenergy.ToArray() });
                     }
                     else//No Data Found
@@ -379,7 +379,7 @@ namespace Dashboard.Controllers
                 }
                 else//Group Id Null
                 {
-                    return Json(new { data = "Group Id was Null/Empty," });
+                    return Json(new { data = "Group Id was Null/Empty." });
                 }
 
             }
@@ -628,6 +628,8 @@ namespace Dashboard.Controllers
                       " FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
                       " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
 
+
+
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
@@ -685,7 +687,7 @@ namespace Dashboard.Controllers
         {
             string BQ = string.Empty;
             string Qry = string.Empty;
-            decimal Ov_Cons = 0;
+            //decimal Ov_Cons = 0;
             try
             {
 

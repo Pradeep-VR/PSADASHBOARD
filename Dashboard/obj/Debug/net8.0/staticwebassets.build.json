@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KeP+0uEI6Yl+gihSYveJ9tE/YyS6bCLmMtlPbF1oPsU=",
+  "Hash": "jmzTs6FmD7mdaKgvpNMkj25KPvUZqu52YD8ZsXsUBRk=",
   "Source": "Dashboard",
   "BasePath": "_content/Dashboard",
   "Mode": "Default",
@@ -309,6 +309,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\pdf.png"
+    },
+    {
+      "Identity": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\SaveGraph.png",
+      "SourceId": "Dashboard",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\",
+      "BasePath": "_content/Dashboard",
+      "RelativePath": "assets/images/SaveGraph#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ye3rxr9g85",
+      "Integrity": "9hg4PJfu5ZHYz5y3CsgpSLWmgTzABUkAKizW6z2seAE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\SaveGraph.png"
     },
     {
       "Identity": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\search.png",
@@ -855,6 +876,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\FileSaver.min.js"
+    },
+    {
+      "Identity": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\html2canvas.min.js",
+      "SourceId": "Dashboard",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\",
+      "BasePath": "_content/Dashboard",
+      "RelativePath": "js/html2canvas.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ckh6wnff0x",
+      "Integrity": "bCpJujr+fRg5fu3lNyBrxMt8VEGC6p8JHPBh4zeaXsw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\html2canvas.min.js"
     },
     {
       "Identity": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\jquery.min.js",
@@ -3628,6 +3670,88 @@
       ]
     },
     {
+      "Route": "assets/images/SaveGraph.png",
+      "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\SaveGraph.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "833"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9hg4PJfu5ZHYz5y3CsgpSLWmgTzABUkAKizW6z2seAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 10:54:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9hg4PJfu5ZHYz5y3CsgpSLWmgTzABUkAKizW6z2seAE="
+        }
+      ]
+    },
+    {
+      "Route": "assets/images/SaveGraph.ye3rxr9g85.png",
+      "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\SaveGraph.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "833"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9hg4PJfu5ZHYz5y3CsgpSLWmgTzABUkAKizW6z2seAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 10:54:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ye3rxr9g85"
+        },
+        {
+          "Name": "label",
+          "Value": "assets/images/SaveGraph.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9hg4PJfu5ZHYz5y3CsgpSLWmgTzABUkAKizW6z2seAE="
+        }
+      ]
+    },
+    {
       "Route": "assets/images/search.l0i5az253u.png",
       "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\assets\\images\\search.png",
       "Selectors": [],
@@ -5372,7 +5496,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Nov 2024 16:41:36 GMT"
+          "Value": "Mon, 09 Dec 2024 13:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5417,7 +5541,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Nov 2024 16:41:36 GMT"
+          "Value": "Mon, 09 Dec 2024 13:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5462,7 +5586,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Nov 2024 16:41:36 GMT"
+          "Value": "Mon, 09 Dec 2024 13:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5499,7 +5623,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 12 Nov 2024 16:41:36 GMT"
+          "Value": "Mon, 09 Dec 2024 13:13:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5920,6 +6044,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-BbEUDFxbnn+1hgiU4V7RKbFPXqlIG0EhlvsjD4eR9W4="
+        }
+      ]
+    },
+    {
+      "Route": "js/html2canvas.min.ckh6wnff0x.js",
+      "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\html2canvas.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "220005"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bCpJujr+fRg5fu3lNyBrxMt8VEGC6p8JHPBh4zeaXsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 09:46:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ckh6wnff0x"
+        },
+        {
+          "Name": "label",
+          "Value": "js/html2canvas.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bCpJujr+fRg5fu3lNyBrxMt8VEGC6p8JHPBh4zeaXsw="
+        }
+      ]
+    },
+    {
+      "Route": "js/html2canvas.min.js",
+      "AssetFile": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\wwwroot\\js\\html2canvas.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "220005"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bCpJujr+fRg5fu3lNyBrxMt8VEGC6p8JHPBh4zeaXsw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 29 Nov 2024 09:46:38 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bCpJujr+fRg5fu3lNyBrxMt8VEGC6p8JHPBh4zeaXsw="
         }
       ]
     },

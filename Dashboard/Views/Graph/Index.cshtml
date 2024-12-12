@@ -7,20 +7,174 @@
     var Name = ViewBag.Name;
     var GName = ViewBag.GName;
     ViewBag.Heading = GName + " | " + Name + " | GRAPH"; // $"{ViewBag.Name} - {GName} - GRAPH";// GName "-" + "'@Html.Raw(Id)'" + "- GRAPH";
+    var dwnName = ViewBag.Heading;
 }
 
 <link href="~/css/graphindex.css" rel="stylesheet" />
+
+<!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START -------------------------------------------------------------------->
+
+<style>
+
+    /* Button container to align buttons side by side */
+    /* Button container to align buttons */
+    .button-container {
+        display: flex;
+        gap: 130px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        border: 1px solid gray;
+        margin-top: 20px;
+        border-radius: 15px;
+        padding: 40px;
+        position: relative;
+    }
+
+    /* General button styling */
+    .styled-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: transparent;
+        border: none;
+        border-radius: 50px;
+        padding: 5px 10px;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-top: 30px;
+    }
+
+    .heading {
+        position: absolute;
+        top: 0;
+        left: 51%;
+        transform: translateX(-50%);
+        font-size: 25px; /* Adjust size as needed */
+        color: #333; /* Adjust color */
+        font-weight: bold;
+        margin: 0;
+        display: inline-block;
+        margin-right: 10px;
+        right: -198px;
+    }
+    /* Specific styles for Previous and Next buttons */
+    .prev {
+        background-color: #f4a900; /* Orange color */
+    }
+
+    .next {
+        background-color: #00b167; /* Green color */
+    }
+
+    /* Icon styles */
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        color: black;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hover effects */
+    .styled-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        .styled-btn:hover .icon {
+            background-color: #ffffff;
+        }
+
+    /* Text spacing for buttons */
+    .text {
+        margin: 0 10px;
+    }
+
+    .export-btn {
+        background-color: #4CAF50; /* Green background */
+        border: none; /* Remove border */
+        color: white; /* Text color */
+        padding: 5px 5px; /* Padding inside the button */
+        text-align: center; /* Center-align text */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Inline block for button */
+        font-size: 16px; /* Font size */
+        margin: 10px 0; /* Margin for spacing */
+        cursor: pointer; /* Pointer cursor on hover */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        transition: all 0.3s ease; /* Smooth transition for effects */
+    }
+
+        /* Hover effect */
+        .export-btn:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: translateY(-3px); /* Slight upward movement */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+        }
+
+        /* Active state (when clicked) */
+        .export-btn:active {
+            background-color: #388e3c; /* Even darker green when pressed */
+            transform: translateY(1px); /* Slight downward movement */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow on active state */
+        }
+
+        /* Focus state (when tabbed into) */
+        .export-btn:focus {
+            outline: none; /* Remove default outline */
+            border: 2px solid #4CAF50; /* Green border on focus */
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Glowing green focus */
+        }
+
+    .heading {
+        display: flex;
+        justify-content: space-between; /* Space between text and image */
+        align-items: center; /* Vertically align the content */
+    }
+
+        .heading span {
+            margin-left: 10px; /* Adds space between text and the image */
+        }
+
+    .export-btn {
+        width: 30px; /* Adjust width as necessary */
+        height: 30px; /* Adjust height as necessary */
+        cursor: pointer; /* Optional: for a better user experience */
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between; /* Align buttons and heading */
+        align-items: center;
+    }
+
+</style>
+<!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
+
 
 <div class="row">
     <div class="col-3" style="border:2px solid gray; border-radius:0px">
         <div>
             <div class="dateF">
                 <div class="date-selector">
-                    <label for="FromDate">From Date:</label>
+                    <label for="FromDate" style="color:black;">From Date:</label>
                     <input type="datetime-local" id="Fdate" name="fromdate">
-                    <label for="ToDate">To Date:</label>
+                    <label for="ToDate" style="color:black;">To Date:</label>
                     <input type="datetime-local" id="Tdate" name="todate">
-                </div>
+                </div> 
                 <div class="side-buttons">
                     <button id="viewGraphBtn" onclick="viewGraphBtn_Clicked()">View Graph</button>
                     <button id="viewDataBtn" onclick="viewDataBtn_Clicked()">View Data</button>
@@ -31,11 +185,11 @@
             <span class="arrow" style="transform: rotate(180deg); display:none;" id="btnPrev"></span>
 
 
-            <label class="lblcss" style="margin: 8px 0;">Interval</label>
+            <label class="lblcss" style="margin: 8px 0;">Interval (mins)</label>
             <input type="number" style="    margin-top: -15px" class="form__input" id="interval" value="15" />
 
-            <label class="lblcss" style="margin: 8px 0;">KWH</label>
-            <input type="text" id="txtConsumption" style="    margin-top: -15px" class="form__input" value="0" readonly="readonly" style="margin-left:5px; border-color:cornflowerblue !important; border-width:1px !important;" />
+            <label class="lblcss" style="margin: 8px 0;">Consumption </label>
+            <input type="text" id="txtConsumption" class="form__input" value="0" readonly="readonly" style="margin-left:5px; border-color:cornflowerblue !important; border-width:1px !important;" />
 
             <label class="lblcss" style="margin-bottom: -10px;  ">Target Value</label>
             <input type="number" style="width:45%" class="form__input" id="targetValue" value="60" />
@@ -44,6 +198,37 @@
 
             <span class="arrow" id="btnNext" style="display: none;"></span>
         </div>
+
+        <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START -------------------------------------------------------------------->
+
+        <div class="button-container">
+            <!-- Heading inside the container -->
+            <h1 class="heading">
+                GRAPH CONTROLLER
+
+                <img src="~/assets/images/SaveGraph.png" alt="Export as Image" id="screenshotButton" class="export-btn">
+            </h1>
+            <!-- Previous Button -->
+            <button class="styled-btn prev">
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="color:#f4a900;" viewBox="0 0 24 24" width="25" height="25">
+                        <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+                <span id="prevButton" onclick="showPreviousData()" class="text">PREV</span>
+            </button>            
+            <!-- Next Button -->
+            <button class="styled-btn next">
+                <span id="nextButton" onclick="showNextData()" class="text">NEXT</span>
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="color: #00b167;" viewBox="0 0 24 24" width="25" height="25">
+                        <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+            </button>
+        </div>
+        <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
+
     </div>
     <div class="col-9">
         <div class="chart-container" onclick="toggleControls()">
@@ -54,23 +239,26 @@
     </div>
 </div>
 @section Scripts {
-    <script src="~/js/linechart.js"></script>
-    <script src="~/js/chart.js"></script>
-    <script>
+    @* <script src="~/js/linechart.js"></script> *@
+    @* <script src="~/js/chart.js"></script> *@
+    <script>        
 
         let currentIndex = 0;
         var Id = '';
         var FromDate = '';
         var ToDate = '';
         var Name = '';
-
+        var preloader = document.getElementById('preloader');
         window.onload = function () {
-            debugger;
+            preloader.style.display = 'inline-flex';
             Id = '@Html.Raw(Id)';
             currentIndex = Id;
             GetMetersIds(Id);
             var interval = document.getElementById('interval').value;
             LoadGraphData(Id, '', '', Name, interval);
+                    setTimeout(function () {
+            preloader.style.display = 'none';
+        }, 3000);
         }
 
         let meterIds = null;
@@ -171,21 +359,22 @@
                 success: function (response) {
                     debugger;
                     if (response) {
-                        let labels = response.syncdatetime;
+                        // let labels = response.syncdatetime;
                         let maxDemandData = response.maxDemand.map(x => parseFloat(x));
                         let powerFactorData = response.powerFactor.map(x => parseFloat(x));
                         let activeEnergyData = response.activeEnergy.map(x => parseFloat(x));
+                        //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START//------------------------------------------------------------------------------------------------------------
 
-                        // Display only the last 30 data points
-                        let last30Labels = labels.slice(-30);
-                        let last30MaxDemandData = maxDemandData.slice(-30);
-                        let last30PowerFactorData = powerFactorData.slice(-30);
-                        let last30ActiveEnergyData = activeEnergyData.slice(-30);
+                        // Store the total data
+                        totalData = response.syncdatetime.map((x, i) => ({
+                            label: x,
+                            maxDemand: maxDemandData[i],
+                            powerFactor: powerFactorData[i],
+                            activeEnergy: activeEnergyData[i]
+                        }));
 
-                        myLineChart.data.labels = last30Labels;
-                        myLineChart.data.datasets[0].data = last30MaxDemandData;
-                        myLineChart.data.datasets[1].data = last30PowerFactorData;
-                        myLineChart.data.datasets[2].data = last30ActiveEnergyData;
+                        // Set currentStartIndex to the last 32 data points
+                        currentStartIndex = Math.max(totalData.length - dataChunkSize, 0);  // Ensure we don't go negative
 
                         // Calculate and display the sum of the last 30 active energy values
                         let sum = activeEnergyData.reduce((accumulator, currentValue) => {
@@ -195,7 +384,9 @@
                         let inputField = document.getElementById('txtConsumption');
                         inputField.value = sum.toFixed(2);
 
-                        myLineChart.update();
+                        // Display the last 32 data points by default
+                        updateGraph();
+                        updateNavigationButtons();
                     } else {
                         alert('No data found');
                     }
@@ -206,9 +397,81 @@
             });
         }
 
+        function showPreviousData() {
+            if (currentStartIndex > 0) {
+                currentStartIndex = Math.max(currentStartIndex - dataChunkSize, 0);
+                updateGraph();
+                updateNavigationButtons();
+            }
+        }
+
+        function showNextData() {
+            if (currentStartIndex + dataChunkSize < totalData.length) {
+                currentStartIndex = Math.min(currentStartIndex + dataChunkSize, totalData.length - dataChunkSize);
+                updateGraph();
+                updateNavigationButtons();
+            }
+        }
+
+        function updateGraph() {
+            const endIndex = Math.min(currentStartIndex + dataChunkSize, totalData.length);
+            const currentData = totalData.slice(currentStartIndex, endIndex);
+
+            // Map the data points to display the actual label (e.g., timestamp or another meaningful label)
+            const currentLabels = currentData.map((item) => item.label); // Using `item.label` from the data
+
+            // Update the chart data
+            myLineChart.data.labels = currentLabels;  // Use meaningful labels (like timestamps) for x-axis
+            myLineChart.data.datasets[0].data = currentData.map(item => item.maxDemand);  // maxDemand values
+            myLineChart.data.datasets[1].data = currentData.map(item => item.powerFactor);  // powerFactor values
+            myLineChart.data.datasets[2].data = currentData.map(item => item.activeEnergy);  // activeEnergy values
+
+            myLineChart.update();  // Redraw the chart with the updated data
+        }
+
+
+        function updateNavigationButtons() {
+            document.getElementById('prevButton').disabled = currentStartIndex === 0;
+            document.getElementById('nextButton').disabled = currentStartIndex + dataChunkSize >= totalData.length;
+        }
+
+
+        document.getElementById('screenshotButton').addEventListener('click', function () {
+            var dt = new Date();
+            var time =
+                ' ' +
+                dt.getDate() +
+                '/' +
+                (dt.getMonth() + 1) + // Adjusted to display correct month (0-indexed)
+                '/' +
+                dt.getFullYear() +
+                ' ' +
+                dt.getHours() +
+                ':' +
+                dt.getMinutes() +
+                ':' +
+                dt.getSeconds();
+
+            // Select only the specific div
+            var targetDiv = document.querySelector('.col-9');
+
+            // Pass the target element to html2canvas
+            html2canvas(targetDiv).then(function (canvas) {
+                const link = document.createElement('a');
+                link.download = '@Html.Raw(dwnName)' + time + '.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        });
+
+        let currentStartIndex = 0; // Start of the current data range
+        const dataChunkSize = 32; // Number of points per view
+        let totalData = []; // Will hold all the data fetched for the graph
+        
+        //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END//------------------------------------------------------------------------------------------------------------
+
 
         function viewGraphBtn_Clicked() {
-            debugger;
             var fromD = document.getElementById('Fdate').value;
             var toD = document.getElementById('Tdate').value;
             var interval = document.getElementById('interval').value;
@@ -220,8 +483,7 @@
             }
         }
 
-        function viewDataBtn_Clicked() {
-            debugger;
+        function viewDataBtn_Clicked() {            
             var fromD = document.getElementById('Fdate').value == null ? "" : document.getElementById('Fdate').value;
             var toD = document.getElementById('Tdate').value == null ? "" : document.getElementById('Tdate').value;
             var MId = "@Html.Raw(Id)";
@@ -372,18 +634,18 @@
 
         //For Toggle Menu Icons Hide Only
         function toggleControls1() {
-            const controls = document.querySelector('.controls');
-            controls.style.display = "none";
+            // const controls = document.querySelector('.controls');
+            // controls.style.display = "none";
         }
 
         //For Toggle Menu Icons Both Open and Hide
         function toggleControls() {
-            const controls = document.querySelector('.controls');
-            if (controls.style.display === "none" || controls.style.display === "") {
-                controls.style.display = "flex";
-            } else {
-                controls.style.display = "none";
-            }
+            // const controls = document.querySelector('.controls');
+            // if (controls.style.display === "none" || controls.style.display === "") {
+            //     controls.style.display = "flex";
+            // } else {
+            //     controls.style.display = "none";
+            // }
         }
 
     </script>
