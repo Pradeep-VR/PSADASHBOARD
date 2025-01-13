@@ -119,7 +119,9 @@
             });
         }
 
-        
+               function navigateGraph(Id, Name, gName) {
+            window.location.href = `@Url.Action("Index", "Graph")?strId=${Id}&strName=${Name}&strGName=${gName}`;
+        }
 
         
     </script>
