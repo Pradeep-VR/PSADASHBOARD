@@ -23,12 +23,7 @@
 </div>
 
 @section Scripts {
-    @* <script src="~/lib/jquery/jquery.min.js"></script> *@
-    @* <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script> *@
-    @* <script src="~/lib/echarts/echarts.min.js"></script> *@
-    @* <script src="~/lib/bootstrap/bootstrap.min.js"></script> *@
-    @* <script src="~/js/linechart.js"></script> *@
-    @* <script src="~/js/chart.js"></script> *@
+    
     <script>
         var preloader = document.getElementById('preloader');
         $(document).ready(function () {
@@ -40,7 +35,6 @@
         function onLoadScreen(JstrGroupid, JMetrDiv, JMetrTimes) {
             preloader.style.display = 'inline-flex';
             LoadGroupData(JstrGroupid, JMetrDiv);
-            Getmetersforddl(JstrGroupid);
             setTimeout(function () {
                 preloader.style.display = 'none';
             }, 3000);
@@ -103,62 +97,6 @@
             });
         }
 
-
-
-        // function LoadGroupData(Id, jstrMeterDiv) {
-        //     var groupName = '@Html.Raw(groupName)';
-
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '@Url.Action("GetMeters", "Home")',
-        //         data: { groupId: Id, strMeterDiv: jstrMeterDiv },
-        //         success: function (group) {
-        //             console.log(group);
-        //             var meters = $('#divMeters');
-        //             meters.empty();
-        //             if (group && group.mmaster) {
-        //                 group.mmaster.forEach((meter) => {
-        //                     var meterHtml = `<div class="containerMeter">
-        //                                             <div class="meterheading" onclick="navigateGraph('${meter.meterid}','${meter.metername}','${groupName}')">
-        //                                                 <div class="meter">
-        //                                                     <h1>${meter.metername}</h1>
-        //                                                 </div>
-        //                                             </div>
-        //                                             <div class="card1">
-        //                                                 <p style="color:#30d1c1;">TODAY: <span id="today_${meter.meterid}"></span> kWh</p>
-        //                                                 <p style="color:#3066d1;">YESTERDAY: <span id="yesterday_${meter.meterid}"></span> kWh</p>
-        //                                             </div>
-        //                                             <div class="card">
-        //                                                 <div class="row1">
-        //                                                     <div class="column">
-        //                                                         <h2>Current (A)</h2>
-        //                                                         <p>RY: <span id="currentA_${meter.meterid}"></span></p>
-        //                                                         <p>YB: <span id="currentB_${meter.meterid}"></span></p>
-        //                                                         <p>BR: <span id="currentC_${meter.meterid}"></span></p>
-        //                                                     </div>
-        //                                                     <div class="column">
-        //                                                         <h2>Voltage (V)</h2>
-        //                                                         <p>RY: <span id="voltageA_${meter.meterid}"></span></p>
-        //                                                         <p>YB: <span id="voltageB_${meter.meterid}"></span></p>
-        //                                                         <p>BR: <span id="voltageC_${meter.meterid}"></span></p>
-        //                                                     </div>
-        //                                                 </div>
-        //                                                 <p>kWh: <span id="kwh_${meter.meterid}"></span></p>
-        //                                             </div>
-        //                                         </div>`;
-        //                     meters.append(meterHtml);
-        //                     LoadMeterData(meter.meterid);
-        //                 });
-        //             } else {
-        //                 console.error("Expected a group with an MMASTER array but received: ", group);
-        //             }
-        //         },
-        //         error: function (err) {
-        //             console.log(err);
-        //         }
-        //     });
-        // }
-
         function LoadMeterData(meterId) {
             $.ajax({
                 type: 'POST',
@@ -181,143 +119,9 @@
             });
         }
 
-        function Getmetersforddl(groupId) {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("GetMetersName", "Home")',
-                data: { Groupid: groupId },
-                success: function (getmetersname) {
-                    for (var i = 0; i < getmetersname.mmaster.length; i++) {
-                        var meter = getmetersname.mmaster[i];
-                        var html = '<label style="color:black; padding-left:10px;font-size: 15px;">'
-                            + '<input type="checkbox" name="Meteridentify" style="height:10px;" value=' + meter.meterid + ' /> &nbsp;&nbsp;' + meter.metername + ''
-                            + '</label><br/>';
-                        $('#ddlmetersname').append(html);
-                    }
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        }
+        
 
-        function OnSelectChanged() {
-            var data = document.getElementById('ddlDivision');
-            var selectedOption = data.options[data.selectedIndex];
-            var Divisionvalue = selectedOption.value;
-
-            var data1 = document.getElementById('ddlTimes');
-            var selectedOption1 = data1.options[data1.selectedIndex];
-            var Timingsvalue = selectedOption1.value;
-
-            var groupId = '@Html.Raw(groupId)';
-            onLoadScreen(groupId, Divisionvalue, Timingsvalue);
-        }
-
-        function navigateGraph(Id, Name, gName) {
-            window.location.href = `@Url.Action("Index", "Graph")?strId=${Id}&strName=${Name}&strGName=${gName}`;
-        }
-
-        function TotCon_BtnClicked() {
-            var ids = "@Html.Raw(groupId)";
-            window.location.href = `@Url.Action("TotalIndex", "Total")?id=${ids}`;
-        }
-
-        function btnGraph() {
-            var meternames = [];
-            $("input:checkbox[name=Meteridentify]:checked").each(function () {
-                meternames.push($(this).val());
-            });
-            var fDate = document.getElementById('Fdate').value;
-            var tDate = document.getElementById('Tdate').value;
-            if (fDate == "" && tDate == "" && meternames.length == 0) {
-                alert("Please select the Meters.....!");
-            } else {
-                var meterParams = meternames.map(function (name) {
-                    return `${name}`;
-                });
-
-                var url = `@Url.Action("LstGraphIndex", "Graph")?strId=${meterParams}&strName=${meterParams[0]}&strFdate=${fDate}&strTdate=${tDate}`;
-                window.location.href = url;
-            }
-        }
-
-        $("#viewDataBtn").click(function () {
-            var fDate = document.getElementById('Fdate').value;
-            var tDate = document.getElementById('Tdate').value;
-            var groupId = '@Html.Raw(groupId)';
-            var groupname = '@Html.Raw(groupName)';
-            if (fDate !== "" && tDate !== "" && groupId !== "" && groupname !== "") {
-                window.location.href = `@Url.Action("TableData", "Home")?strgroupId=${groupId}&strgroupName=${groupname}&strfromDate=${fDate}&strtoDate=${tDate}`;
-            } else {
-                alert('Please Check Date Selection.');
-            }
-        });
-
-        $("#exportXLBtn").click(function () {
-            var fDate = document.getElementById('Fdate').value;
-            var tDate = document.getElementById('Tdate').value;
-            var groupId = '@Html.Raw(groupId)';
-            var groupname = '@Html.Raw(groupName)';
-            if (fDate !== "" && tDate !== "" && groupId !== "" && groupname !== "") {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetXLData", "Home")',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ strGroupId: groupId, strFromDate: fDate, strToDate: tDate }),
-                    xhrFields: {
-                        responseType: 'blob'
-                    },
-                    success: function (data, status, xhr) {
-                        var blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                        var link = document.createElement('a');
-                        var d = '@DateTime.Now.ToString("dd/mm/yy hh:mm:ss")';
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = groupname + ' ENERGYDATA ' + d + '.xlsx';
-                        link.click();
-                    },
-                    error: function (err) {
-                        alert('Error : ' + err);
-                    }
-                });
-            } else {
-                alert('Please Check Date Selection.');
-            }
-        });
-
-        let maxDemandData = [];
-        let powerFactorData = [];
-        let activeEnergyData = [];
-        let labels = [];
-
-        async function fetchData() {
-            try {
-                const response = await fetch('@Url.Action("GetGraphData", "Graph")', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        groupId: '@Html.Raw(groupId)',
-                        startDate: '2022-12-01',
-                        endDate: '2022-12-30'
-                    })
-                });
-
-                const graphData = await response.json();
-
-                graphData.forEach((dataPoint) => {
-                    labels.push(dataPoint.label);
-                    maxDemandData.push(dataPoint.maxDemand);
-                    powerFactorData.push(dataPoint.powerFactor);
-                    activeEnergyData.push(dataPoint.activeEnergy);
-                });
-
-                // Call your chart rendering functions here with fetched data
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
+        
     </script>
 
 }

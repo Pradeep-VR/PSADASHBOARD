@@ -252,6 +252,13 @@
 
         function onLoadScreen(JstrGroupid, JMetrDiv, JMetrTimes) {
             preloader.style.display = 'inline-flex';
+            var data = document.getElementById('ddlDivision');
+
+            if(JstrGroupid === "GTW1"){
+                data.disabled = true;
+            }else{
+                data.disabled = false;
+            }
 
             LoadGroupData(JstrGroupid, JMetrDiv);
             LoadGraphData(JstrGroupid, JMetrTimes, JMetrDiv);

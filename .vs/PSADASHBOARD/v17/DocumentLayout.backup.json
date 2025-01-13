@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\graph\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\home\\transformer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\transformer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\views\\home\\shopwiseindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|d:\\pradeep\\plc_fx5u\\web\\live\\psadashboard\\dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A1E841D2-CD3D-4218-989E-1B5A2AFDC8EA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Graph\\Index.cshtml",
-              "RelativeDocumentMoniker": "Dashboard\\Views\\Graph\\Index.cshtml",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Graph\\Index.cshtml*",
-              "RelativeToolTip": "Dashboard\\Views\\Graph\\Index.cshtml*",
-              "ViewState": "AgIAAPMAAAAAAAAAAAAAAAQBAAARAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "TransFormer.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\TransFormer.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\TransFormer.cshtml",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\TransFormer.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\TransFormer.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-08T18:19:05.139Z",
+              "WhenOpened": "2025-01-13T10:49:21.499Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Program.cs",
-              "RelativeDocumentMoniker": "Dashboard\\Program.cs",
-              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Program.cs",
-              "RelativeToolTip": "Dashboard\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAUAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "GraphController.cs",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Controllers\\GraphController.cs",
+              "RelativeDocumentMoniker": "Dashboard\\Controllers\\GraphController.cs",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Controllers\\GraphController.cs",
+              "RelativeToolTip": "Dashboard\\Controllers\\GraphController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAuwHQAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T13:25:54.385Z",
+              "WhenOpened": "2025-01-13T09:45:49.124Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Dashboard\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Dashboard\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAowCYAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-13T06:28:41.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShopwiseIndex.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\ShopwiseIndex.cshtml",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAEwPkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-13T06:28:10.154Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Dashboard\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Dashboard\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAANUAAAAAAAAAAAAEwOgAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-13T06:16:12.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\appsettings.json",
+              "RelativeDocumentMoniker": "Dashboard\\appsettings.json",
+              "ToolTip": "D:\\Pradeep\\PLC_FX5U\\WEB\\LIVE\\PSADASHBOARD\\Dashboard\\appsettings.json",
+              "RelativeToolTip": "Dashboard\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-10T06:34:45.863Z",
               "EditorCaption": ""
             }
           ]
