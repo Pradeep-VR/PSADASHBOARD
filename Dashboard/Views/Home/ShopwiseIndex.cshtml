@@ -143,6 +143,75 @@
         align-items: center;
     }
 
+    #exportOptionsPopup {
+        position: fixed;
+        /* top: 50%;
+         left: 50%; */
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 0px;
+        border: 1px solid #ccc;
+        display: none;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        text-align: center;
+    }
+
+    button {
+        margin: 10px;
+        padding: 10px 2 0px;
+        font-size: 16px;
+    }
+
+    #exportOptionsPopup {
+        /*  display: none;
+         position: fixed;
+         z-index: 1000;
+         top: 282px;
+         left: 255px;
+         border: 1px solid #ccc;
+         background: #fff;
+         border-radius: 5px;
+         padding: 10px;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+        background: #44d397c2;
+        border-radius: 8px;
+        border: 1px solid #b5e7d2c2;
+    }
+
+    /* Styling for each option */
+
+
+    .ex {
+        border: 1px solid Gray;
+        width: 185px;
+        margin-left: 125px;
+        margin-top: -15px;
+        background-color: LightGray;
+    }
+
+    .export-option {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        background-color: #8fd1b54f;
+        border-bottom: 1px solid gray;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border-radius: 5px;
+    }
+
+        .export-option:last-child {
+            border-bottom: none;
+        }
+
+        .export-option:hover {
+            background-color: lightgreen;
+            box-shadow: 0 0 4px rgba(0, 255, 0, 0.8);
+            transform: scale(1.05);
+        }
 </style>
 <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
 
@@ -202,9 +271,35 @@
                     <span id="prevButton" onclick="showPreviousData()" class="texts">PREV</span>
                 </button>
 
-                <span>
+                @* <span>
                     <img src="~/assets/images/SaveGraph.png" alt="Export as Image" id="screenshotButton" class="export-btn" />                    
+                </span> *@
+
+                <!------------------------------------------------------------------------------------- Ajesh modify 14-12-2024 Start -------------------------------------------------------------------->
+
+                <span>
+                    <img src="~/assets/images/SaveGraph.png"
+                         alt="Export as Image" style="width:30px"
+                         id="ssButton"
+                         class="export-btn"
+                         onclick="toggleExportOptions()" />
                 </span>
+
+                <!-- Popup to select export option -->
+                <div id="exportOptionsPopup" style="width: 100px;">
+                    <div class="export-option" onclick="takeScreenshot()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;" hidePopup()">
+                        <img src="~/assets/images/SaveGraph.png"
+                             alt="Export as Image" style="width: 27px;padding: 4px;margin-left: 10px;" />
+                        <span>Image</span>
+                    </div>
+                    <div class="export-option" onclick="downloadGraphDataAsTable()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;" hidePopup()">
+                        <img src="~/assets/images/excel.png"
+                             alt="Export as Image" style="width: 27px;padding: 4px;margin-left: 10px;" />
+                        <span>Excel</span>
+                    </div>
+                </div>
+
+                <!------------------------------------------------------------------------------------- Ajesh modify 14-12-2024 End -------------------------------------------------------------------->
 
                 <button class="styled-btn next">
                     <span id="nextButton" onclick="showNextData()" class="texts">NEXT</span>
@@ -252,6 +347,13 @@
 
         function onLoadScreen(JstrGroupid, JMetrDiv, JMetrTimes) {
             preloader.style.display = 'inline-flex';
+            var data = document.getElementById('ddlDivision');
+
+            if(JstrGroupid === "GTW1"){
+                data.disabled = true;
+            }else{
+                data.disabled = false;
+            }
 
             LoadGroupData(JstrGroupid, JMetrDiv);
             LoadGraphData(JstrGroupid, JMetrTimes, JMetrDiv);
@@ -698,38 +800,139 @@
             chartInstance.ctx.restore();
         }
 
-         //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START//------------------------------------------------------------------------------------------------------------
-               document.getElementById('screenshotButton').addEventListener('click', function () {
-                   var dt = new Date();
-                   var time =
-                       ' ' +
-                       dt.getDate() +
-                       '/' +
-                       (dt.getMonth() + 1) + // Adjusted to display correct month (0-indexed)
-                       '/' +
-                       dt.getFullYear() +
-                       ' ' +
-                       dt.getHours() +
-                       ':' +
-                       dt.getMinutes() +
-                       ':' +
-                       dt.getSeconds();
-
-                   // Select only the specific div
-                    var targetDiv = document.querySelector('.col');
-
-                    // Pass the target element to html2canvas
-                    html2canvas(targetDiv).then(function (canvas) {
-                        const link = document.createElement('a');
-                        link.download = '@Html.Raw(groupName)' + time + '.png';
-                        link.href = canvas.toDataURL();
-                        link.click();
-                    });
-               });
+                 //----------------------------------------------------------------------------------- Ajesh modify 14-12-2024 START//------------------------------------------------------------------------------------------------------------
 
 
+        function hidePopup() {
+            document.getElementById("exportOptionsPopup").style.display = "none";
+        }
 
-               //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END//------------------------------------------------------------------------------------------------------------
+
+        function showExportOptions() {
+            // Show the popup with options
+            document.getElementById('exportOptionsPopup').style.display = 'block';
+        }
+
+
+        function toggleExportOptions() {
+            const popup = document.getElementById("exportOptionsPopup");
+            const button = document.getElementById("ssButton");
+
+            // Get button's position for placing the popup
+            const rect = button.getBoundingClientRect();
+
+            // Set popup position dynamically near the button
+            popup.style.top = `${rect.bottom + window.scrollY}px`;
+            popup.style.left = `${rect.left + window.scrollX}px`;
+
+            // Toggle popup visibility
+            popup.style.display = popup.style.display === "block" ? "none" : "block";
+        }
+
+        // Close popup when clicking outside of it
+        document.addEventListener("click", (event) => {
+            const popup = document.getElementById("exportOptionsPopup");
+            const button = document.getElementById("ssButton");
+
+            if (!popup.contains(event.target) && event.target !== button) {
+                popup.style.display = "none";
+            }
+        });
+
+        // Placeholder function for screenshot logic
+        function takeScreenshot() {
+            alert("Screenshot logic executed");
+        }
+
+        // Placeholder function for CSV download logic
+        function downloadGraphDataAsTable() {
+            alert("CSV download logic executed");
+        }
+
+        function closePopup() {
+            // Close the popup when cancel is clicked
+            document.getElementById('exportOptionsPopup').style.display = 'none';
+        }
+
+        function takeScreenshot() {
+            // Logic for taking a screenshot (export as image)
+            console.log('Screenshot functionality triggered!');
+            // Example of screenshot functionality
+            var dt = new Date();
+            var time =
+                ' ' +
+                dt.getDate() +
+                '/' +
+                (dt.getMonth() + 1) + // Adjusted to display correct month (0-indexed)
+                '/' +
+                dt.getFullYear() +
+                ' ' +
+                dt.getHours() +
+                ':' +
+                dt.getMinutes() +
+                ':' +
+                dt.getSeconds();
+
+            // Select only the specific div
+            var targetDiv = document.querySelector('.col');
+
+            // Pass the target element to html2canvas
+            html2canvas(targetDiv).then(function (canvas) {
+                const link = document.createElement('a');
+                link.download = '@Html.Raw(groupName)' + time + '.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+
+            // Close the popup after action
+            closePopup();
+        }
+
+        function downloadGraphDataAsTable() {
+            if (!totalData || totalData.length === 0) {
+                alert('No graph data available for download.');
+                return;
+            }
+
+            var dt = new Date();
+            var time =
+                ' ' +
+                dt.getDate() +
+                '/' +
+                (dt.getMonth() + 1) + // Adjusted to display correct month (0-indexed)
+                '/' +
+                dt.getFullYear() +
+                ' ' +
+                dt.getHours() +
+                ':' +
+                dt.getMinutes() +
+                ':' +
+                dt.getSeconds();
+                var names = '@Html.Raw(groupName)'+' ' + time ;
+            // Prepare the data for CSV export
+            const graphData = [
+                ['DateTime', 'Consumption'],  // Headers
+                ...totalData.map(item => [item.label, item.activeEnergy])
+            ];
+
+            // Convert data to CSV format
+            const csvContent = graphData.map(row => row.join(',')).join('\n');
+
+            // Create a blob and trigger download
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download =  names + '.csv';
+            link.click();
+
+            console.log('Graph data downloaded as CSV!');
+
+            // Close the popup after action
+            closePopup();
+        }
+
+        //----------------------------------------------------------------------------------- Ajesh modify 14-12-2024 END//------------------------------------------------------------------------------------------------------------
+
 
     </script>
 }
