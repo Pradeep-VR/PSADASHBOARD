@@ -44,8 +44,8 @@ namespace Dashboard.Controllers
         }
         public IActionResult TransFormer(string groupId, string groupName)
         {
-            var vals = groupId.Split(',');
-            ViewBag.groupId = vals[0];
+            //var vals = groupId.Split(',');
+            ViewBag.groupId = groupId;
             ViewBag.groupName = groupName;
             //ViewBag.yesCon = vals[1];
             //ViewBag.toCon = vals[2];
@@ -456,6 +456,12 @@ namespace Dashboard.Controllers
             {
                 query = "SELECT GM.GROUPID,GM.GROUPNAME,MM.METERID,MM.METERNAME,MM.METERDIVISION FROM GROUPMASTER GM LEFT JOIN  METERMASTER MM ON GM.GROUPID = MM.GROUPID " +
               "WHERE GM.FLAG = '1' AND MM.FLAG='1'  ORDER BY MM.TRANSFORMER DESC ";
+            }
+            else if(groupId == "GTW1")
+            {
+                groupId = groupId.Replace('1', ' ');
+                query = "SELECT GM.GROUPID,GM.GROUPNAME,MM.METERID,MM.METERNAME,MM.METERDIVISION FROM GROUPMASTER GM LEFT JOIN  METERMASTER MM ON GM.GROUPID = MM.GROUPID " +
+               "WHERE GM.FLAG = '1' AND MM.FLAG='1' AND GM.GROUPID = '" + groupId.Trim() + "' ";
             }
             else
             {

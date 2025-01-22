@@ -174,7 +174,7 @@
                     <input type="datetime-local" id="Fdate" name="fromdate">
                     <label for="ToDate" style="color:black;">To Date:</label>
                     <input type="datetime-local" id="Tdate" name="todate">
-                </div> 
+                </div>
                 <div class="side-buttons">
                     <button id="viewGraphBtn" onclick="viewGraphBtn_Clicked()">View Graph</button>
                     <button id="viewDataBtn" onclick="viewDataBtn_Clicked()">View Data</button>
@@ -216,7 +216,7 @@
                     </svg>
                 </div>
                 <span id="prevButton" onclick="showPreviousData()" class="text">PREV</span>
-            </button>            
+            </button>
             <!-- Next Button -->
             <button class="styled-btn next">
                 <span id="nextButton" onclick="showNextData()" class="text">NEXT</span>
@@ -241,7 +241,7 @@
 @section Scripts {
     @* <script src="~/js/linechart.js"></script> *@
     @* <script src="~/js/chart.js"></script> *@
-    <script>        
+    <script>
 
         let currentIndex = 0;
         var Id = '';
@@ -467,7 +467,7 @@
         let currentStartIndex = 0; // Start of the current data range
         const dataChunkSize = 32; // Number of points per view
         let totalData = []; // Will hold all the data fetched for the graph
-        
+
         //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END//------------------------------------------------------------------------------------------------------------
 
 
@@ -483,7 +483,7 @@
             }
         }
 
-        function viewDataBtn_Clicked() {            
+        function viewDataBtn_Clicked() {
             var fromD = document.getElementById('Fdate').value == null ? "" : document.getElementById('Fdate').value;
             var toD = document.getElementById('Tdate').value == null ? "" : document.getElementById('Tdate').value;
             var MId = "@Html.Raw(Id)";
