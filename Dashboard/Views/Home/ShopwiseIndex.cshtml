@@ -146,7 +146,7 @@
     #exportOptionsPopup {
         position: fixed;
         /* top: 50%;
-         left: 50%; */
+                                                                         left: 50%; */
         transform: translate(-50%, -50%);
         background: #fff;
         padding: 0px;
@@ -167,15 +167,15 @@
 
     #exportOptionsPopup {
         /*  display: none;
-         position: fixed;
-         z-index: 1000;
-         top: 282px;
-         left: 255px;
-         border: 1px solid #ccc;
-         background: #fff;
-         border-radius: 5px;
-         padding: 10px;
-         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+                                                                         position: fixed;
+                                                                         z-index: 1000;
+                                                                         top: 282px;
+                                                                         left: 255px;
+                                                                         border: 1px solid #ccc;
+                                                                         background: #fff;
+                                                                         border-radius: 5px;
+                                                                         padding: 10px;
+                                                                         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
         background: #44d397c2;
         border-radius: 8px;
         border: 1px solid #b5e7d2c2;
@@ -212,6 +212,46 @@
             box-shadow: 0 0 4px rgba(0, 255, 0, 0.8);
             transform: scale(1.05);
         }
+
+    .datepicker {
+        border: 1px solid black;
+        border-radius: 20px;
+        background-color: #8fbc8fa1;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+
+    .viewbtn {
+        border-radius: 10px;
+        width: 70px;
+        font-family: auto;
+        background-color: #00ff7fad;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
+
+    #showDataLabelsBtn {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        #showDataLabelsBtn:hover {
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        #showDataLabelsBtn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
 </style>
 <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
 
@@ -234,6 +274,7 @@
                     <option value="LIVE">LIVE</option>
                     <option value="7">WEEKLY</option>
                     <option value="30">MONTHLY</option>
+                    <option value="CUSTOMIZE">CUSTOMIZE</option>
                 </select>
             </div>
 
@@ -276,6 +317,18 @@
                 </span> *@
 
                 <!------------------------------------------------------------------------------------- Ajesh modify 14-12-2024 Start -------------------------------------------------------------------->
+                <span id="optCustomize" class="datepicker" style="display:none;">
+                    <label for="FromDate" style="color:black;font-weight:600;padding:10px;">From Date:</label>
+                    <input style="width: 152px;margin-right: 30px;font-family: auto;
+    border-radius: 10px;" type="datetime-local" id="Fdate" name="fromdate" />
+
+                    <label for="ToDate" style="color:black;font-weight:600;padding:10px;">To Date:</label>
+                    <input style="width: 152px;margin-right: 30px;font-family: auto;
+    border-radius: 10px;" type="datetime-local" id="Tdate" name="todate" />
+
+                    <button class="viewbtn" onclick="Btn_Customize_View()">VIEW</button>
+
+                </span>
 
                 <span>
                     <img src="~/assets/images/SaveGraph.png"
@@ -287,6 +340,9 @@
 
                 <!-- Popup to select export option -->
                 <div id="exportOptionsPopup" style="width: 100px;">
+
+
+
                     <div class="export-option" onclick="takeScreenshot()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;" hidePopup()">
                         <img src="~/assets/images/SaveGraph.png"
                              alt="Export as Image" style="width: 27px;padding: 4px;margin-left: 10px;" />
@@ -297,10 +353,12 @@
                              alt="Export as Image" style="width: 27px;padding: 4px;margin-left: 10px;" />
                         <span>Excel</span>
                     </div>
+
+
                 </div>
 
                 <!------------------------------------------------------------------------------------- Ajesh modify 14-12-2024 End -------------------------------------------------------------------->
-
+                <button id="showDataLabelsBtn">Show Data Labels</button>
                 <button class="styled-btn next">
                     <span id="nextButton" onclick="showNextData()" class="texts">NEXT</span>
                     <div class="icon">
@@ -314,10 +372,9 @@
             <div class="col">
                 <div class="chart-wrapper">
                     <canvas id="myLineChart" style="border: 3px solid black;margin-top: 10px;"></canvas>
-
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>
@@ -329,8 +386,10 @@
     @* <script src="~/lib/bootstrap/bootstrap.min.js"></script> *@
     @* <script src="~/js/linechart.js"></script> *@
     @* <script src="~/js/chart.js"></script> *@
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script>
+
         var preloader = document.getElementById('preloader');
         $(document).ready(function () {
             var groupId = '@Html.Raw(groupId)';
@@ -435,12 +494,34 @@
                     document.getElementById(`voltageB_${meterId}`).innerText = resultData.voltagebc;
                     document.getElementById(`voltageC_${meterId}`).innerText = resultData.voltageca;
                     document.getElementById(`kwh_${meterId}`).innerText = resultData.activeenergydelivered;
+
+                    // Calculate the sum of current and voltage values
+
+                    let voltageA = parseFloat(resultData.voltageab) || 0;
+                    let voltageB = parseFloat(resultData.voltagebc) || 0;
+                    let voltageC = parseFloat(resultData.voltageca) || 0;
+
+                    let sum = voltageA + voltageB + voltageC;
+
+                    // Get the meter container
+                    const meterContainer = document.getElementById(`voltageA_${meterId}`).closest('.containerMeter');
+
+                    // Update the border color based on the sum
+                    if (sum === 0) {
+                        meterContainer.style.borderColor = 'red';
+                        meterContainer.style.boxShadow = '10px 3.5px 5px red';
+                    } else {
+                        meterContainer.style.borderColor = '#ccc'; // Default border color
+                    }
+
+
                 },
                 error: function (err) {
                     console.log(err);
                 }
             });
         }
+
 
         function Getmetersforddl(groupId) {
             $.ajax({
@@ -464,6 +545,7 @@
         }
 
         function OnSelectChanged() {
+            var customize = document.getElementById('optCustomize');
 
             var data = document.getElementById('ddlDivision');
             var selectedOption = data.options[data.selectedIndex];
@@ -474,7 +556,14 @@
             var Timingsvalue = selectedOption1.value;
 
             var groupId = '@Html.Raw(groupId)';
-            onLoadScreen(groupId, Divisionvalue, Timingsvalue);
+
+            if(Timingsvalue === 'CUSTOMIZE'){
+                customize.style.display = 'block';
+            }else{
+                customize.style.display = 'none';
+                onLoadScreen(groupId, Divisionvalue, Timingsvalue);
+            }
+
         }
 
         //  New 1
@@ -565,14 +654,16 @@
         let myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [],
+                labels: [], // Your labels here
                 datasets: [
                     {
                         label: 'AED(KWh)',
-                        data: [],
+                        data: [], // Your data here
                         borderColor: 'green',
                         borderWidth: 2,
                         fill: true,
+                        pointBackgroundColor: 'green', // Color of the points
+                        pointRadius: 5, // Size of the points
                     }
                 ]
             },
@@ -619,6 +710,19 @@
                             color: 'black'
                         }
                     },
+                    datalabels: {
+                        display: false, // Initially hide data labels
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function (value, context) {
+                            return value.toFixed(2); // Format the value to 2 decimal places
+                        },
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        color: 'black'
+                    },
                     annotation: {
                         annotations: {
                             line1: {
@@ -637,13 +741,104 @@
                     }
                 }
             },
-            plugins: [{
-                id: 'targetLine',
-                afterDraw: (chart) => {
-                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
-                }
-            }]
+            plugins: [ChartDataLabels] // Enable the DataLabels plugin
         });
+
+        // Button event listener to toggle data labels visibility
+        document.getElementById('showDataLabelsBtn').addEventListener('click', function () {
+            let datalabelsVisible = myLineChart.options.plugins.datalabels.display;
+            myLineChart.options.plugins.datalabels.display = !datalabelsVisible; // Toggle visibility
+            myLineChart.update(); // Update chart
+            this.innerText = datalabelsVisible ? 'Show Data Labels' : 'Hide Data Labels'; // Toggle button text
+        });
+
+
+
+        // let ctx = document.getElementById('myLineChart').getContext('2d');
+        // let targetLineValue = document.getElementById('txtTarget').value;
+
+        // let myLineChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //         labels: [],
+        //         datasets: [
+        //             {
+        //                 label: 'AED(KWh)',
+        //                 data: [],
+        //                 borderColor: 'green',
+        //                 borderWidth: 2,
+        //                 fill: true,
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         scales: {
+        //             x: {
+        //                 title: {
+        //                     display: true,
+        //                     text: 'DAYS',
+        //                     font: {
+        //                         size: 20,
+        //                         weight: 'bold',
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'darkblue'
+        //                 }
+        //             },
+        //             y: {
+        //                 title: {
+        //                     display: true,
+        //                     text: 'UNITS',
+        //                     font: {
+        //                         size: 20,
+        //                         weight: 'bold',
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'darkblue'
+        //                 },
+        //                 beginAtZero: true
+        //             }
+        //         },
+        //         plugins: {
+        //             legend: {
+        //                 display: true,
+        //                 position: 'top',
+        //                 labels: {
+        //                     boxWidth: 20,
+        //                     padding: 15,
+        //                     font: {
+        //                         size: 14,
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'black'
+        //                 }
+        //             },
+        //             annotation: {
+        //                 annotations: {
+        //                     line1: {
+        //                         type: 'line',
+        //                         yMin: targetLineValue,
+        //                         yMax: targetLineValue,
+        //                         borderColor: 'red',
+        //                         borderWidth: 2,
+        //                         label: {
+        //                             content: 'Target',
+        //                             enabled: true,
+        //                             position: 'end'
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     },
+        //     plugins: [{
+        //         id: 'targetLine',
+        //         afterDraw: (chart) => {
+        //             drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+        //         }
+        //     }]
+        // });
 
         //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START//------------------------------------------------------------------------------------------------------------
                let currentStartIndex = 0; // Start of the current data range
@@ -693,7 +888,8 @@
                     }
                 });
             } else {
-                $.ajax({
+                if(Intval != 'CUSTOMIZE'){
+                    $.ajax({
                     type: 'POST',
                     url: '@Url.Action("GetGroupGraph", "Graph")',
                     data: { groupId: Id, Interval: Intval, Divs: divss },
@@ -734,8 +930,68 @@
                         alert('Error : ' + err);
                     }
                 });
+                }
             }
 
+        }
+
+        function Btn_Customize_View() {
+            // alert("Date changed...");
+
+            var data = document.getElementById('ddlDivision');
+            var selectedOption = data.options[data.selectedIndex];
+            var Divisionvalue = selectedOption.value;
+
+            var data1 = document.getElementById('ddlTimes');
+            var selectedOption1 = data1.options[data1.selectedIndex];
+            var Timingsvalue = selectedOption1.value;
+
+            var groupid = '@Html.Raw(groupId)';
+
+            var fDate = document.getElementById('Fdate').value;
+            var tDate = document.getElementById('Tdate').value;
+
+            debugger;
+
+            $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetShopWise_Group_GraphAll", "Graph")',
+                    data: { groupId: groupid, strFD: fDate, strTD: tDate, Interval: Timingsvalue, Divison: Divisionvalue },
+                    success: function (response) {
+                        if (response) {
+                            unitsName = 'TIMING';
+                            let labels = response.syncdatetime;
+                            if (Array.isArray(labels) && labels.length > 0) {
+                                let activeEnergyData = response.consumptions.map(x => parseFloat(x));
+                                //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START//------------------------------------------------------------------------------------------------------------
+                                       totalData = labels.map((x, i) => ({
+                                           label: x,
+                                           activeEnergy: activeEnergyData[i]
+                                       }));
+
+                                       // Set currentStartIndex to the last 32 data points
+                                       currentStartIndex = Math.max(totalData.length - dataChunkSize, 0);
+
+                                       // Calculate and display the sum of the active energy values
+                                       let sum = activeEnergyData.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+                                       let inputField = document.getElementById('txtConsumption');
+                                       inputField.value = sum.toFixed(2);
+
+                                       // Display the last 32 data points by default
+                                       updateGraph();
+                                       updateNavigationButtons();
+                                       //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END//------------------------------------------------------------------------------------------------------------
+                            } else {
+                                alert('No valid labels data found');
+                            }
+                        } else {
+                            alert('No data found');
+                        }
+                    },
+                    error: function (err) {
+                        alert('Error : ' + err);
+                    }
+                });
         }
 
         //----------------------------------------------------------------------------------- Ajesh modify 5-12-2024 START//------------------------------------------------------------------------------------------------------------

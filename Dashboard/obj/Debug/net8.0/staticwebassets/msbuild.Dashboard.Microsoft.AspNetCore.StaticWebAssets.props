@@ -516,8 +516,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>jhqcdf3qb4</Fingerprint>
-      <Integrity>F4rAb/6g1g9kwFx4i4tf2SFCHZKZLN/XKy3RV1ZtFxA=</Integrity>
+      <Fingerprint>ksid82a4hi</Fingerprint>
+      <Integrity>nG87Vv051GiGX/8RYJ2ttLuDoorqWPEEVeFybLalXeI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\HomeTransformer.css'))</OriginalItemSpec>

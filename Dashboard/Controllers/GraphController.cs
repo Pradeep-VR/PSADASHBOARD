@@ -322,6 +322,89 @@ namespace Dashboard.Controllers
 
 
         [HttpPost]
+        public ActionResult GetGroupGraphWDate(string groupId, string Interval, string Divs, string fDate, string eDate)
+        {
+            string Qry = string.Empty;
+            List<string> Cons = new List<string>();
+            List<string> Days = new List<string>();
+            int Intervals = Convert.ToInt32(Interval);
+            try
+            {
+
+                var startDate = DateTime.Now;
+                var endDate = DateTime.Now;
+
+                if (groupId != "" && Intervals != 0)
+                {
+                    groupId = groupId == "GTW1" ? groupId.Replace('1', ' ') : groupId;
+                    if (string.IsNullOrEmpty(fDate) && string.IsNullOrEmpty(eDate))
+                    {
+                        startDate = Convert.ToDateTime(fDate);//DateTime.Today.AddDays(-k);
+                        endDate = Convert.ToDateTime(eDate); //startDate.AddDays(1).AddTicks(-1);
+                    }
+                    //else
+                    //{
+
+                    //}
+
+                    for (int k = Intervals; k > 0; k--)
+                    {
+                        decimal SpeCons = 0;
+
+                        var Consumption = "";
+
+                        if (Divs == "'V','F'")
+                        {
+                            Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND FLAG = 1;";
+                            var meters = _serve.GetDataTable(Qry);
+                            if (meters.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < meters.Rows.Count; i++)
+                                {
+                                    string meter = meters.Rows[i]["METERID"].ToString();
+                                    Consumption = _mgnt.GetConsumptions(meter, startDate.ToString("dd-MM-yyyy HH:mm:ss"), endDate.ToString("dd-MM-yyyy HH:mm:ss"), "M");
+
+                                    var cons = Consumption == "" ? "0" : Consumption;
+                                    SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND METERDIVISION = " + Divs + " AND FLAG = 1;";
+                            var meters = _serve.GetDataTable(Qry);
+                            if (meters.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < meters.Rows.Count; i++)
+                                {
+                                    string meter = meters.Rows[i]["METERID"].ToString();
+                                    Consumption = _mgnt.GetConsumptions(meter, startDate.ToString("dd-MM-yyyy HH:mm:ss"), endDate.ToString("dd-MM-yyyy HH:mm:ss"), "M");
+
+                                    var cons = Consumption == "" ? "0" : Consumption;
+                                    SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                }
+
+                            }
+                        }
+
+                        Cons.Add(SpeCons.ToString(".00"));
+                        Days.Add(startDate.ToString("dd-MM-yyyy"));
+                    }
+
+                }
+                var res = new { days = Days, consumption = Cons };
+                return Json(res);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex);
+            }
+        }
+
+
+
+        [HttpPost]
         public ActionResult GetShopWise_Group_GraphAll(string groupId, string strMeterId, string strFD, string strTD, int Interval, string Divison)
         {
 

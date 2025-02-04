@@ -66,6 +66,7 @@
         $(document).ready(function () {
             const container = document.querySelector('.container');
             container.classList.add('active');
+            const signup = document.querySelector('.companyname-section');
             const signupContainer = document.querySelector('.signup-section header');
             const loginContainer = document.querySelector('.login-section header');
 
@@ -73,13 +74,15 @@
                 container.classList.add('active');
             });
 
-            signupContainer.addEventListener('click', () => {
+            signup.addEventListener('click', () => {
                 container.classList.remove('active');
             });
 
-            $("#signupForm").submit(function (event) {
-                event.preventDefault(); // Prevent the default form submission
 
+
+            $("#signupForm").submit(function (event) {
+                event.preventDefault(); //Prevent the default form submission
+                debugger
                 var NewUserName = $("#NewUserName").val();
                 var NewUserId = $("#NewUserid").val();
                 var Newpassword = $("#Newpasswordid").val();
@@ -138,7 +141,7 @@
                     type: 'POST',
                     url: '@Url.Action("UserSignin", "Login")',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ NewUserName: NewUserName, Newuserid: NewUserId, Newpassword: Newpassword }),
+                    data: JSON.stringify({ UserName: NewUserName, UserId: NewUserId, Password: Newpassword }),
                     success: function (resultData) {
                         if (resultData.success) {
                             alert(resultData.message);

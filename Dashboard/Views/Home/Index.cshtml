@@ -27,7 +27,7 @@
             <div class="side-buttons">
                 <button id="viewGraphBtn" style="display:none;">View Graph</button>
                 <button id="viewDataBtn" style="display:none;" onclick="viewDataBtn_Clicked()">VIEW DATA</button>
-                
+
                 <button id="btnAllMeters" onclick="btnAllMeters()" style="width:250px">ALL METERS</button>
             </div>
             <div class="side-buttons">
@@ -101,7 +101,6 @@
                                                                                                                                 <option value="PCC-1">PCC-1</option>
                                                                                                                                 <option value="PCC-2">PCC-2</option>
                                                                                                                                 <option value="PCC-3">PCC-3</option>
-                                                                                                                                <option value="EMG Panel">EMG Panel</option>
                                                                                                                                 </select>
                                                                                                                                 </div>
                                                                                                                                 <div style="padding:3px;">
@@ -470,9 +469,9 @@
             window.location.href = `@Url.Action("ShopWiseIndex", "Home")?groupId=${vals}&groupName=${groupName}`;
         }
 
-        
 
-        function tws_clicked(groupId, groupName) {            
+
+        function tws_clicked(groupId, groupName) {
             var yesdays = document.getElementById(`tsyesterday_${groupId}`).innerText;
             var todays = document.getElementById(`tstoday_${groupId}`).innerText;
             var vals = `${groupId}1,${yesdays},${todays}`;

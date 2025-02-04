@@ -136,6 +136,31 @@
         border: groove 2px black;
         margin-top: 20px;
     }
+
+    #showDataLabelsBtn {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #showDataLabelsBtn:hover {
+        background: linear-gradient(135deg, #2E7D32, #1B5E20);
+        transform: scale(1.05);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    #showDataLabelsBtn:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
 </style>
 <link href="~/css/datatables.datatables.css" rel="stylesheet" />
 <link href="~/css/tabel.css" rel="stylesheet" />
@@ -172,6 +197,9 @@
                         <img src="~/assets/images/SaveGraph.png" alt="Export as Image" id="screenshotButton" class="export-btn" />
                     </div>
                 </div>
+
+
+
             </div>
 
             <!-- Column 2 (col-9) -->
@@ -233,6 +261,10 @@
         </div>
     </div>
 </div>
+<button id="showDataLabelsBtn">Show Data Labels</button>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 @section Scripts {
 
     <script>
@@ -432,17 +464,110 @@
             chartInstance.ctx.restore();
         }
 
+        // function generateChart_All(labels) {
+        //     var ctx = document.getElementById('myLineChart').getContext('2d');
+
+        //     if (myLineChart) {
+        //         myLineChart.destroy(); // Destroy the existing chart instance
+        //     }
+        //     myLineChart = new Chart(ctx, {
+        //         type: 'line',
+        //         data: {
+        //             labels: labels.label,
+        //             datasets: labels.datasets
+        //         },
+        //         options: {
+        //             responsive: true,
+        //             scales: {
+        //                 x: {
+        //                     title: {
+        //                         display: true,
+        //                         text: 'TIMING',
+        //                         font: {
+        //                             size: 20,
+        //                             weight: 'bold',
+        //                             family: 'Arial'
+        //                         },
+        //                         color: 'darkblue'
+        //                     }
+        //                 },
+        //                 y: {
+        //                     title: {
+        //                         display: true,
+        //                         text: 'UNITS',
+        //                         font: {
+        //                             size: 20,
+        //                             weight: 'bold',
+        //                             family: 'Arial'
+        //                         },
+        //                         color: 'darkblue'
+        //                     },
+        //                     beginAtZero: true
+        //                 }
+        //             },
+        //             plugins: {
+        //                 legend: {
+        //                     display: true,
+        //                     position: 'left',
+        //                     labels: {
+        //                         boxWidth: 20,
+        //                         padding: 15,
+        //                         font: {
+        //                             size: 14,
+        //                             family: 'Arial'
+        //                         },
+        //                         color: 'black'
+        //                     }
+        //                 },
+        //                 annotation: {
+        //                     annotations: {
+        //                         line1: {
+        //                             type: 'line',
+        //                             yMin: targetLineValue,
+        //                             yMax: targetLineValue,
+        //                             borderColor: 'red',
+        //                             borderWidth: 2,
+        //                             label: {
+        //                                 content: 'Target',
+        //                                 enabled: true,
+        //                                 position: 'end'
+        //                             }
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         },
+        //         plugins: [
+        //             {
+        //             id: 'targetLine',
+        //             afterDraw: (chart) => {
+        //                 drawHorizontalLine(chart, targetLineValue, '#FFFFFF');
+        //             }
+        //         }]
+        //     });
+
+        // }
+
+
+
         function generateChart_All(labels) {
             var ctx = document.getElementById('myLineChart').getContext('2d');
 
             if (myLineChart) {
                 myLineChart.destroy(); // Destroy the existing chart instance
             }
+
             myLineChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels.label,
-                    datasets: labels.datasets
+                    datasets: labels.datasets.map(dataset => ({
+                        ...dataset,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Colored points
+                        pointBorderColor: '#fff', // Border color for points
+                        pointRadius: 5, // Size of the points
+                        pointHoverRadius: 7, // Size of points on hover
+                    }))
                 },
                 options: {
                     responsive: true,
@@ -487,6 +612,20 @@
                                 color: 'black'
                             }
                         },
+                        datalabels: {
+                            display: false,
+                            color: 'black',
+                            align: 'top',
+                            offset: 10,
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            formatter: function (value) {
+                                return (typeof value === 'number' && !isNaN(value)) ? value.toFixed(2) : value; // Check if value is a valid number
+                            }
+
+                        },
                         annotation: {
                             annotations: {
                                 line1: {
@@ -505,41 +644,7 @@
                         }
                     }
                 },
-                plugins: [{
-                    id: 'targetLine',
-                    afterDraw: (chart) => {
-                        drawHorizontalLine(chart, targetLineValue, '#FFFFFF');
-                    }
-                }]
-            });
-
-        }
-
-
-        function GetDataForGenerateGraph(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetOverAllIndex_Graph", "Graph")',
-                    // contentType: "application/json; charset=utf-8",
-                    data: { groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval },
-                    success: function (response) {
-                        var data = response.activeenergy;
-                        if (data != null) {
-                            var label = response.syncdatetime; // Example label, you can change this as needed.
-                            var labels = {
-                                label: label,
-                                data: data
-                            };
-                            resolve(labels);
-                        } else {
-                            resolve(null);
-                        }
-                    },
-                    error: function (error) {
-                        reject(error);
-                    }
-                });
+                plugins: [ChartDataLabels] // Enable the DataLabels plugin
             });
         }
 
@@ -559,7 +664,11 @@
                         data: labels.data,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 2,
-                        fill: false
+                        fill: false,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Colored points
+                        pointBorderColor: '#fff', // Border color for points
+                        pointRadius: 5, // Size of the points
+                        pointHoverRadius: 7, // Size of points on hover
                     }]
                 },
                 options: {
@@ -591,10 +700,114 @@
                                 color: 'darkblue'
                             }
                         }
+                    },
+                    plugins: {
+                        datalabels: {
+                            display: false,
+                            color: 'black',
+                            align: 'top',
+                            offset: 10,
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            },
+                            formatter: function (value) {
+                                return value.toFixed(2); // Format the value to 2 decimal places
+                            }
+                        }
                     }
-                }
+                },
+                plugins: [ChartDataLabels] // Enable the DataLabels plugin
             });
         }
+        document.getElementById('showDataLabelsBtn').addEventListener('click', function () {
+            let datalabelsVisible = myLineChart.options.plugins.datalabels.display;
+            myLineChart.options.plugins.datalabels.display = !datalabelsVisible; // Toggle visibility
+            myLineChart.update(); // Update chart
+            this.innerText = datalabelsVisible ? 'Show Data Labels' : 'Hide Data Labels'; // Toggle button text
+        });
+
+
+        function GetDataForGenerateGraph(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetOverAllIndex_Graph", "Graph")',
+                    // contentType: "application/json; charset=utf-8",
+                    data: { groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval },
+                    success: function (response) {
+                        var data = response.activeenergy;
+                        if (data != null) {
+                            var label = response.syncdatetime; // Example label, you can change this as needed.
+                            var labels = {
+                                label: label,
+                                data: data
+                            };
+                            resolve(labels);
+                        } else {
+                            resolve(null);
+                        }
+                    },
+                    error: function (error) {
+                        reject(error);
+                    }
+                });
+            });
+        }
+
+        // function generateChart(labels, name) {
+        //     var ctx = document.getElementById('myLineChart').getContext('2d');
+
+        //     if (myLineChart) {
+        //         myLineChart.destroy(); // Destroy the existing chart instance
+        //     }
+
+        //     myLineChart = new Chart(ctx, {
+        //         type: 'line',
+        //         data: {
+        //             labels: labels.label,
+        //             datasets: [{
+        //                 label: name,
+        //                 data: labels.data,
+        //                 borderColor: 'rgba(75, 192, 192, 1)',
+        //                 borderWidth: 2,
+        //                 fill: false
+        //             }]
+        //         },
+        //         options: {
+        //             responsive: true,
+        //             scales: {
+        //                 x: {
+        //                     display: true,
+        //                     title: {
+        //                         display: true,
+        //                         text: 'TIMING',
+        //                         font: {
+        //                             size: 20,
+        //                             weight: 'bold',
+        //                             family: 'Arial'
+        //                         },
+        //                         color: 'darkblue'
+        //                     }
+        //                 },
+        //                 y: {
+        //                     display: true,
+        //                     title: {
+        //                         display: true,
+        //                         text: 'UNITS',
+        //                         font: {
+        //                             size: 20,
+        //                             weight: 'bold',
+        //                             family: 'Arial'
+        //                         },
+        //                         color: 'darkblue'
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     });
+        // }
+
 
         let dt = $('#dataTable tbody');
         let dt1 = $('#dataTable1 tbody');

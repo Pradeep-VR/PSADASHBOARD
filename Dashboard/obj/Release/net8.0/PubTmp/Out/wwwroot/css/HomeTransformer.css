@@ -108,6 +108,12 @@
     box-sizing: border-box;
 }
 
+/*If no value is loaded, the border color will change to red (31-01-2025)*/
+.containerMeter {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+
 h1 {
     text-align: center;
     margin-bottom: 40px;

@@ -49,6 +49,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         margin-top: 30px;
+        margin-right: -32px;
     }
 
     .heading {
@@ -159,7 +160,32 @@
         display: flex;
         justify-content: space-between; /* Align buttons and heading */
         align-items: center;
+        margin-bottom: 15px;
     }
+
+    #showDataLabelsBtn {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        #showDataLabelsBtn:hover {
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        #showDataLabelsBtn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
 
 </style>
 <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
@@ -217,6 +243,7 @@
                 </div>
                 <span id="prevButton" onclick="showPreviousData()" class="text">PREV</span>
             </button>
+
             <!-- Next Button -->
             <button class="styled-btn next">
                 <span id="nextButton" onclick="showNextData()" class="text">NEXT</span>
@@ -226,6 +253,7 @@
                     </svg>
                 </div>
             </button>
+
         </div>
         <!------------------------------------------------------------------------------------- Ajesh modify 5-12-2024 END -------------------------------------------------------------------->
 
@@ -236,11 +264,15 @@
                 <canvas id="myLineChart"></canvas>
             </div>
         </div>
+        <button id="showDataLabelsBtn">Show Data Labels</button>
     </div>
 </div>
+
 @section Scripts {
     @* <script src="~/js/linechart.js"></script> *@
     @* <script src="~/js/chart.js"></script> *@
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script>
 
         let currentIndex = 0;
@@ -510,9 +542,8 @@
         let maxDemandData = [];
         let powerFactorData = [];
         let activeEnergyData = [];
-
         let ctx = document.getElementById('myLineChart').getContext('2d');
-        let targetLineValue = document.getElementById('targetValue').value;
+        let targetLineValue = document.getElementById('targetValue') ? document.getElementById('targetValue').value : 50;
 
         function drawHorizontalLine(chartInstance, value, color) {
             const yScale = chartInstance.scales.y;
@@ -533,7 +564,7 @@
         let myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [],
+                labels: [ ], // Example data labels
                 datasets: [
                     {
                         label: 'MD(kVA)',
@@ -541,6 +572,14 @@
                         borderColor: 'blue',
                         borderWidth: 2,
                         fill: false,
+                        datalabels: {
+                            color: 'blue',
+                            align: 'top',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            }
+                        }
                     },
                     {
                         label: 'PF(Pf)',
@@ -548,6 +587,14 @@
                         borderColor: 'red',
                         borderWidth: 2,
                         fill: false,
+                        datalabels: {
+                            color: 'red',
+                            align: 'top',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            }
+                        }
                     },
                     {
                         label: 'AED(KWh)',
@@ -555,6 +602,14 @@
                         borderColor: 'green',
                         borderWidth: 2,
                         fill: true,
+                        datalabels: {
+                            color: 'green',
+                            align: 'top',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            }
+                        }
                     }
                 ]
             },
@@ -616,16 +671,154 @@
                                 }
                             }
                         }
+                    },
+                    datalabels: {
+                        display: false, // Initially hidden
+                        color: 'black',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        }
                     }
                 }
             },
-            plugins: [{
-                id: 'targetLine',
-                afterDraw: (chart) => {
-                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+            plugins: [
+                ChartDataLabels, // Include this plugin
+                {
+                    id: 'targetLine',
+                    afterDraw: (chart) => {
+                        drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+                    }
                 }
-            }]
+            ]
         });
+
+        // Button click event to toggle data labels
+        document.getElementById('showDataLabelsBtn').addEventListener('click', function () {
+            let datalabelsVisible = myLineChart.options.plugins.datalabels.display;
+            myLineChart.options.plugins.datalabels.display = !datalabelsVisible; // Toggle visibility
+            myLineChart.update(); // Update chart
+            this.innerText = datalabelsVisible ? 'Show Data Labels' : 'Hide Data Labels'; // Toggle button text
+        });
+
+
+        // let ctx = document.getElementById('myLineChart').getContext('2d');
+        // let targetLineValue = document.getElementById('targetValue').value;
+
+        // function drawHorizontalLine(chartInstance, value, color) {
+        //     const yScale = chartInstance.scales.y;
+        //     const yPos = yScale.getPixelForValue(value);
+
+        //     chartInstance.ctx.save();
+        //     chartInstance.ctx.beginPath();
+        //     chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
+        //     chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
+        //     chartInstance.ctx.strokeStyle = color;
+        //     chartInstance.ctx.lineWidth = 1;
+        //     chartInstance.ctx.shadowColor = color;
+        //     chartInstance.ctx.shadowBlur = 10;
+        //     chartInstance.ctx.stroke();
+        //     chartInstance.ctx.restore();
+        // }
+
+        // let myLineChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //         labels: [],
+        //         datasets: [
+        //             {
+        //                 label: 'MD(kVA)',
+        //                 data: [],
+        //                 borderColor: 'blue',
+        //                 borderWidth: 2,
+        //                 fill: false,
+        //             },
+        //             {
+        //                 label: 'PF(Pf)',
+        //                 data: [],
+        //                 borderColor: 'red',
+        //                 borderWidth: 2,
+        //                 fill: false,
+        //             },
+        //             {
+        //                 label: 'AED(KWh)',
+        //                 data: [],
+        //                 borderColor: 'green',
+        //                 borderWidth: 2,
+        //                 fill: true,
+        //             }
+        //         ]
+        //     },
+        //     options: {
+        //         responsive: true,
+        //         scales: {
+        //             x: {
+        //                 title: {
+        //                     display: true,
+        //                     text: 'TIMING',
+        //                     font: {
+        //                         size: 20,
+        //                         weight: 'bold',
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'darkblue'
+        //                 }
+        //             },
+        //             y: {
+        //                 title: {
+        //                     display: true,
+        //                     text: 'UNITS',
+        //                     font: {
+        //                         size: 20,
+        //                         weight: 'bold',
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'darkblue'
+        //                 },
+        //                 beginAtZero: true
+        //             }
+        //         },
+        //         plugins: {
+        //             legend: {
+        //                 display: true,
+        //                 position: 'top',
+        //                 labels: {
+        //                     boxWidth: 20,
+        //                     padding: 15,
+        //                     font: {
+        //                         size: 14,
+        //                         family: 'Arial'
+        //                     },
+        //                     color: 'black'
+        //                 }
+        //             },
+        //             annotation: {
+        //                 annotations: {
+        //                     line1: {
+        //                         type: 'line',
+        //                         yMin: targetLineValue,
+        //                         yMax: targetLineValue,
+        //                         borderColor: 'red',
+        //                         borderWidth: 2,
+        //                         label: {
+        //                             content: 'Target',
+        //                             enabled: true,
+        //                             position: 'end'
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     },
+        //     plugins: [{
+        //         id: 'targetLine',
+        //         afterDraw: (chart) => {
+        //             drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+        //         }
+        //     }]
+        // });
+
+
 
         function updateTargetLine() {
             targetLineValue = document.getElementById('targetValue').value;

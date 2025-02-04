@@ -15,15 +15,14 @@
 
 
 
-<div style="display:flex;flex-direction:row;justify-content:space-around; ">
-
+<div style="display:flex;flex-direction:row;justify-content:space-around;">
 </div>
 <div class="dashboard" id="groupContainers">
     <div class="left-section" id="divMeters"></div>
 </div>
 
 @section Scripts {
-    
+
     <script>
         var preloader = document.getElementById('preloader');
         $(document).ready(function () {
@@ -58,12 +57,12 @@
                                                                                 <div class="containerMeter">
                                                                                     <div class="meterheading" onclick="navigateGraph('${meter.meterid}', '${meter.metername}', '${groupName}')">
                                                                                         <div class="meter">
-                                                                                                    <h1 class="text">${meter.metername}</h1>
+                                                                                             <h1 class="text">${meter.metername}</h1>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="card1">
-                                                                                                <p style="color:#3066d1;font-weight: 500;">YESTERDAY: <span id="yesterday_${meter.meterid}"></span> kwh</p>
-                                                                                                        <p style="color:#088395;font-weight: 500;">TODAY: <span id="today_${meter.meterid}"></span> kwh</p>
+                                                                                        <p style="color:#3066d1;font-weight: 500;">YESTERDAY: <span id="yesterday_${meter.meterid}"></span> kwh</p>
+                                                                                        <p style="color:#088395;font-weight: 500;">TODAY: <span id="today_${meter.meterid}"></span> kwh</p>
                                                                                     </div>
                                                                                     <div class="card">
                                                                                         <div class="row1">
@@ -112,6 +111,25 @@
                     document.getElementById(`voltageB_${meterId}`).innerText = resultData.voltagebc;
                     document.getElementById(`voltageC_${meterId}`).innerText = resultData.voltageca;
                     document.getElementById(`kwh_${meterId}`).innerText = resultData.activeenergydelivered;
+
+                    // Calculate the sum of current and voltage values
+                    let voltageA = parseFloat(resultData.voltageab) || 0;
+                    let voltageB = parseFloat(resultData.voltagebc) || 0;
+                    let voltageC = parseFloat(resultData.voltageca) || 0;
+
+                    let sum = voltageA + voltageB + voltageC;
+
+                    // Get the meter container
+                    const meterContainer = document.getElementById(`voltageA_${meterId}`).closest('.containerMeter');
+
+                    // Update the border color based on the sum
+                    if (sum === 0) {
+                        meterContainer.style.borderColor = 'red';
+                        meterContainer.style.boxShadow = '10px 3.5px 5px red';
+                    } else {
+                        meterContainer.style.borderColor = '#ccc'; // Default border color
+                    }
+
                 },
                 error: function (err) {
                     console.log(err);
@@ -119,11 +137,11 @@
             });
         }
 
-               function navigateGraph(Id, Name, gName) {
+        function navigateGraph(Id, Name, gName) {
             window.location.href = `@Url.Action("Index", "Graph")?strId=${Id}&strName=${Name}&strGName=${gName}`;
         }
 
-        
+
     </script>
 
 }
